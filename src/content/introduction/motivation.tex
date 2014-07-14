@@ -1,5 +1,36 @@
 \section{Motivación}
 
-estoy re motivado
+Cuando trabajamos en ingeniería de requerimientos, nuestra tarea es relevar y documentar los objetivos y el
+funcionamiento del ambiente, para elaborar un conjunto de requerimientos cuya máquina a construir debe cumplir.
+Teniendo estas tres componentes, podemos formular la siguiente ecuación: R, D $\vDash$ G. Donde R son los Requerimientos de la
+máquina, D las asunciones del dominio y G los objetivos que la máquina deberá satisfacer.
 
-Por otro lado, trabajos de síntesis de controladores introducen Labelled Transition System (LTS), Finit State Process (FSP) y Fluent Linear Temporal logic (FLTL) como herramientas útiles para definir ambientes y declarar objetivos. Dichos estudios presentan técnicas para obtener un controlador que satisface los objetivos respetando el ambiente dado.  
+Entonces, un problema clave de la ingeniería de requerimientos puede ser visto como un problema de síntesis, tal que
+dado un modelo de la máquina, un modelo del mundo y un conjunto de objetivos del sistema, permite construir un modelo
+operacional el cual satisface los objetivos. La técnica que resuelve esta ecuación mediante los modelos mencionados es
+llamada síntesis de controladores y esta siendo estudiada exhaustivamente en varios aspectos de la ingeniería de los requerimientos.
+
+La construcción de dichos modelos son una de las principales herramientas en el diseño de sistemas concurrentes, debido
+a que nos facilita la detección de errores de diseño en las primeras etapas de desarrollo. Por otro lado, estos modelos
+de comportamiento pueden resultar complejos de construir. Utilizar la técnica de síntesis anteriormente mencionada
+facilita la construcción tomando modelos pequeños y propiedades lógicas, que suelen ser más sencillas de especificar y de validar.
+
+Por lo tanto, un problema de control consiste en generar automáticamente una máquina que restrinja la ocurrencia de
+eventos controlables basado en los eventos del mundo que se producen. Es decir, teniendo la especificación de un
+ambiente, asunciones, objetivos y un conjunto de acciones controlables, podemos definir una máquina cuyo comportamiento
+concurrente con el ambiente satisfaga las asunciones y los objetivos del sistema.
+
+Este problema está siendo ampliamente estudiado en diferentes contextos, desde sistemas autoadaptativos hasta
+composición automática de web-services. Para diseñar softwares autoadaptativos los más evolucionados fueron los basados
+en arquitectura y los basados en requerimientos. El primero de estos utiliza reglas de adaptación que serán utilizadas
+para monitorear condiciones del conjunto de operaciones del sistema y definir acciones en run-time si las condiciones
+son desfavorables. Por otro lado, los basados en requerimientos extienden las técnicas de ingeniería de los
+requerimientos con el fin de representar a los requisitos de adaptación y/o la incertidumbre inherente del medio
+ambiente en el que opera el sistema. El modelo más utilizado en la comunidad, hoy en día, para definir sistemas
+autoadaptables es el modelo arquitectural. 
+
+Actualmente, trabajos recientes en el área de sistemas auto adaptativos definen una técnica para lograr encontrar
+estados de la ejecución del controlador en los cuales es seguro realizar una actualización y seguir  ejecutando el nuevo
+controlador sin tener que apagar y prender el primero. Sin embargo, dicho problema no ha sido estudiado en el marco de
+síntesis de controladores.
+
