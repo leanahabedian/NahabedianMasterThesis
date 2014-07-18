@@ -12,6 +12,13 @@ normas y procesos conocidos. Estas, forman parte de la intersección entre el mu
 un brazo robótico o las reglas de procesamiento para cada elemento que entra en una linea de producción (véase la Fig.
 \ref{world_and_machine}).
 
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.45]{img/world_and_machine.png}
+    \caption{El Mundo y la Máquina}
+    \label{world_and_machine}
+\end{figure}
+
 Así mismo, es esperado que la máquina proponga una solución al problema. Por ejemplo, en la Fig. \ref{world_and_machine}
 podemos ver que la célula de producción debe procesar cada producto, solo si están disponible en la bandeja de entrada en ese
 momento. Con la sentencia $EnBandeja[p] \rightarrow get.Bandeja[p]$ muestro que se espera que el brazo del robot solo
@@ -20,12 +27,19 @@ máquina, es decir, los que se encuentran en la intersección, representa a la \
 interactúa con el mundo. También, podemos definir a los fenómenos del mundo como el \emph{modelo del entorno} ya que el
 conjunto de estos describen los eventos que suceden en el mundo real.
 
-\begin{figure}
-    \centering
-    \includegraphics[scale=0.45]{img/world_and_machine.png}
-    \caption{El Mundo y la Máquina}
-    \label{world_and_machine}
-\end{figure}
+Las sentencias que detallan los distintos fenómenos, tanto en el mundo como en la máquina pueden variar en
+\emph{alcance} y en \emph{forma} \cite{Parnas95functionaldocuments,Jackson:1995:SRA:210207}. Además, estas pueden estar en modo \emph{indicativo} u \emph{optativo}. En
+otros trabajos, como en \cite{van2009requirements}, las sentencias utilizadas son \emph{descriptivas} y \emph{prescriptivas}.
 
+\begin{itemize}
+    \item \underline{Sentencias descriptivas:} representan propiedades que son independientes de cómo se comporta el
+    sistema. Se usan en modo \emph{indicativo}. No pueden ser cambiadas ni removidas.
+    \item \underline{Sentencia prescriptivas:} afirman propiedades deseables que pueden estar presentes o no. Deben estar
+    aplicadas por los componentes del sistema. Normalmente, pueden cambiar fortaleciéndose o debilitándose, o incluso
+    pueden ser eliminadas. 
+\end{itemize}
 
-
+Anteriormente, fue mencionado que los estados pueden variar en su alcance. Ambos tipos de sentencias pueden referirse a
+características de la máquina que no son compartidas por el mundo. En otras ocaciones, sentencias pueden referirse a
+fenómenos compartidos por el mundo y la máquina. Más precisamente, una \emph{propiedad de dominio} es
+una sentencia descriptiva sobre el mundo
