@@ -6,7 +6,7 @@ informe:
     bibtex thesis > /dev/null; \
 	pdflatex --interaction batchmode thesis.tex > /dev/null; \
 	pdflatex --interaction batchmode thesis.tex > /dev/null; \
-	rm -f *.toc *.out *.aux *.log
+	rm -f *.toc *.out *.aux *.log *.bbl *.blg
 	@mv src/thesis.pdf .
 	@echo "Done"
 	                      

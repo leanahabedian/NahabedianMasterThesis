@@ -3,9 +3,29 @@
 Los primeros conceptos que detallaré estarán involucrados con la ingeniería de los requerimientos. Los puntos de vista
 mas relevantes son los de Zave y Jackson (\cite{Zave97fourdark, Jackson:1995:SRA:210207, 5071113}) por un lado, y los de
 Letier y Van Lamsweerde (\cite{879820, VanLamsweerde:2001:GRE:882477.883624}) por el otro. Ambos puntos de vista
-distinguen a los problemas del \emph{Mundo} y las soluciones de la \emph{Máquina} como fundamentales para reconocer si los
-objetivos del sistema están siendo alcanzados correctamente. De hecho, el efecto de la máquina en el mundo y las
+distinguen a los problemas del \emph{Mundo} y las soluciones de la \emph{Máquina} como fundamentales para reconocer si 
+las operaciones de la máquina soluciona los problemas planteados en el mundo. De hecho, el efecto de la máquina en el mundo y las
 suposiciones que hacemos acerca de este mundo son fundamentales para el proceso de toma de requerimientos. En el lado
 del mundo definimos una serie de problemas que existen en el mundo real que serán solucionados al construir una máquina.
-Fácilmente podremos notar que existen componente en la máquina que interactuan directamente con el mundo siguiendo
-normas y procesos conocidos. Por ejemplo
+Fácilmente podremos notar que existen componentes en la máquina que interactúan directamente con el mundo siguiendo
+normas y procesos conocidos. Estas, forman parte de la intersección entre el mundo y la máquina. Por ejemplo un taladro,
+un brazo robótico o las reglas de procesamiento para cada elemento que entra en una linea de producción (véase la Fig.
+\ref{world_and_machine}).
+
+Así mismo, es esperado que la máquina proponga una solución al problema. Por ejemplo, en la Fig. \ref{world_and_machine}
+podemos ver que la célula de producción debe procesar cada producto, solo si están disponible en la bandeja de entrada en ese
+momento. Con la sentencia $EnBandeja[p] \rightarrow get.Bandeja[p]$ muestro que se espera que el brazo del robot solo
+podrá tomar los productos de la bandeja cuando estén listos. Finalizando, los fenómenos compartidos entre el mundo y
+máquina, es decir, los que se encuentran en la intersección, representa a la \emph{interfaz}, donde la máquina
+interactúa con el mundo. También, podemos definir a los fenómenos del mundo como el \emph{modelo del entorno} ya que el
+conjunto de estos describen los eventos que suceden en el mundo real.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.45]{img/world_and_machine.png}
+    \caption{El Mundo y la Máquina}
+    \label{world_and_machine}
+\end{figure}
+
+
+
