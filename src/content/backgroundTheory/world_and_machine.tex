@@ -42,4 +42,14 @@ otros trabajos, como en \cite{van2009requirements}, las sentencias utilizadas so
 Anteriormente, fue mencionado que los estados pueden variar en su alcance. Ambos tipos de sentencias pueden referirse a
 características de la máquina que no son compartidas por el mundo. En otras ocaciones, sentencias pueden referirse a
 fenómenos compartidos por el mundo y la máquina. Más precisamente, una \emph{propiedad de dominio} es
-una sentencia descriptiva sobre el mundo
+una sentencia descriptiva sobre el mundo. Durante todo este trabajo, vamos a llamar \emph{modelo ambiente}, al conjunto
+de propiedades del dominio de un problema particular.
+
+Por otro lado, un \emph{supuesto de ambiente} es una sentencia que podría no suceder y debe ser satisfecha por el
+ambiente. Un requisito de software, o \emph{requisito} de forma abreviada, es una sentencia prescriptiva que la máquina
+deberá satisfacer independientemente de cómo se comporta el problema detallado en el mundo y deben ser elaboradas en
+términos de fenómenos compartidos entre el mundo y la máquina.
+
+Para finalizar y siguiendo lo publicado en \cite{VanLamsweerde:2001:GRE:882477.883624, 879820} podremos determinar a una acción como supervisada / controlable si
+dicha acción es supervisada / controlable por la máquina. En este trabajo, llamaremos a las acciones supervisadas como
+acciones no controlables, ya que están controladas por el ambiente.
