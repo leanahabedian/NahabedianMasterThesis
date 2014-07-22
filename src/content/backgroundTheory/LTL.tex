@@ -3,4 +3,50 @@
 La Lógica Lineal Temporal (LTL) esta siendo ampliamente usada en la ingeniería de los requerimientos
 \cite{1347546,Giannakopoulou:2003:FMC:940071.940106,879820,Letier:2002:ATG:581339.581353}. La motivación para escoger a
 las LTL de flujos es que estas proveen un framework uniforme para especificar propiedades basados en estados sobre
-modelos basados en eventos \cite{Giannakopoulou:2003:FMC:940071.940106}. Fluent Linear Temporal Logic (FLTL) \cite{}
+modelos basados en eventos \cite{Giannakopoulou:2003:FMC:940071.940106}. Fluent Linear Temporal Logic (FLTL) \cite{Giannakopoulou:2003:FMC:940071.940106}
+es una lógica de tiempo lineal, temporal, para razonar acerca de flujos. Un \emph{flujo} $Fl$ es definido por un par de
+conjuntos y un valor booleano: $Fl = <I_{Fl},T_{Fl},Init_{Fl}>$, donde $I_{Fl} \subseteq Act$ es el conjunto de acciones
+iniciadoras, $T_{Fl} \subseteq Act$ es el conjunto de acciones finalizadoras y $I_{Fl} \cap T_{Fl} = \emptyset$. Un
+flujo puede ser inicializado con valor true o false indicado por $Init_{Fl}$. Toda acción $l \in Act$ induce un flujo,
+que notaremos $\^l = <l, Act \ \{l\}, false>$. Por último, el alfabeto de un flujo es el que se obtiene mediante la
+unión del conjunto de acciones iniciadoras y el conjunto de acciones finalizadoras.
+
+Sea $\mathcal{F}$ el conjunto de todas las posibles flujos sobre $Act$. Una formula FLTL esta se define inductivamente
+utilizando los conectores booleanos estandar y operadores temporales como el $\mathbf{X}$ (próximo), $\mathbf{U}$ (antes
+fuerte) de la
+siguiente manera:
+
+\begin{center}
+\begin{equation*}
+    \varphi ::= Fl\ |\ \neg\varphi\ |\ \varphi\ \lor\ \psi\ |\ \mathbf{X} \varphi\ |\ \varphi\ \mathbf{U}\ \psi
+\end{equation*}
+\end{center}
+
+\noindent donde $Fl \in \mathcal{F}$. Para comodidad sintáctica, vamos a introducir las operaciones de $\land$,
+$\Diamond$ (eventualmente) y $\Box$ (siempre). Sea $\Pi$ el conjunto de trazas infinitas sobre $Act$, diremos que la
+traza $\pi = l_0,l_1,...$ satisface un flujo $Fl$ en la posición $i$, notado $\pi,i\vDash Fl$, si y solo si una de las
+siguientes condiciones es válida:
+
+\begin{itemize}
+    \item $Init_{Fl} \land (\forall j \in \mathbb{N}: 0 \leq j \leq i \rightarrow l_k \notin T_{Fl} )$
+    \item $\exists j \in \mathbb{N}: (j \leq i \land l_j \in I_{Fl}) \land (\forall k \in \mathbb{N}: j < k \leq i
+    \rightarrow l_k \notin T_{Fl})$
+\end{itemize}
+
+\noindent Dada una traza infinita $\pi$, la fórmula que satisface $\varphi$ en la posición $i$, denotada como $\pi,i
+\vDash \varphi$, es definida a continuación como se muestra en la semántica para el operador de satisfacción:
+
+\begin{center}
+\begin{tabular}{p{2cm}p{0.5cm}l}
+    $\pi,i \vDash Fl                        & \triangleq    & \pi,i \vDash Fl$\\
+    $\pi,i \vDash \neg\varphi               & \triangleq    & \neg(\pi,i \vDash \varphi)$\\
+    $\pi,i \vDash \varphi \lor \psi         & \triangleq    & (\pi,i\vDash\varphi)\lor(\pi,i\vDash\psi)$\\
+    $\pi,i \vDash \mathbf{X}\varphi         & \triangleq    & \pi,1 \vDash \varphi$\\
+    $\pi,i \vDash \varphi\mathbf{U}\varphi  & \triangleq    & \exists j \geq i: \pi,j \vDash \psi\land\forall i \leq k < j:
+    \pi,k \vDash \varphi$
+\end{tabular}
+\end{center}
+
+Diremos que $\varphi$ se cumple en $\pi$, denotado como $\pi \vDash \varphi$, si $\pi,0 \vDash \varphi$. Una fórmula
+$\varphi \in$ FLTL es cierta si un LTS $E$ (denotado como $E \vDash \varphi$) si éste es cierto en toda traza infinita
+producida por $E$. 
