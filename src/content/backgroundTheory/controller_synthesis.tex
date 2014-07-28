@@ -1,1 +1,28 @@
 \section{Problemas de síntesis de controladores}
+
+Los problemas de síntesis de controladores son aquellos que producen una máquina, la cual, restringe las ocurrencias de
+los eventos controlables basado en las observaciones de los eventos no controlados que han ocurridos. Dicha máquina, al
+ser desplegada con un ambiente adecuando logramos satisfacer el conjunto de objetivos del sistema. Cabe destacar, que
+estos objetivos se cumplirán si se satisfacen las asunciones que se hacen sobre el ambiente. Resumiendo, tendremos una
+especificación del ambiente, asunciones, objetivos, y un conjunto de acciones controlables. Resolver el \emph{problema
+de síntesis de control} es hallar una máquina, que al trabajar concurrentemente con el ambiente, que satisface las
+asunciones del dominio, satisfacemos el conjunto de objetivos del sistema.
+
+Hecha esta introducción definiremos el problema de síntesis de control para modelos basados en eventos de la siguiente
+manera. Dada una LTS que detalla el comportamiento del ambiente, un conjunto de eventos controlables, un conjunto de
+formulas FLTL que describen los objetivos del sistema, el problema de control LTS consiste en encontrar una LTS que
+restringe solamente la ocurrencia de acciones controlables y garantiza que la composición paralela del ambiente con la
+LTS recién descripta estará libre de deadlocks y que, si las presunciones del ambiente valen, satisfacerá también los
+objetivos del sistema.
+
+\begin{nahaDef}
+    \emph{(Control LTS)} Dada una especificación de un entorno en forma de una LTS $E$, un conjunto de acciones
+    controlables $A_c \in Act$ y un conjunto $H$ de pares $(A_{s_i}, G_i)$ donde $A_{s_i}$ y $G_i$ son fórmulas FLTL
+    especificando presunciones y objetivos del sistema respectivamente, la solución al problema de control LTS
+    $\mathcal{E} = <E,H,A_c>$ consiste en encontrar una LTS $M$ de forma que $M$ es legal a $E$ sobre el conjunto de acciones
+    no controlables $A_U = \overline{A_c}$, $E||M$ se encuentra libre de deadlocks, y para cada par $(A_{s_i}, G_i) \in
+    H$ y para cada traza $\pi$ en $E||M$ se cumple que si $\pi \vDash A_{s_i}$ entonces $\pi \vDash G_i$.
+\end{nahaDef}
+
+Como en los tradicionales si
+
