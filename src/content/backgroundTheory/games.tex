@@ -1,4 +1,56 @@
 \section{Juegos de dos jugadores}
 
 Llamaremos juegos de dos jugadores a aquellos que consisten en dos jugadores, jugador 1 y jugador 2, donde el objetivo
-del jugador 1 es satisfacer una especificación independientemente de las acciones que el jugador 2 ejecute. 
+del jugador 1 es satisfacer una especificación independientemente de las acciones que el jugador 2 ejecute.
+Intuitivamente, el jugador 1 puede deshabilitar las acciones que él controla aunque no podrá deshabilitarlas todas ya
+que esto transformaría dicho estado a un estado de deadlock.
+
+Durante el transcurso de esta tesis llevaremos los juegos de dos jugadores al marco de síntesis de controladores, donde
+el jugador 1 (el controlador) elije, del conjunto de acciones controlables, cual habilitar y el jugador 2 (el ambiente)
+elije que acciones tomar libremente. Formalmente podemos definir lo siguiente.
+
+\begin{nahaDef}
+    \emph{(Juego de dos jugadores) Un juego de dos jugadores es $G = (S_g, \Gamma^-, \Gamma^+, s_{g_0}, \varphi)$, donde
+    $S$ es un conjunto finito de estados, $\Gamma^-, \Gamma^+ \subseteq S \times S$ son conjuntos de transiciones no
+    controlables y controlables respectivamente, $s_{g_0} \in S$ es el estado inicial, y $\varphi \subseteq S^\omega$ es
+    la condición de ganada. Definimos $\Gamma^-(s) = \{s'\ |\ (s,s') \in \Gamma^-\}$ y análogamente para $\Gamma^+$. Un
+    estado $s$ es no controlable si $\Gamma^-(s) \neq \emptyset$ y controlable en el resto de los casos. Una jugada en
+    $G$ es una secuencia $p = s_{g_0}, s_{g_1},...$ Una jugada $p$ terminada en $s_{g_n}$ es extendida por el
+    controlador eligiendo un subconjunto $\gamma \subseteq \Gamma^+(s_{g_n})$. Luego el ambiente elige un estado
+    $s_{g_{n+1}} \in \gamma \cup \Gamma^-(s_{g_n})$ y agrega $s_{g_{n+1}}$ a $p$.}
+\end{nahaDef}
+
+Un detalle importante es que si para un estado controlable $\gamma$ el conjunto de opciones del controlador es vacía, esto
+puede llevar a un deadlock. Esto será considerado como prohibido mas adelante ya que el controlador definirá este estado
+como un estado perdedor. Para un estado no controlable el controlador puede decidir deshabilitar todas las acciones
+controlables. Las elecciones del controlador son formalizadas como estrategias y estas reglas son las que el controlador
+aplicará. Por lo general, las estrategias son elegidas dependiendo de la historia. Esto puede verse en la estrategia
+utilizando un valor de memoria $\Omega$ y actualizando este valor de acuerdo a la evolución del juego.
+
+Es importante destacar, que este tipo de juegos, con memoria, es diferente al definido en \cite{Piterman}. Piterman et al.
+define un juego en el cual el ambiente elige su movimiento y recién luego de este, el controlador podrá elegir cual será
+el siguiente paso.
+
+\begin{nahaDef}
+    \emph{(Estrategia con memoria) Una estrategia con memoria $\Omega$ para el controlador es un par de funciones
+    $(\sigma, u)$, donde $\Omega$ es una memoria que tiene designado como valor inicial $\omega_0, \sigma: \Omega \times
+    S \rightarrow 2^S$ tal que $\sigma(\omega,s) \subseteq \Gamma^+(s)$ y $u: \Omega \times S \rightarrow \Omega$.}
+\end{nahaDef}
+
+Intuitivamente, $\sigma$ le informa al controlador cuales estados debe habilitar como posibles sucesores y $u$ define
+como actualizar la memoria en cada paso. Si $\Omega$ es finita, diremos que la estrategia usa memoria finita.
+
+\begin{nahaDef}
+    \emph{(Consistencia y estrategia ganadora) una jugada finita o infinita $p = s_0,s_1,...$ es consistente con
+    $(\omega,u)$ si para cada $n$ tenemos que $s_{n+1} \in \sigma(\omega_n,s_n)$ donde $\omega_{i+1} =
+    u(\omega_i,s_{i+1})$ para toda $i \geq 0$. Una estrategia $(\sigma, u)$ para el controlador desde el estado $s$ es
+    ganadora si cada jugada maximal empezando de $s$ y consistente con $(\sigma, u)$ es infinita y en $\varphi$. Diremos
+    que el controlador gana el juego $G$ si tiene una estrategia ganadora desde el estado inicial.}
+\end{nahaDef}
+
+Diremos que chequear si un controlador gana un juego $G$ es resolver el juego $G$. Una vez definido un juego de dos
+jugadores, pasaremos a traducir un problema de síntesis de controladores a este tipo de juegos. La transformación se
+basa en generar una estrategia ganadora para el controlador. Si dicha estrategia existe, diremos que el problema de
+control es realizable \cite{MalerPS95,21072}. Resultados estudiados anteriormente \cite{Pnueli:1989:SRM:75277.75293},
+demuestran que si un controlador gana el juego $G$ y $\varphi$ es $\omega -regular$, el juego puede ganarse utilizando
+una estrategia con memoria finita.
