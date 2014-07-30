@@ -12,7 +12,15 @@ $(\sigma,u)$ es una solución a $\mathcal{E}$.
 
 \subsection{Control LTS SGR(1) a juegos GR(1)}
 
-texto
+Convertiremos el problema de control LTS SGR(1) a un juego GR(1). Dado un problema de control LTS SGR(1) $\mathcal{E} =
+<E,H,A_C>$ construimos un juego GR(1) $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ tal que cada estado en $S_g$
+representa un estado en $E$ y una valuación de todos los flujos que aparecen en $A_s$ y en $G$.
+
+Mas precisamente, y por la definición de control LTS SGR(1) (definición \ref{ControlLTSSGR1}) tendremos que $H =
+\{(\emptyset,I),(A_s,G)\}$, $E = (S_e,A,\Delta_e,s_{e_0})$, $A_s = \bigwedge_{i=1}^n\Box\ \Diamond\ \phi_i$, $I = \Box\
+\rho$ y $G = \bigwedge_{j=1}^m\Box\ \Diamond\ \omega_j$. Sea $fl = \{\dot1,...,\dotk\}$ un conjunto de flujos usados en
+$A_s$ y en $G$ donde $\doti = <I_i,T_i,Init_i>$. Construimos al juego $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ de
+la siguiente manera.
 
 \subsection{Traduciendo la estrategia a un Controlador LTS}
 
