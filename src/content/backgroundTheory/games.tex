@@ -42,8 +42,8 @@ como actualizar la memoria en cada paso. Si $\Omega$ es finita, diremos que la e
 
 \begin{nahaDef}
     \emph{(Consistencia y estrategia ganadora) una jugada finita o infinita $p = s_0,s_1,...$ es consistente con
-    $(\omega,u)$ si para cada $n$ tenemos que $s_{n+1} \in \sigma(\omega_n,s_n)$ donde $\omega_{i+1} =
-    u(\omega_i,s_{i+1})$ para toda $i \geq 0$. Una estrategia $(\sigma, u)$ para el controlador desde el estado $s$ es
+    $(\omega,u)$ si para cada $n$ tenemos que $s_{n+1} \in \sigma(\omega_n,s_n)$ donde $\omega_{i+1} = u(\omega_i,s_{i+1})$ 
+    para toda $i \geq 0$. Una estrategia $(\sigma, u)$ para el controlador desde el estado $s$ es
     ganadora si cada jugada maximal empezando de $s$ y consistente con $(\sigma, u)$ es infinita y en $\varphi$. Diremos
     que el controlador gana el juego $G$ si tiene una estrategia ganadora desde el estado inicial.}
 \end{nahaDef}
@@ -52,5 +52,5 @@ Diremos que chequear si un controlador gana un juego $G$ es resolver el juego $G
 jugadores, pasaremos a traducir un problema de síntesis de controladores a este tipo de juegos. La transformación se
 basa en generar una estrategia ganadora para el controlador. Si dicha estrategia existe, diremos que el problema de
 control es realizable \cite{MalerPS95,21072}. Resultados estudiados anteriormente \cite{Pnueli:1989:SRM:75277.75293},
-demuestran que si un controlador gana el juego $G$ y $\varphi$ es $\omega -regular$, el juego puede ganarse utilizando
+demuestran que si un controlador gana el juego $G$ y $\varphi$ es $\omega$-regular, el juego puede ganarse utilizando
 una estrategia con memoria finita.

@@ -1,7 +1,23 @@
-\section{Resolviendo LTS control SGR(1)}
+\section{Resolviendo el problema de control LTS SGR(1)}
+
+En esta sección explicaremos como una solución para un problema de control SGR(1) puede ser obtenida por construcción
+utilizando técnicas existentes de síntesis de controladores (basados en estados), llamados GR(1). \cite{Piterman}
+
+La construcción de la máquina para un problema de control LTS SGR(1) esta divido en dos pasos. Primero, se crea un juego GR(1)
+$G$ en representación del ambiente $E$, las asunciones $A_s$, los objetivos $O$ y el conjunto de acciones controlables
+$A_C$. Como segundo paso, se elabora una solución $(\sigma,u)$ al juego GR(1) para construir una máquina $M$ (i.e un
+controlador LTS) para $\mathcal{E}$. Esta solución al problema de control LTS SGR(1) $\mathcal{E}$ existe, si y solo si,
+existe una solución al juego GR(1) $G$. Luego, podremos afirmar que el controlador LTS $M$ creada a partir de
+$(\sigma,u)$ es una solución a $\mathcal{E}$.
 
 \subsection{Control LTS SGR(1) a juegos GR(1)}
 
+texto
+
 \subsection{Traduciendo la estrategia a un Controlador LTS}
 
+texto
+
 \subsection{Algoritmo}
+
+algoritmo
