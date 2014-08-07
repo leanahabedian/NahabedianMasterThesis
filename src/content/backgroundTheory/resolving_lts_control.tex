@@ -22,9 +22,43 @@ Mas precisamente, y por la definición de control LTS SGR(1) (definición \ref{C
 $A_s$ y en $G$ donde $\doti = <I_i,T_i,Init_i>$. Construimos al juego $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ de
 la siguiente manera.
 
+Construimos $S_g$ a partir de $E$ de tal forma, que los estados en $S_g$ corresponden a un estado en $E$ y los valores
+de verdad de los \emph{flujos} en $\varphi$. Formalmente, tenemos que  $S_g = S_e \times \prod_{i=1}^k\{true,false\}$.
+Consideramos un estado $s_g = (s_e,\alpha_1,...,\alpha_k)$. Dado un flujo $fl_i$, diremos que $s_g$ satisface $fl_i$ si
+$\alpha_i$ es $true$ y $s_g$ no satisface $fl_i$ si no. 
+
+Además, definiremos las relaciones $\Gamma^-$ y $\Gamma^+$ aplicando las siguientes reglas. Sea $s_g =
+(s_e,\alpha_1,...,\alpha_k)$. Si $s_g$ no satisface $\rho$ (es decir, $s_g$ es no seguro) no agregaremos los sucesores a
+$s_g$. Si $s_g$ satisface $\rho$, por cada transición $(s_e,l,s_e') \in \Delta_e$ agregaremos
+$(s_g,(s_e',\alpha_1',...,\alpha_k'))$ en $\Gamma^{\beta}$, donde $\beta$ y $\alpha_i'$ cumplen las siguiente
+condiciones:
+
+\begin{center}
+\begin{tabular}{ c | c}
+$\beta$ & $\alpha_i'$ \\
+\hline
+es +: si $l \in A_C$, & es $\alpha_i$: si $l \notin I_{fl_i} \cup T_{fl_i}$, \\
+es -: si $l \notin A_C$. & es $true$: si $l \in I_{fl_i}$ o \\
+& es $false$: si $l \in T_{fl_i}$. \\
+\end{tabular}
+\end{center}
+
+El estado inicial $s_{g_0}$ es $(s_{e_0},initially_1,...,initially_k)$.
+
+Por último, construiremos la \emph{condición de ganada} $\varphi_g$, definida como un conjunto infinito de trazas, para
+$A_S$ y $G$ de la siguiente manera: abusando de la notación denotaremos $\phi_i$ al conjunto de estados $s_g$ tales que
+$s_g$ satisface las asunciones $\phi_i$ y a $\gamma_i$ al conjunto de secuencias que satisfacen
+$gr((\phi_1,..,\phi_n),(\gamma_1,...,\gamma_m))$. De esta forma, obtendremos que $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ es un
+juego GR(1).
+
+Cabe destacar que las propiedades de seguridad (safety) que son parte de la especificación no están contempladas en la
+\emph{condición de ganada} $\varphi_g$ del juego GR(1), pero si se traducen a un problema de \emph{deadlock avoidance} a
+la hora de construir $\Gamma^-$ y $\Gamma^+$. De esta manera, la \emph{condicion de ganada} es  $\Box\ \rho
+\wedge(\bigwedge_{i=1}^n\Box\Diamond\phi_i \Rightarrow \bigwedge_{j=1}^m \Box\Diamond\omega_j)$.
+
 \subsection{Traduciendo la estrategia a un Controlador LTS}
 
-texto
+ESCRIBIR AHORA ACA!!
 
 \subsection{Algoritmo}
 
