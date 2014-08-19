@@ -58,8 +58,60 @@ la hora de construir $\Gamma^-$ y $\Gamma^+$. De esta manera, la \emph{condicion
 
 \subsection{Traduciendo la estrategia a un Controlador LTS}
 
-ESCRIBIR AHORA ACA!!
+Ahora pasaremos a explicar como conseguir un controlador LTS a partir de una estrategia ganadora para el juego en GR(1).
+Intuitivamente, la transformación es de la siguiente manera: dado un problema de control LTS SGR(1) $\mathcal{E} =
+<E,H,A_C>$, el juego $G = (S_g, \Gamma^-, \Gamma^+, s_{g_0},\varphi_g)$ obtenido a partir de $\mathcal{E}$ y de la
+estrategia ganadora para $G$, construimos $M = (S_M,A,\Delta_M,s_{M_0})$ una solución para $\mathcal{E}$ traduciendo
+a estados de $S_M$ un estado de $S_g$ y un estado de la memoria dada por la estrategia ganadora.
+
+Mas formalmente, sea $E = (S_e,A,\Delta_e,s_{e_0})$, $fl = \{fl_1,...,fl_k\}$ el conjunto de flujos que aparecen en
+$\varphi$, $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ el juego GR(1) construido a partir de $E$ como explicamos
+anteriormente, y sea $\sigma: \Omega \times S_g \rightarrow 2^{S_g}$ y $u: \Omega \times S_g \rightarrow \Omega$ la
+estrategia ganadora para $G$. Construiremos la máquina $M = (S_M, A, \Delta_M, s_{M_0})$ de la siguiente manera.
+
+Para construir $S_M \subseteq \Omega \times S_g$, consideremos dos estados $s_g = (s_e,\alpha_1,...,\alpha_k)$ y $s_g' =
+(s_e',\alpha_1',...,\alpha_k')$. Decimos que esa acción $\ell$ es \emph{posible} desde $s_g$ hacia $s_g'$ si:
+
+\begin{enumerate}
+\itemsep-4mm
+\item $(s_g,s_g') \in \Gamma^- \cup \Gamma^+$,
+\item existe una acción $\ell$ tal que $(s_e,\ell,s_e') \in \Delta_e$ y
+\item para cada \emph{flujo} $fl_i$ valga alguna de las siguiente condiciones:
+\vspace{-4mm}
+\begin{itemize}
+    \itemsep-4mm
+    \item $\ell \notin I_{fl_i} \cup T_{fl_i}$ y $\alpha_i' = \alpha_i$,
+    \item $\ell \in I_{fl_i}$ y $\alpha_i'=true$, o
+    \item $\ell \in T_{fl_i}$ u $\alpha_i'=false$.
+\end{itemize}
+\end{enumerate}
+
+Para construir $\Delta_M \subset S_M \times A \times S_M$, consideremos la transición $(s_g,s_g') \in \Gamma^-$. Por
+definición de $\Gamma^-$ existe una acción $\ell \notin A_C$ tal que $\ell$ es posible desde $s_g$ hacia $s_g'$. Si
+$s_g' \in \sigma(\omega,s_g)$ entonces para cada acción $\ell$ tal que $\ell$ es posible desde $s_g$ hacia $s_g'$
+agregamos $((\omega,s_g),\ell,(u(\omega,s_g),s_g'))$ hacia $\Delta_M$. De forma similar, consideramos una transición
+$(s_g,s_g') \in \Gamma^+$. Por definición de $\Gamma^+$ existe una acción $\ell \in A_C$ tal que $\ell$ es posible desde
+$s_g$ hacia $s_g'$. Si $s_g' \in \sigma(\omega,s_g)$ entonces para cada acción $\ell$ tal que $\ell$ es posible desde
+$s_g$ hacia $s_g'$ agregamos $((\omega,s_g),\ell,(u(\omega,s_g),s_g'))$ hacia $\Delta_M$.
+
+El estado inicial de $M$ esta definido como $s_{M_0} = (\omega_0,s_{g_0})$ donde $\omega_0$ es el valor inicial de la
+memoria $\Omega$. De esta forma completamos la definición de $M$.
 
 \subsection{Algoritmo}
 
-algoritmo
+En esta sección, presentaremos el algoritmo implementado en la herramienta MTSA \cite{4639371} el cual está basado en las
+ideas de Juvekar y Piterman \cite{Juvekar:buchi}.
+
+Este algoritmo realiza una búsqueda de ciclos de estados que satisfacen todas las asunciones pero no todos los objetivos
+restringiendo acciones controlables. De haber ciclos como estos podrían permitir tranzas en las que el controlador
+pierde el juego GR(1). Para lograr evitar estos ciclos, el algoritmo busca para cada estado, una estrategia que
+garantice la satisfacción de todos los objetivos. Para esto, se configura un orden en el cual satisfacer los objetivos.
+El algoritmo, mediante la técnica de punto fijo computa la mejor forma en que cada estado puede satisfacer el siguiente
+objetivo. A su vez, mide la ''calidad'' de cada uno de los diferentes sucesores para satisfacer un objetivo mediante un
+sistema de rankings \cite{Jurdzinski:ParityGames}. El ranking de un sucesor particular mide la distancia (cantidad de transiciones utilizadas)
+al siguiente objetivo en términos de número de veces que las asunciones son satisfechas antes de alcanzar el objetivo.
+Si este número tiende a infinito, deduciremos que desde el estado actual existe una traza infinita en la cual las
+asunciones del ambiente valen infinitamente, pero los objetivos no se satisfacen. Es así, como el algoritmo reconoce
+estados que deben ser evitados para la construcción de la estrategia para el controlador.
+
+El algoritmo

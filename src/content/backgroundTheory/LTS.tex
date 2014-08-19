@@ -12,15 +12,15 @@ de ellas esta etiquetada con una acción. El conjunto de todas las acciones que 
     \subseteq (S_E \times A_E \times S_E)$ es una relación, y $s_0 \in S_E$ es el estado inicial.}
 \end{nahaDef}
 
-Si $(s,l,s') \in \Delta_E$ diremos que $l$ está activo desde $s$ en $E$. Diremos también que un LTS $E$ es
-$determinístico$ si $\forall_{(s,l,s'),(s,l,s'') \in \Delta_E}$ implica $s' = s''$. Para un estado $s$ definiremos
-$\Delta_E(s) = $\{$l$ $|$ $(s,l,s')$ $\in$ $\Delta_E\}$. Dado un LTS $E$, vamos a referirnos a su alfabeto como $\alpha E$.
+Si $(s,\ell,s') \in \Delta_E$ diremos que $\ell$ está activo desde $s$ en $E$. Diremos también que un LTS $E$ es
+$determinístico$ si $\forall_{(s,\ell,s'),(s,\ell,s'') \in \Delta_E}$ implica $s' = s''$. Para un estado $s$ definiremos
+$\Delta_E(s) = $\{$\ell$ $|$ $(s,\ell,s')$ $\in$ $\Delta_E\}$. Dado un LTS $E$, vamos a referirnos a su alfabeto como $\alpha E$.
 
 \begin{nahaDef}
     \emph{(Composición en Paralelo) Sean $M = (S_M,A_M,\Delta_M, s_{M_0})$ y $E = (S_E,A_E,\Delta_E, s_{E_0})$ LTSs.
     Una Composición en Paralelo($||$) es un operador simétrico tal que $E||M$ es el LTS definido de la siguiente
     manera $E||M = (S_E \times S_M, A_E \cup A_M, \Delta, (s_{E_0},s_{M_0}))$, donde $\Delta$ es la relación mas
-    pequeña que satisface las siguientes reglas, donde $l \in A_E \cup A_M$:}
+    pequeña que satisface las siguientes reglas, donde $\ell \in A_E \cup A_M$:}
 \end{nahaDef}
 
 ESCRIBIR GARCHA DE LOGICA
@@ -32,20 +32,20 @@ ESCRIBIR GARCHA DE LOGICA
 \end{nahaDef} 
 
 Intuitivamente, un LTS $M$ es un LTS $Legal$ para el LTS $E$ con respecto a $A_{E_u}$, si para todos los estados en la
-composición $(s_E,s_M) \in S_{S||M}$ se cumple que, una acción $l \in A_{E_u}$ es deshabilitada en $(s_E,s_M)$ si y solo
+composición $(s_E,s_M) \in S_{S||M}$ se cumple que, una acción $\ell \in A_{E_u}$ es deshabilitada en $(s_E,s_M)$ si y solo
 si también esta deshabilitada en $s_E \in E$. En otras palabras, $M$ no restringe a $E$ con respecto a $A_{E_u}$.
 
 
 \begin{nahaDef}
-    \emph{(Tranzas) Sea un LTS $E = (S,A,\Delta,s_0)$. Una secuencia $\pi = l_0,l_1,...$ es una traza en $E$ si existe una
-    secuencia $s_0,l_0,s_1,l_1,...$ donde para todo $i$ tenemos $(s_i,l_i,s_{i+1}) \in \Delta$.}
+    \emph{(Tranzas) Sea un LTS $E = (S,A,\Delta,s_0)$. Una secuencia $\pi = \ell_0,\ell_1,...$ es una traza en $E$ si existe una
+    secuencia $s_0,\ell_0,s_1,\ell_1,...$ donde para todo $i$ tenemos $(s_i,\ell_i,s_{i+1}) \in \Delta$.}
 \end{nahaDef} 
 
 
 \begin{nahaDef}
     \emph{(Estados Alcanzables) Sea un LTS $E = (S_E, A_E, \Delta_E, s_0)$. Un estado $s \in S_E$ es alcanzable (desde
-    el estado inicial) en $E$ si existe una secuencia $s_0,l_0,s_1,l_1,...$ donde para cada $i$ tenemos
-    $(s_i,l_i,s_{i+1}) \in \Delta$ y $s = s_{i+1}$. Nos referimos a el conjunto de todos los estados alcanzables en $E$
+    el estado inicial) en $E$ si existe una secuencia $s_0,\ell_0,s_1,\ell_1,...$ donde para cada $i$ tenemos
+    $(s_i,\ell_i,s_{i+1}) \in \Delta$ y $s = s_{i+1}$. Nos referimos a el conjunto de todos los estados alcanzables en $E$
     como $Reach(E)$.}
 \end{nahaDef} 
 
