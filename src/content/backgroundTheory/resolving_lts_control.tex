@@ -114,4 +114,60 @@ Si este número tiende a infinito, deduciremos que desde el estado actual existe
 asunciones del ambiente valen infinitamente, pero los objetivos no se satisfacen. Es así, como el algoritmo reconoce
 estados que deben ser evitados para la construcción de la estrategia para el controlador.
 
-El algoritmo
+\begin{nahaDef}
+    \emph{(Función de Ranking) Sea $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi)$ donde $\varphi = 
+    gr(( \phi_1 ,..., \phi_n ),( \gamma_1 ,..., \gamma_m ) )$. Una función de ranking para un objetivo $\gamma_j$ es una función
+    $R_j : S_g \rightarrow (\mathbb{N} \times \{1,...,n\}\cup\{\infty\})$. Intuitivamente, $R_j(s_g) = (k,\ell)$
+    significa que para alcanzar desde $s_g$ a un estado en el cual $\gamma_j$ vale, todos los caminos satisfacen
+    la asunción $\phi_{\ell}$ a lo sumo $k$ veces. $R(s) = \infty$ significa que $s$ es un estado perdedor, es decir,
+    desde $s$ no hay una estrategia para el controlador que pueda evitar una traza en la cual se satisface infinitamente
+    las asunciones, pero no satisface infinitamente a todos los objetivos.}
+\end{nahaDef}
+
+\begin{algorithm}
+\caption{para resolver juegos SGR(1)}\label{euclid}
+\label{algoritmo 1}
+\begin{algorithmic}[1]
+\Procedure{solveGame(game=(states,transitions),safe,guarantees,assumptions)}{}
+\BState \emph{Inicialización}:
+\For {state : states}
+    \For {g : guarantees}
+        \State $rank_g$(state)$\gets$ (0,1)
+    \EndFor
+\EndFor
+\State Queue pending
+\For {state : states}
+    \If {$\exists$ g : guarantees / state $\notin$ g $\land$ state $\in assume_1$}
+        \State pending.push(pair(state,g))
+    \EndIf
+    \If {$\Gamma^-$(state) = $\emptyset \land \Gamma^+(state)$ = $\emptyset$}
+        \For {g : guarantees}
+            \State $rank_g$(state) $\gets \infty$
+            \State pending.push(unstablePred(state,g))
+        \EndFor
+    \EndIf
+\EndFor
+\BState \emph{Estabilización}:
+\While {!pending.empty()}
+    \State (state,g) $\gets$ pending.pop()
+    \If {$rank_g$(state) = $\infty$ }
+        \State continue
+    \EndIf
+    \If {isStable($rank_g$(state))}
+        \State continue
+    \EndIf
+    \State rank_g(state) $\gets$ inc(best(state,g),state,g)
+    \State pending.push(unstablePred(state,g))
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
+
+
+El algoritmo \ref{algoritmo 1} computa un ranking estable en cada estado $s_g \in T$ si $s_g$ es ganador para el
+controlador (es decir, $R_1(t)<\infty$). Conceptualmente, podemos separar el algoritmo en dos grandes instancias,
+inicialización y estabilización. El valor valor inicial del ranking para cada estado en el juego, junto a la cola de
+estados \emph{pending} para ser procesados, se crean en la etapa de inicialización. Agregaremos un estado a
+\emph{pending} si no satisface ningún objetivo y satisface las asunciones. Todos los estados en cada función de ranking
+son inicializados con el valor $(0,1)$. Este valor indica el menor ranking posible. Los estados que cumplen que
+$\Gamma^- \cup \Gamma^+ = \emptyset$ serán inicializados con el valor $\infty$. De esta manera, los estados cuyos
+rankings son $\infty$ son aquellos donde no se satisface $\rho$ o son estados de \emph{deadlock} en $E$.
