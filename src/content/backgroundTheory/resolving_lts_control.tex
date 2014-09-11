@@ -115,7 +115,7 @@ asunciones del ambiente valen infinitamente, pero los objetivos no se satisfacen
 estados que deben ser evitados para la construcción de la estrategia para el controlador.
 
 \begin{nahaDef}
-    \emph{(Función de Ranking) Sea $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi)$ donde $\varphi = 
+    \emph{(Función de Ranking) Sea $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi)$ donde \\$\varphi = 
     gr(( \phi_1 ,..., \phi_n ),( \gamma_1 ,..., \gamma_m ) )$. Una función de ranking para un objetivo $\gamma_j$ es una función
     $R_j : S_g \rightarrow (\mathbb{N} \times \{1,...,n\}\cup\{\infty\})$. Intuitivamente, $R_j(s_g) = (k,\ell)$
     significa que para alcanzar desde $s_g$ a un estado en el cual $\gamma_j$ vale, todos los caminos satisfacen
@@ -143,7 +143,7 @@ estados que deben ser evitados para la construcción de la estrategia para el co
     \If {$\Gamma^-$(state) = $\emptyset \land \Gamma^+(state)$ = $\emptyset$}
         \For {g : guarantees}
             \State $rank_g$(state) $\gets \infty$
-            \State pending.push(unstablePred(state,g))
+            \State pending.push(unstable\_pred(state,g))
         \EndFor
     \EndIf
 \EndFor
@@ -157,7 +157,7 @@ estados que deben ser evitados para la construcción de la estrategia para el co
         \State continue
     \EndIf
     \State rank_g(state) $\gets$ inc(best(state,g),state,g)
-    \State pending.push(unstablePred(state,g))
+    \State pending.push(unstable\_pred(state,g))
 \EndWhile
 \end{algorithmic}
 \end{algorithm}
@@ -165,9 +165,38 @@ estados que deben ser evitados para la construcción de la estrategia para el co
 
 El algoritmo \ref{algoritmo 1} computa un ranking estable en cada estado $s_g \in T$ si $s_g$ es ganador para el
 controlador (es decir, $R_1(t)<\infty$). Conceptualmente, podemos separar el algoritmo en dos grandes instancias,
-inicialización y estabilización. El valor valor inicial del ranking para cada estado en el juego, junto a la cola de
+inicialización y estabilización. El valor inicial del ranking para cada estado en el juego, junto a la cola de
 estados \emph{pending} para ser procesados, se crean en la etapa de inicialización. Agregaremos un estado a
 \emph{pending} si no satisface ningún objetivo y satisface las asunciones. Todos los estados en cada función de ranking
 son inicializados con el valor $(0,1)$. Este valor indica el menor ranking posible. Los estados que cumplen que
 $\Gamma^- \cup \Gamma^+ = \emptyset$ serán inicializados con el valor $\infty$. De esta manera, los estados cuyos
 rankings son $\infty$ son aquellos donde no se satisface $\rho$ o son estados de \emph{deadlock} en $E$.
+
+La sección de estabilización es un iteración de punto fijo sobre la cola \emph{pending} hasta que se vacía. La función
+\texttt{is\_stable(state,g)} devuelve true si la g-esima función de ranking es estable para \texttt{state}.
+
+La función \texttt{unstable\_pred(state,g)} devuelve un conjunto de pares de predecesores de \texttt{state} y un
+ranking g para el cual el ranking es inestable.
+
+La función \texttt{best(state,g)} devuelve el mejor ranking basado en sus sucesores. Para eso utiliza la siguiente
+función $sr : S_g \rightarrow (\mathbb{N} \times \{1,...,n\} \cup \{\infty\})$. Esta función también codifica el hecho
+de que los estados de \empht{deadlock} tienen ranking $\infty$. Además, notemos que usa un orden lexicográfico para los
+objetivos. Dado un estado $s_g$ y un objetivo $\gamma_j$, $sr(s_g,j)$ está definida de la siguiente manera:
+
+\begin{itemize}
+\item Si $\Gamma^+(s_g) \cup \Gamma^-(s_g) = \emptyset$, entonces $sr(s_g,j) = \infty$, caso contrario,
+\item si $s_g$ es controlable y $s_g \in \gamma_j$, entonces $sr(s_g,j) = min_{s'_g \in \Gamma^+(s_g)} R_{j \oplus
+1}(S'_g)$.
+\item si $s_g$ es controlable y $s_g \notin \gamma_j$, entonces $sr(s_g,j) = min_{s'_g \in \Gamma^+(s_g)} R_j(s'_g)$.
+\item si $s_g$ es no controlable y $s_g \in \gamma_j$, entonces $sr(s_g,j) = max_{s'_g \in \Gamma^-(s_g)} R_{j \oplus
+1}(s'_g)$.
+\item si $s_g$ es no controlable y $s_g \notin \gamma_j$, entonces $sr(s_g,j) = max_{s'_g \in \Gamma^-(s_g)} R_j(s'_g)$.
+\end{itemize}
+
+Por último, \texttt{inc(($k$,$\ell$),state,g)} devuelve $(0,1)$ si \texttt{state} está en $\gamma_g$, devuelve $(k,\ell)$ si
+\texttt{state} no está en \texttt{$assumption_\ell$}, y devuelve el mínimo valor mayor que $(k,\ell)$ en el resto de los
+casos. Notemos que \texttt{inc($\infty$,state,g)} es $\infty$, y si $n = max_\ell(|\phi_\ell-(\gamma_g)|)$ y
+\texttt{state} está en $\phi_m-\gamma_g$ entonces \texttt{inc((n,m),state,g)} es $\infty$. Este algoritmo calcula el
+mínimo ranking estable. Basados en ideas del mundo de autómatas de büchi \cite{doi:10.1137/S0097539703420675,
+PitermanAndJuvekar}, este algoritmo puede ser implementado
+en $O(m \cdot n \cdot |S|^2)$.
