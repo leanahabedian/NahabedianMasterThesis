@@ -22,13 +22,25 @@ $\Delta_E(s) = $\{$\ell$ $|$ $(s,\ell,s')$ $\in$ $\Delta_E\}$. Dado un LTS $E$, 
     manera $E||M = (S_E \times S_M, A_E \cup A_M, \Delta, (s_{E_0},s_{M_0}))$, donde $\Delta$ es la relación mas
     pequeña que satisface las siguientes reglas, donde $\ell \in A_E \cup A_M$:}
     \label{COMP_EN_PARALELO}
-\end{nahaDef}
 
-ESCRIBIR GARCHA DE LOGICA
+    \begin{center} \begin{tabular}{lcl}
+    $\!  \frac{(s,\ell,s') \in \Delta_E}{((s,t),\ell,(s',t)) \in
+    \Delta} \, { \scriptstyle \ell \, \in \, A_E\setminus A_M}$ &
+    \hspace{0.5cm} &
+    $\!  \frac{(t,\ell,t')\in \Delta_M} {((s,t),\ell,(s,t'))\in\Delta}
+    \, {\scriptstyle \ell \, \in \, A_M\setminus A_E}$
+    \\ \\
+    %    \hspace{0.01in} &
+    \multicolumn{3}{c}{
+    $\! \frac{(s,\ell,s') \in \Delta_E, \ (t,\ell,t') \in \Delta_M}
+    {((s,t),\ell,(s',t'))\in \Delta} \, {\scriptstyle \ell \, \in \, A_E\cap A_M}$
+    }
+    \end{tabular} \end{center}
+\end{nahaDef}
 
 \begin{nahaDef}
     \emph{(LTS Legal) Dado $E = (S_E, A_E, \Delta_E, s_{E_0}), M = (S_M, A_M, \Delta_M, s_{M_0})$ LTSs, y $A_{E_u} \in
-    A_E$. Decimos que $M$ es un LTS $Legal$ par $E$ con respecto a $A_{E_u}$ si para todos $(s_E,s_M) \in E||M$ sucede
+    A_E$. Decimos que $M$ es un LTS $Legal$ para $E$ con respecto a $A_{E_u}$ si para todos $(s_E,s_M) \in E||M$ sucede
     lo siguiente: $\Delta_{E||M}((s_E,s_M)) \cap A_{E_u} = \Delta_E(S_E) \cap A_{E_u}$.}
 \end{nahaDef} 
 
