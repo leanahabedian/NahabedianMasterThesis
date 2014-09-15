@@ -1,37 +1,37 @@
 \section{Motivación}
 
-La operación continua es un requerimiento común en muchas aplicaciones. Por lo tanto, es necesario desarrollar técnicas
-ingenieriles que puedan cambiar un sistema en cuanto a su ambiente y sus requerimientos, sin la necesidad de frenar o
-interrumpir sus operaciones. Este trabajo ha sido estudiado de diversas maneras, empezando por la actualización dinámica
-de software \cite{60317} y mas recientemente con el diseño de software adaptable. \cite{SEAMS}
+La operación continua, sistemas donde cada una de sus componentes se mantienen operativos, es un requerimiento común en
+muchas aplicaciones. Por lo tanto, es necesario desarrollar técnicas ingenieriles que puedan actualizar un sistema
+tanto su ambiente como sus requerimientos, sin la necesidad de frenar o interrumpir sus operaciones. Este trabajo ha
+sido estudiado de diversas maneras, empezando por la actualización dinámica de software \cite{60317} y más recientemente con el diseño de software adaptable. \cite{SEAMS}
 
-La pregunta central que se analiza en esta área es ``cuando es seguro cambiar un componente de software en un sistema
-que esta corriendo''. Una respuesta conservadora a esta pregunta es ``cuando los componentes no están involucradas en
-alguna interacción''; esto fue formalizado introduciendo la noción de quietud (quiescense) \cite{60317} y luego
-tranquilidad (tranquility) \cite{4359466}. Muchas otras técnicas han sido desarrolladas (como
-\cite{Anderson:2009:MPM:1656437.1656448} y \cite{485222}) aunque estos nunca explican los requerimientos de
-actualización \cite{Baresi:2010:DBD:1882362.1882367} ni cuando es correcto realizar el cambio a la nueva especificación.
+La pregunta central que intenta solucionar este problema es ?`cuándo es seguro cambiar un componente de software en un sistema
+que esta corriendo? Una respuesta conservadora a esta pregunta es ``cuando los componentes no están involucrados en
+alguna interacción''; esto fue formalizado introduciendo la noción de \textbf{quietud} (\emph{quiescense}) \cite{60317} y luego
+\textbf{tranquilidad} (\emph{tranquility}) \cite{4359466}. Muchas otras técnicas han sido desarrolladas (como en
+\cite{Anderson:2009:MPM:1656437.1656448} y \cite{485222}) aunque estas nunca explican los requerimientos de
+actualización \cite{Baresi:2010:DBD:1882362.1882367}, ni indican cuando es correcto realizar el cambio a la nueva especificación.
 Para tal fin Ghezzi et al. \cite{6224401,PanzicaLaManna:2013:FCC:2487336.2487349} estudió el problema de actualizar un
-controlador que esta monitoreando un entorno de sistema reactivo mientras controla actuadores. La pregunta que persiguen
-contestar es ``cuándo es seguro reemplazar el controlador actual con uno nuevo donde se cumple la nueva
-especificación''.
+controlador que esta monitoreando un ambiente de sistema reactivo mientras controla actuadores. La pregunta que persiguen
+contestar los autores es ?`cuándo es seguro reemplazar el controlador actual con uno nuevo donde se cumple la nueva
+especificación?
 
 Un problema en común que los trabajos existentes en actualización dinámica poseen, es que dichas técnicas necesitan
 asumir que el sistema que esta siendo ejecutado va a eventualmente alcanzar un estado seguro donde hacer la
-actualización (estos estados son designados como \emph{actualizables} y cómo identificarlos dependen de cada técnica) y
-suelen tener un operador o una pieza de software especial designado a identificar dichos estados. Esta asunción, es algo
-que no depende del software, sino que depende del ambiente el cual no puede ser manipulado. A su vez, los trabajos
-existentes, tampoco dan una técnica para guiar al sistema para que llegue a un estado actualizable. 
+actualización. Estos estados son designados como \emph{actualizables} y su identificación depende de cada técnica.
+Dichas técnicas, suelen tener un operador o una pieza de software especial designado a identificar dichos estados. Esta asunción, es algo
+que no depende del software, sino que depende del ambiente, el cual sabemos que no puede ser manipulado. A su vez, los trabajos
+existentes, tampoco dan una técnica para guiar al sistema hacia un estado actualizable. 
 
-Por ejemplo, en \cite{60317}, la expectativa es que los componentes en un sistema distribuido deben ser diseñados, para que
-den información de cuando este componente entró en estado de \emph{quiescence}. A su vez, están diseñados para aceptar mensajes
+Por ejemplo, en \cite{60317}, la expectativa sería que los componentes en un sistema distribuido deben ser diseñados, para que
+den información del momento en que dicho componente entró en estado de \emph{quiescence}. A su vez, están diseñados para aceptar mensajes
 \emph{pasivate} que, al deshabilitar componentes para inicializar nuevas transacciones, intentan, pero no garantizan
-alcanzar \emph{quiescence}. Similarmente, en \cite{6224401} requiere asumir que el controlador a ser actualizado va a volver
-eventualmente a su estado inicial (o que la nueva especificación vale desde el último estado inicial); estados
+que alcance \emph{quiescence}. Similarmente, en \cite{6224401} requiere asumir que el controlador a ser actualizado va a
+volver, eventualmente, a su estado inicial (o asumir que la nueva especificación vale desde el último estado inicial). Estados
 actualizables son aquellos en los que el comportamiento del sistema desde el ultimo estado inicial puede controlarse
-para satisfacer la nueva especificación.  Por otra parte, in \cite{PanzicaLaManna:2013:FCC:2487336.2487349}, el mismo
-autor relajas las condiciones necesarias para realizar una actualización, permitiendo mas estados actualizables, al
-costo de violar la nueva especificación, sin contemplar que podrían suceder con estos.
+para satisfacer la nueva especificación.  Por otra parte, en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}, el mismo
+autor relaja las condiciones necesarias para realizar una actualización, permitiendo más estados actualizables, al
+costo de violar la nueva especificación, y sin contemplar que podrían suceder con estos.
 
 %Cuando trabajamos en ingeniería de requerimientos, nuestra tarea es relevar y documentar los objetivos y el
 %funcionamiento del ambiente, para elaborar un conjunto de requerimientos cuya máquina a construir debe cumplir.
