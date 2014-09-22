@@ -1,0 +1,19 @@
+\section{Modelando objetivos para controladores actualizables}
+
+Agregamos un conjunto de palabras reservadas a FSP para poder soportar objetivos actualizables. En la figura
+\ref{TEMPLATE1} mostramos el código FSP necesario para síntesis de controladores actualizables para el ejemplo del reactor nuclear
+presentado en la sección \ref{}.
+
+El operador \texttt{\textbf{updatingController}} devuelve, si existe, un controlador que satisface una especificación
+acerca de los nuevos requerimientos. Necesitamos en esta declaración, además de los nuevos requerimientos, suministrar
+la información necesaria acerca de cual es el controlador actual, el modelo del ambiente actual, el modelo del ambiente
+nuevo y un conjunto de pares de flujos donde cada elemento indicará correspondencia de estados del ambiente actual al
+ambiente nuevo como dijimos en la sección \ref{}. Por ejemplo, en la figura \ref{TEMPLATE1} podemos observar que
+al usar la palabra reservada \texttt{\textbf{updatingController}} configuramos BLA1 como el controlador actual, BLA2
+como modelo del ambiente actual, BLA3 como modelo del ambiente nuevo, \texttt{\textbf{UpdateSpec}} como la nueva
+especificación y \texttt{\textbf{\{\{RequestPending,RequestPending\}, \{IsStopped,IsStopped\}\}}} es el conjunto de
+flujos.
+
+Los objetivos nuevos están definidos mediante el operador \texttt{\textbf{controllerSpec}}. La palabra reservada
+\texttt{\textbf{safety}} permite definir requerimientos de seguridad (\emph{safety}). Aquí incluiremos las formulas
+LTL descritas en la sección \ref{}
