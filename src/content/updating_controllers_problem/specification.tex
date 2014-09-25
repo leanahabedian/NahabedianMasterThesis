@@ -1,0 +1,16 @@
+\section{Especificación}
+
+En capítulos anteriores mostramos ejemplos en los cuales nos referíamos a la actual y nueva especificación como
+entidades monolíticas (las llamaremos $S$ y $S'$ respectivamente). Sin embargo, para presentar la actualización dinámica
+de controladores como un problema de control asumiremos que la especificación $S$ esta dividida en tres partes. La
+primera es la descripción de la interfaz del controlador dada como un conjunto de etiquetas $A$ que representa las
+acciones controlables del controlador. La segunda es una descripción operacional $E$, en forma de LTS, que describe el
+comportamiento del ambiente en cuanto a acciones controlables y monitoriables. La tercera son los objetivos del
+controlador $G$, expresado como una formula FLTL.
+
+Note que como el estado inicial de $E'$ depende el estado actual de $E$, el ingeniero debe proveer un mapeo de estados
+$M$ de $E$ a $E'$. Omitiremos referirnos a $M$ hasta que lleguemos a la sección donde formalizaremos todos estos
+conceptos para mantener la presentación simple
+
+En consecuencia, el problema general que apuntamos a resolver puede ser planteado de la siguiente manera: La
+comportamiento de un sistema adaptable están siendo ejecutadas
