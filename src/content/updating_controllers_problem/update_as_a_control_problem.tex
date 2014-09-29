@@ -1,1 +1,27 @@
 \section{La actualización dinámica de controladores como un problema de síntesis de controladores}
+
+Una primera aproximación intuitiva para implementar la actualización de controladores dinámicamente puede ser
+construyendo dos controladores adicionales al controlador actual $C$. El primero es un controlador $C'$ que puede
+satisfacer los objetivos $G'$ para el nuevo ambiente $E'$ controlando acciones $A'$. El segundo es un ``controlador de
+transición'' $C^*$ que controla el traspaso del controlador actual $C$ al nuevo controlador $C'$ satisfaciendo los
+requerimientos de transición $T$.
+
+Si bien es conceptualmente elegante, el enfoque de los tres controladores es ingenuo ya que estos controladores están
+intrínsecamente relacionados. La nueva especificación solo puede ser alcanzada por un controlador $C'$ desde estados
+específicos ($I_{C'}$). Estos estados iniciales de $C'$ necesitan ser calculados y considerados como estados finales del
+``controlador de transición'' $C^*$. Luego, los estados desde donde el ``controlador de transición'' puede alcanzar
+($I_{C'}$) necesitan ser computados ($I_{C^*}$). Finalmente, nos queda analizar si $C$ puede ser extendido para
+garantizar que alcance algún estado en $I_{C^*}$ sin violar sus objetivos ($G$).
+
+La interacción entre estos tres controladores y la necesidad de generar una técnica para computar $C'$ y $C^*$ puede ser
+obtenida mediante la resolución de un problema de control que produce un solo controlador (el cual vamos a llamar $C_u$)
+que ejecuta acciones simulando las tres faces, primero simulando a $C$, luego a $C^*$ y finalmente a $C'$. Ahora
+pasaremos a explicar como la actualización de controladores dinámica puede ser expresada como un problema de control que
+abarca estas tres fases.
+
+El problema de control para la actualización de controladores dinámicos, como cualquier otro problema de control,
+necesita de un modelo del ambiente, el cual llamaremos $E_u$, un objetivo, el cual llamaremos $G_u$, y un conjunto de
+acciones, $A_u$. El objetivo $iG_u$, lo definiremos en términos de $G$, $G'$ y $T$ mas los eventos $stopOldSpec$,
+$startNewSpec$ y $beginUpdate$. El ambiente $E_u$ estará definido en base a $E$, $E'$ y $C$. El conjunto de acciones
+$A_u$ estará definido en base a $A$ y $A'$.
+

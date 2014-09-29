@@ -12,5 +12,19 @@ Note que como el estado inicial de $E'$ depende el estado actual de $E$, el inge
 $M$ de $E$ a $E'$. Omitiremos referirnos a $M$ hasta que lleguemos a la sección donde formalizaremos todos estos
 conceptos para mantener la presentación simple
 
-En consecuencia, el problema general que apuntamos a resolver puede ser planteado de la siguiente manera: La
-comportamiento de un sistema adaptable están siendo ejecutadas
+En consecuencia, el problema general que apuntamos a resolver puede ser planteado de la siguiente manera: Ejecutar
+un sistema adaptable mediante un controlador $C$ que controla un conjunto de acciones $A$ y a su vez satisface los
+objetivos $G$ para un ambiente $E$. El usuario desea cambiar dinámicamente el controlador que se esta ejecutando para
+empezar a satisfacer el nuevo objetivos $G'$ en el nuevo ambiente $E'$ controlando un conjunto de acciones $A'$ y a su
+vez satisfacer los requerimientos de transición $T$.
+
+METER ALGÚN EJEMPLO
+
+Los modelos de los ambientes $E$ y $E'$ pueden ser construidos mediante la composición paralela de varios modelos LTSs
+que describen diferentes aspectos del comportamiento del ambiente. Por ejemplo podríamos definir una LTS que describa el
+comportamiento de un tren que va atravesando distintas secciones de una vía. Por otro lado, tenemos otra LTS que
+describe la comunicación que el tren realiza con la barrera electrónica para identificar si está habilitado para cruzar.
+Para definir por completo el ambiente, necesitamos componer en paralelo ambas LTS. El comportamiento del ambiente por
+completo puede verse en la sección de casos de estudio.
+
+NECESITO EL EJEMPLO
