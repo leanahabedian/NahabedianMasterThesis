@@ -25,3 +25,39 @@ acciones, $A_u$. El objetivo $iG_u$, lo definiremos en términos de $G$, $G'$ y 
 $startNewSpec$ y $beginUpdate$. El ambiente $E_u$ estará definido en base a $E$, $E'$ y $C$. El conjunto de acciones
 $A_u$ estará definido en base a $A$ y $A'$.
 
+\subsection{El objetivo del problema de control}
+
+La formalización del objetivo para la actualización de controladores dinámicamente (DCU), $G_u$, puede ser formalizado
+como una conjunción de las siguientes formulas FLTL.
+
+\begin{enumerate}
+\itemsep-4mm
+\item $\Box(G W stopOldSpec)$
+\item $\Box(startNewSpec \Longrightarrow G')$
+\item $\Box\ T$
+\item $\Box(beginUpdate \Longrightarrow \Diamond startNewSpec)$
+\item $\Box(beginUpdate \Longrightarrow \Diamond stopOldSpec)$
+\end{enumerate}
+
+La primera fórmula requiere que el objetivos viejo $G$ valga hasta que el controlador active la señal $stopOldSpec$.
+Tenga en cuenta que esta propiedad de manera aislada significa que la especificación vieja, cualquiera sean su estado,
+puede dejar de valer en cualquier momento. Esto no es lo deseado para una actualización dinámica, por lo tanto debemos
+restringirlo en la especificación de transición ($T$).
+
+La segunda fórmula simplemente requiere que la nueva especificación empiece a valer desde el momento en que el
+controlador active la señal $startNewSpec$. Esto forzará al controlador a que solo produzca esta señal cuando puede
+asegurar $G'$.
+
+La tercera fórmula indica que los requerimientos de transición deben valer siempre. Restringimos $T$ a que sea una
+propiedad de seguridad (\emph{safety}). $T$ es esperado que predique sobre eventos $stopOldSpec$ y $startNewSpec$ para
+poder restringir el comportamiento del sistema cuando ni $G$ ni $G'$ valen. Un enfoque mas preciso sería requerir que
+$T$ solo valga entre ambos eventos, esto seria $\Box inTransition \Longrightarrow T$ donde $inTransition =
+\langle\{stopOldSpec\},\{startNewSpec\}, \bot\rangle$. Esta idea es muy restrictiva ya que los requerimientos de transición
+pueden necesitar referirse a situaciones que suceden antes que la especificación vieja deje de valer. Por ejemplo
+COMPLETAR ACA CON UN EJEMPLO: a photograph taken before $stopOldSpec$ that was not processed before $stopOldSpec$ or
+after $startNewSpec$ ...
+
+Finalmente, las ultimas dos fórmulas requiere que el controlador luego de ejecutar la acción $beginUpdate$, continúe con
+el procedimiento y garantice que los eventos $stopOldSpec$ y $startNewSpec$ sucedan.
+
+\subsection{Modelo del ambiente del problema de control}
