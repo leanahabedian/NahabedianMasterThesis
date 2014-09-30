@@ -30,16 +30,24 @@ $A_u$ estará definido en base a $A$ y $A'$.
 La formalización del objetivo para la actualización de controladores dinámicamente (DCU), $G_u$, puede ser formalizado
 como una conjunción de las siguientes formulas FLTL.
 
+\begin{nahaDef}
+\emph{(Objetivo para el problema de control de la actualización de controladores dinámicamente) Sean $\Box\ G$ y $\Box\ G'$
+los objetivos actuales y los nuevos para un escenario de actualización de controladores dinámicamente, donde $G$ y $G'$
+son una combinación Booleana de flujos y $T$ es una propiedad de safety. Definimos a $G_u$, el objetivo para el
+problema de control de la actualización de controladores dinámicamente como la conjunción de las siguientes fórmulas
+FLTL:}
+\end{nahaDef}
+
 \begin{enumerate}
 \itemsep-4mm
-\item $\Box(G W stopOldSpec)$
+\item $\Box(G\ W stopOldSpec)$
 \item $\Box(startNewSpec \Longrightarrow G')$
 \item $\Box\ T$
 \item $\Box(beginUpdate \Longrightarrow \Diamond startNewSpec)$
 \item $\Box(beginUpdate \Longrightarrow \Diamond stopOldSpec)$
 \end{enumerate}
 
-La primera fórmula requiere que el objetivos viejo $G$ valga hasta que el controlador active la señal $stopOldSpec$.
+La primer fórmula requiere que el objetivos viejo $G$ valga hasta que el controlador active la señal $stopOldSpec$.
 Tenga en cuenta que esta propiedad de manera aislada significa que la especificación vieja, cualquiera sean su estado,
 puede dejar de valer en cualquier momento. Esto no es lo deseado para una actualización dinámica, por lo tanto debemos
 restringirlo en la especificación de transición ($T$).
@@ -61,3 +69,40 @@ Finalmente, las ultimas dos fórmulas requiere que el controlador luego de ejecu
 el procedimiento y garantice que los eventos $stopOldSpec$ y $startNewSpec$ sucedan.
 
 \subsection{Modelo del ambiente del problema de control}
+
+El modelo del ambiente $E_u$ para la actualización de controladores dinámicamente debe ser construido para cubrir las
+tres fases del controlador a ser sintetizado: el ambiente para la especificación vieja, el ambiente para la nueva
+especificación, y el ambiente para la transición. A grandes rasgos, esto significa definir a $E_u$ para que sea una
+combinación de $E$ y $E'$ más el agregado de transiciones para los eventos $beginUpdate$, $stopOldSpec$ y
+$startNewSpec$. Por otro lado, hay dos problemas que debemos tener en cuenta cuidadosamente a la hora de definir
+formalmente $E_u$.
+
+El primer concepto clave que debemos considerar en la construcción de $E_u$ esta relacionado en buscar un ambiente que
+permita un hot-swap trasparente del controlador actual con el obtenido por la síntesis. Necesitamos que la actualización
+del controlador sea estructuralmente idéntico al controlador actual hasta que la acción $beginUpdate$ suceda. Este
+requerimiento es crucial para lograr establecer un mapeo de estados desde el controlador actual a los estados de controlador
+actualizable. Esto hace que sea trivial que debemos establecer el estado inicial del nuevo controlador basándonos en el
+estado actual del controlador viejo, y luego intercambiar controladores durante la ejecución sin perder información del
+estado. De esta manera, el nuevo controlador va a continuar ejecutando exactamente de la misma manera que como lo hacía
+el viejo hasta el momento que se inicie el proceso de actualización.
+
+Para lograr esta propiedad en el controlador de actualización definiremos su ambiente en su parte inicial como la
+composición paralela del controlador viejo y su ambiente (es decir $E\|C$). Esto apunta a construir un controlador
+actualizable que inicialmente ejecutará en un ambiente que ya esta siendo controlado por $C$. Tenga en cuenta que como
+no queremos que la actualización se interponga con $C$ antes que $beginUpdate$ suceda, vamos a asegurar que en esta fase
+el controlador actualizable no controle nada, solo monitorea lo que sucede.
+
+Es cuando $beginUpdate$ sucede, que el controlador actualizable debe tomar cartas en el asunto e intentar garantizar la
+la transición correcta para satisfacer la nueva especificación. Es decir que luego de de que la actualización es
+solicitada necesitamos deshabilitar $C$ y por lo tanto, cambiar de fase del ambiente.
+
+Entonces, el ambiente $E_u$ es construido para ser como $E\|C$ y luego, cuando $beginUpdate$ sucede, empezará a
+comportarse como $E$ hasta que la nueva especificación se pueda cumplir, momento en el cual $E_u$ se comportará como
+$E'$.
+
+El segundo problema que debemos manejar en la construcción de $E_u$ está relacionado con preservar el estado el estado
+del ambiente cuando cambia desde $E$ a $E'$.
+
+Consider, the moment in which... EJEMPLO
+
+El mapeo desde estados de $E$ a $E'$ puede ser definido de varias maneras, solo necesitamos que todos los estados de $E$
