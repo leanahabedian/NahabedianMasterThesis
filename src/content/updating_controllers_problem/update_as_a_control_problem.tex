@@ -31,6 +31,7 @@ La formalización del objetivo para la actualización de controladores dinámica
 como una conjunción de las siguientes formulas FLTL.
 
 \begin{nahaDef}
+\label{update_goals_def}
 \emph{(Objetivo para el problema de control de la actualización de controladores dinámicamente) Sean $\Box\ G$ y $\Box\ G'$
 los objetivos actuales y los nuevos para un escenario de actualización de controladores dinámicamente, donde $G$ y $G'$
 son una combinación Booleana de flujos y $T$ es una propiedad de safety. Definimos a $G_u$, el objetivo para el
@@ -106,3 +107,82 @@ del ambiente cuando cambia desde $E$ a $E'$.
 Consider, the moment in which... EJEMPLO
 
 El mapeo desde estados de $E$ a $E'$ puede ser definido de varias maneras, solo necesitamos que todos los estados de $E$
+tengan al menos un estado correspondiente en $E'$. Tenga en cuenta que permitimos sub-especificar la correspondencia de
+estados de $E'$ permitiendo, por ejemplo, una evolución no determinística desde un estado cuyo valor de batería es
+$\lnot LowBattery$ a un estado donde el valor es $MidBattery$ o $\neg HighBattery$. Durante este capítulo vamos a asumir
+una relación de mapping $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que desarrollamos (ver
+\ref{}), por conveniencia, definimos el mapeo naturalmente sobre definiciones de flujos: un estado $E$ esta mapeado a
+todos los estados de $E'$ que preservan el valor de flujos.
+
+Ahora definiremos formalmente el ambiente $E_u$ para el problema de control de la actualización de controladores
+dinámicamente:
+
+\begin{nahaDef}
+\emph{(Ambiente para el problema de control de la actualización de controladores dinámicamente) Sean $C$ el controlador
+actual, $A$, $E$ y $G$ la especificación actual y $A'$, $E'$ y $G'$ la especificación nueva para el problema de
+control de actualiazación, donde $E = (S_E, A_E, \Delta_E, s_{E_0})$ y $E' = (S_{E'}, A_{E'}, \Delta_{E'}, s_{E'_0})$.
+Además, sea $M \subset S_E \times S_{E'}$ un mapeo de estados tal que para todo $s \in S_E$ existe un estado $s' \in
+{S_E'}$. El ambiente para el problema de control de la actualización de controladores dinámicamente ($E_u$) es un LTS
+$(S_u,A_u,\Delta_u,s_u)$ tal que $E_u$ es una unión disjunta de estados en $E\|C$, $E$ y $E'$ (i.e. $E_u = S_{E\|C}
+\uplus S_E \uplus S_{E'}$), $s_u = s_{E\|C}$, $A_u = A_E \cup A_{E'} \uplus \bar{\ell}|\ell \in A$ y $\Delta_u$ es la relación mas
+pequeña que satisface las reglas que siguen a continuación donde $\ell \in A_u$:}
+
+\begin{enumerate}
+\label{update_environment_def}
+\itemsep-4mm
+\renewcommand*\labelenumi{[\theenumi]}
+\item si $(s,\ell,s') \in \Delta_{E\|C} \wedge \ell \notin A$ entonces $(s,\ell,s') \in \Delta_u$
+\item si $(s,\ell,s') \in \Delta_{E\|C} \wedge \ell \in A$ entonces $(s,\bar{\ell},s') \in \Delta_u$
+\item si $(s,t) \in S_{E\|C}$ entonces $((s,t), beginUpdate,s) \in \Delta_u$
+\item si $(s,\ell,s') \in \Delta_E$ entonces $(s,\ell,s') \in \Delta_u$
+\item si $s \in \Delta_E$ entonces $(s,stopOldSpec,s) \in \Delta_u$
+\item si $s \in \Delta_{E'}$ entonces $(s,stopOldSpec,s) \in \Delta_u$
+\item si $(s,s') \in M$ entonces $(s,startNewSpec,s') \in \Delta_u$
+\item si $(s,\ell,s') \in \Delta_{E'}$ entonces $(s,\ell,s') \in \Delta_u$
+\end{enumerate}
+\emph{Una representación gráfica informal de $E_u$ esta representado en la figura \ref{update_environment}}
+\end{nahaDef}
+
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{img/E_u.png}
+\caption{Representación gráfica del ambiente $E_u$ para el problema de control de la actualización de controladores
+dinámicamente - $\hat{E}$ es $E$ con la diferencia de que su estado inicial es el estado actual de $E$ en $E\|C$.
+$\hat{E'}$ es $E'$ con la diferencia de que su estado inicial es alguno de los estados relacionados en $M$ con el estado
+actual de $E$.}
+\label{update_environment}
+\end{figure}
+
+Las definiciones anteriores construyen a $E_u$ para comportarse exactamente igual a $E\|C$ (ver reglas 1 y 2) hasta que
+sucede $beginUpdate$. La regla 2 simplemente renombra acciones controladas de $C$ para impedir que el controlador de
+actualización las controle. Juntas, ambas reglas permiten intercambiar $C$ por $C_u$ mientras aseguramos que $C_u$
+continua ejecutando exactamente de la misma manera que $C$. Una vez que $beginUpdate$ se efectua (regla 3), el ambiente
+se comporta como $E$ (regla 4). Es justo en este momento que el nuevo controlador tendrá que mantener la vieja
+especificación pero forzandolo a llegar a un estado desde el cual los requerimientos de transición puedan ser
+satisfechos y luego alcanzar la nueva especificación. En cualquier momento el controlador puede efectuar la acción
+$stopOldSpec$ (regla 5) e incluso $startNewSpec$ (regla 7). En caso de que ya haya ocurrido la acción $startNewSpec$, el
+ambiente de actualizacion $E_u$ se comporta como el nuevo ambiente $E'$ (regla 8). Aunque como no forzamos que la
+vieja especificación deje de valer antes de que valga la nueva especificación, $stopOldSpec$ puede ocurrir durante esta
+última fase (regla 6).
+
+\subsection{El problema de control de la actualización de controladores dinámicamente}
+
+Ahora podemos definir formalmente el problema de control que nos soluciona el escenario de la actualización de
+controladores dinámicamente.
+
+El problema de control de la actualización de controladores dinámicamente puede ser visto como un problema de control de
+LTS usando un ambiente $E_u$ como definimos en la sección \ref{update_environment_def}, los objetivos $G_u$ como
+definimos en la sección \ref{update_goals_def} y el set de acciones controlables $A_u$ definido como la unión de las
+acciones controlables entre $A$ y $A'$. La única sutileza es que como $E_u$ introduce cambios de nombres de acciones que
+son controladas por $C$ en la primera fase ($E\|C$), estos cambios deben ser revertidos una vez computado el controlador
+de actualización (reemplazar las acciones $\bar{\ell}$ por $\ell$). Recordar que el cambio de nombre es realizado para
+asegurar que el controlador de actualización, cuando se esta generando, no considere a las acciones de $E\|C$ como
+controlables hasta que suceda $beginUpdate$. Una vez computado, mientras el controlador de actualización es ejecutado
+las acciones deben ser revertidas a su nombre original.
+
+\begin{nahaDef}
+\emph{(El problema de control de la actualización de controladores dinámicamente)}
+\end{nahaDef}
+
+
+
