@@ -14,28 +14,17 @@ estudio pueden verse en \cite{}.
 
 En \cite{PanzicaLaManna:2013:FCC:2487336.2487349} se analiza un controlador para un sistema de refrigeración de una
 planta de energía nuclear. El controlador actual debe ejecutar servicios de mantenimiento primero apagando la
-bomba que refrigera la planta y luego reiniciandola. El nuevo controlador no necesita parar la bomba y reiniciarla. Hay
-también un invariante del sistema que indica que la bomba de refrigeración no puede estar apagada indefinidamente (esto
-puede llevar a un accidente devastador). Los autores muestran que si una actualización se lleva a cabo en un estado en
-donde el controlador actual tiene la bomba apagada, entonces el nuevo controlador puede no reiniciar la bomba, generando
-un accidente. Esto nos muestra dos problemas. Primero, que la forma segura de preservar el invariante del sistema es
-requerir que la actualización preserve el comportamiento como si el controlador actual haya sido reemplazado desde su
-estado inicial (cuando la bomba es reiniciada). Esto es lo que los autores aseguran en \cite{6224401}. Segundo, que las
-restricciones de cuándo una actualización de \cite{6224401} es suavisada como en \cite{PanzicaLaManna:2013:FCC:2487336.2487349} 
-puede generar fallas y consecutivamente ellos recomiendan que ``el diseño de controladores actualizables
-dinámicamente basados en el criterio débil de  actualización incluye una subsiguiente validación de los controladores''.
+bomba que refrigera la planta y luego reiniciarla. El nuevo controlador no necesita parar la bomba y reiniciarla para
+efectuar el mantenimiento. Hay también un invariante del sistema que indica que la bomba de refrigeración no puede estar
+apagada indefinidamente (esto puede llevar a un accidente devastador). 
 
-Nosotros resolvemos tres diferentes problemas de control de actualización dinámica de controladores para este caso de
-estudio. El primero no tiene requerimientos para el período de transición entre la especificación vieja y la nueva (esto
-es, $T$ configurado como $true$). El controlador obtenido ($C^1_u$) exhibe el comportamiento invalido descrito en
-\cite{PanzicaLaManna:2013:FCC:2487336.2487349}, permitiendo una actualización mientras la bomba esta apagada, prendiendo
-la bomba durante la transición y permitiendo al nuevo controlador a nunca reiniciarla.
-
-El segundo problema de control usa a $T$ con el requerimiento genérico de \cite{6224401} (ver fórmula
-\ref{ghezzi_formula}). El controlador resultante ($C^2_u$) evita la actualización mientras la bomba esta apagada, y por lo
-tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De hecho, como se espera, este controlador
-exhibe estrictamente menos comportamiento que el controlador previo ($TR(C^2_u) \subset TR(C^1_u)$).
-
-
+Los autores muestran que si una actualización se lleva a cabo en un estado en donde el controlador actual tiene la bomba
+apagada, entonces el nuevo controlador puede no reiniciar la bomba, generando un accidente. Esto nos muestra dos
+problemas. Primero, que la forma segura de preservar el invariante del sistema es requerir que la actualización preserve
+el comportamiento como si el controlador actual haya sido reemplazado desde su estado inicial (cuando la bomba es
+reiniciada). Esto es lo que los autores aseguran en \cite{6224401}. Segundo, que las restricciones de cuándo una
+actualización de \cite{6224401} es suavizada como en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}  puede generar
+fallas y consecutivamente ellos recomiendan que ``el diseño de controladores actualizables dinámicamente basados en el
+criterio débil de  actualización incluye una subsiguiente validación de los controladores''.
 
 

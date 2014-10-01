@@ -1,1 +1,34 @@
 \section{Resultados}
+
+En esta sección detallaremos los resultados obtenidos para cada caso de estudio planteado en la sección
+\ref{cases_of_study}. Para comparar diferentes resultados obtenidos por el problema de control notaremos $Tr(C)$ como el
+conjunto de trazas del LTS $C$. Informalmente, una traza es una secuencia de acciones que un controlador puede
+realizar. Por lo tanto, dado dos controladores $C_1$, $C_2$, si toda traza de $C_1$ está en $Tr(C_2)$ (i.e. $Tr(C_1) \subset
+Tr(C_2)$) podremos decir que el controlador $C_2$ tiene mas comportamiento que $C_1$ debido a que en el controlador
+$C_2$ puedo ejecutar todas las secuencias de acciones de $C_1$ y algunas más.
+
+\subsection{Planta de energía nuclear}
+
+Nosotros resolvemos tres diferentes problemas de control de actualización dinámica de controladores para este caso de
+estudio. El primero no tiene requerimientos para el período de transición entre la especificación vieja y la nueva (esto
+es, $T$ configurado como $true$). El controlador obtenido ($C^1_u$) exhibe el comportamiento invalido descrito en
+\cite{PanzicaLaManna:2013:FCC:2487336.2487349}, permitiendo una actualización mientras la bomba esta apagada, prendiendo
+la bomba durante la transición y permitiendo al nuevo controlador a nunca reiniciarla.
+
+El segundo problema de control usa a $T$ con el requerimiento genérico de \cite{6224401} (ver fórmula
+\ref{ghezzi_formula}). El controlador resultante ($C^2_u$) evita la actualización mientras la bomba esta apagada, y por
+lo
+tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De hecho, como se espera, este controlador
+exhibe estrictamente menos comportamiento que el controlador previo ($Tr(C^2_u) \subset Tr(C^1_u)$).
+
+Finalmente, el tercer problema de control modela explícitamente el requerimiento de que la bomba no debería estar
+apagada continuamente (esto es, en realidad, un requerimiento de transición de aceptación büchi que puede ser manejado
+por nuestro enfoque sin problemas. Ver capítulo \ref{discusion}). El controlador resultante ($C^3_u$) no solo evita el
+escenario descrito en \cite{PanzicaLaManna:2013:FCC:2487336.2487349} y exhibe menos comportamiento que el primer
+controlador ($Tr(C^2_u) \subset Tr(C^1_u)$) sino que también provee más oportunidades de actualización que el segundo
+controlador exhibiendo estrictamente más comportamiento ($Tr(C^2_u) \subset Tr(C^3_u)$). 
+
+En otras palabras, nuestra técnica provee un criterio más relajado para controladores actualizables con respecto a
+\cite{6224401} y que a su vez, es correcto por construcción ya que satisface los requerimientos de transición y además
+no necesita de una validación manual posterior como en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}.
+
