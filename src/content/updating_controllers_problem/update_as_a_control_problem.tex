@@ -10,7 +10,7 @@ Si bien es conceptualmente elegante, el enfoque de los tres controladores es ing
 intrínsecamente relacionados. La nueva especificación solo puede ser alcanzada por un controlador $C'$ desde estados
 específicos ($I_{C'}$). Estos estados iniciales de $C'$ necesitan ser calculados y considerados como estados finales del
 ``controlador de transición'' $C^*$. Luego, los estados desde donde el ``controlador de transición'' puede alcanzar
-($I_{C'}$) necesitan ser computados ($I_{C^*}$). Finalmente, nos queda analizar si $C$ puede ser extendido para
+$I_{C'}$ necesitan ser computados ($I_{C^*}$). Finalmente, nos queda analizar si $C$ puede ser extendido para
 garantizar que alcance algún estado en $I_{C^*}$ sin violar sus objetivos ($G$).
 
 La interacción entre estos tres controladores y la necesidad de generar una técnica para computar $C'$ y $C^*$ puede ser
@@ -21,13 +21,13 @@ abarca estas tres fases.
 
 El problema de control para la actualización de controladores dinámicos, como cualquier otro problema de control,
 necesita de un modelo del ambiente, el cual llamaremos $E_u$, un objetivo, el cual llamaremos $G_u$, y un conjunto de
-acciones, $A_u$. El objetivo $iG_u$, lo definiremos en términos de $G$, $G'$ y $T$ mas los eventos $stopOldSpec$,
+acciones, $A_u$. El objetivo $G_u$, lo definiremos en términos de $G$, $G'$ y $T$ mas los eventos $stopOldSpec$,
 $startNewSpec$ y $beginUpdate$. El ambiente $E_u$ estará definido en base a $E$, $E'$ y $C$. El conjunto de acciones
 $A_u$ estará definido en base a $A$ y $A'$.
 
 \subsection{El objetivo del problema de control}
 
-La formalización del objetivo para la actualización de controladores dinámicamente (DCU), $G_u$, puede ser formalizado
+La formalización del objetivo para la actualización de controladores dinámicamente, $G_u$, puede ser formalizado
 como una conjunción de las siguientes formulas FLTL.
 
 \begin{nahaDef}
@@ -37,7 +37,6 @@ los objetivos actuales y los nuevos para un escenario de actualización de contr
 son una combinación Booleana de flujos y $T$ es una propiedad de safety. Definimos a $G_u$, el objetivo para el
 problema de control de la actualización de controladores dinámicamente como la conjunción de las siguientes fórmulas
 FLTL:}
-\end{nahaDef}
 
 \begin{enumerate}
 \itemsep-4mm
@@ -47,6 +46,7 @@ FLTL:}
 \item $\Box(beginUpdate \Longrightarrow \Diamond startNewSpec)$
 \item $\Box(beginUpdate \Longrightarrow \Diamond stopOldSpec)$
 \end{enumerate}
+\end{nahaDef}
 
 La primer fórmula requiere que el objetivos viejo $G$ valga hasta que el controlador active la señal $stopOldSpec$.
 Tenga en cuenta que esta propiedad de manera aislada significa que la especificación vieja, cualquiera sean su estado,
@@ -93,8 +93,8 @@ actualizable que inicialmente ejecutará en un ambiente que ya esta siendo contr
 no queremos que la actualización se interponga con $C$ antes que $beginUpdate$ suceda, vamos a asegurar que en esta fase
 el controlador actualizable no controle nada, solo monitorea lo que sucede.
 
-Es cuando $beginUpdate$ sucede, que el controlador actualizable debe tomar cartas en el asunto e intentar garantizar la
-la transición correcta para satisfacer la nueva especificación. Es decir que luego de de que la actualización es
+Es cuando $beginUpdate$ sucede, que el controlador actualizable debe empezar a tomar medidas e intentar garantizar
+la transición correcta para satisfacer la nueva especificación. Es decir que luego de que la actualización es
 solicitada necesitamos deshabilitar $C$ y por lo tanto, cambiar de fase del ambiente.
 
 Entonces, el ambiente $E_u$ es construido para ser como $E\|C$ y luego, cuando $beginUpdate$ sucede, empezará a
@@ -171,8 +171,8 @@ Ahora podemos definir formalmente el problema de control que nos soluciona el es
 controladores dinámicamente.
 
 El problema de control de la actualización de controladores dinámicamente puede ser visto como un problema de control de
-LTS usando un ambiente $E_u$ como definimos en la sección \ref{update_environment_def}, los objetivos $G_u$ como
-definimos en la sección \ref{update_goals_def} y el set de acciones controlables $A_u$ definido como la unión de las
+LTS usando un ambiente $E_u$ como definimos en la definición \ref{update_environment_def}, los objetivos $G_u$ como
+definimos en la definición \ref{update_goals_def} y el conjunto de acciones controlables $A_u$ definido como la unión de las
 acciones controlables entre $A$ y $A'$. La única sutileza es que como $E_u$ introduce cambios de nombres de acciones que
 son controladas por $C$ en la primera fase ($E\|C$), estos cambios deben ser revertidos una vez computado el controlador
 de actualización (reemplazar las acciones $\bar{\ell}$ por $\ell$). Recordar que el cambio de nombre es realizado para
@@ -181,8 +181,38 @@ controlables hasta que suceda $beginUpdate$. Una vez computado, mientras el cont
 las acciones deben ser revertidas a su nombre original.
 
 \begin{nahaDef}
-\emph{(El problema de control de la actualización de controladores dinámicamente)}
+\emph{(El problema de control de la actualización de controladores dinámicamente) Sean $G$ y $G'$ expresiones de flujos
+sin expresiones temporales. Sea $E$ un LTS y sea la formula FLTL $\Box G$ la especificación actual que el sistema esta
+satisfaciendo tras ejecutar el LTS $C$, controlador que controla las acciones en $A$. Sea $E'$ un LTS, la formula FLTL
+$\Box G'$ y un conjunto de acciones controlables $A'$ la nueva especificación que es esperada satisfacer con la
+actualización dinámica del controlador del sistema.}
+
+\emph{$C_u$ es una solución al problema de control de actualización de controladores dinámicamente si $C_u$ es el resultado de
+renombrar toda acción $\bar{\ell}$ por $\ell$ en el controlador $\overline{C}$ que es una solución la problema de
+control LTS $\langle E_u, G_u, A_u \rangle$ donde $E_u$ esta definido en la definición \ref{update_environment_def},
+$G_u$ esta definido en la definición \ref{update_goals_def} y $A_u = A \cup A'$}
 \end{nahaDef}
 
+\begin{figure}
+\centering
+\includegraphics[scale=0.35]{img/C_u.png}
+\caption{Abstracción informal de un controlador $C_u$ para el problema de control de la actualización de controladores
+dinámicamente - $C_T$ representa el comportamiento que satisface $T$ mientras que garantiza eventualmente tanto
+$stopOldSpec$ como $startNewSpec$, mientras que $C_{G'}$ representa el comportamiento del controlador que satisface
+$G'$.}
+\label{update_controller}
+\end{figure}
+
+Por definición, cualquier solución del problema de control de la actualización de controladores dinámicamente
+satisfacerá a $G_u$ asumiendo que el ambiente se comporta como $E_u$. La validez de las asunciones de $E_u$ dependen en
+la validez de las especificaciones actuales y nuevas, $E$ y $E'$, que son responsabilidad del ingeniero, y que la
+infraestructura de ejecución del controlador va a dinámicamente cargar cualquier nueva habilidad descrita en $E'$ cuando
+la señal $startNewSpec$ suceda.
+
+Un controlador que es solución del problema definido recientemente tomará, informalmente, la estructura descrita en la
+figura \ref{update_controller}. Primero va a comportarse como $C$ excepto que aceptará en cualquier momento que la acción no controlable
+$beginUpdate$ suceda. Luego, se comportará como un controlador que esta intentando realizar las acciones $stopOldSpec$ y
+$startNewSpec$ mientras satisface la propiedad $T$. Finalmente, una vez que la acción $startNewSpec$ ha ocurrido se
+comportará como un controlador que satisface $G'$.
 
 
