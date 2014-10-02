@@ -43,4 +43,29 @@ resultante $C^1_u$ ....
 
 \subsection{Production Cell}
 
+Para analizar este caso, exploramos varios escenarios de adaptación definiendo una especificación inicial y nueva. Para
+cada escenario identificamos posibles especificaciones alternativas. Por ejemplo, una decisión común para todo escenario
+de actualización es como son los productos procesados. ?`Debería la cadena de montaje estar vacía antes de que se
+produzca la actualización? En este caso, los productos que están siendo procesados ?`deberían ser descartados? ?`o
+terminarlos?. Si decidimos terminarlos, ?`los deberíamos terminar con la vieja especificación o con la nueva? O tal vez,
+durante el proceso de transición, la cadena de montaje no necesita ser vaciada y no importa que receta se lleva a cabo
+para  construir un producto, siempre y cuando, estén construidos de una manera consistente. 
+
+Estas alternativas fueron modeladas cambiando el valor del requerimiento de transición $T$...
+
+\subsection{ARDrone}
+
+Un aspecto interesante del controlador resultante, en este caso de estudio, es que en la vieja especificación el nivel
+de batería nunca es tenido en cuenta, generando en el ambiente de actualización $E_u$ mucho no determinismo a la hora de
+efectuar la acción $startNewSpec$ desde cualquier estado (i.e. una transición por cada nivel de batería distinto que
+puede tener el nuevo ambiente). A pesar del no determinismo que este problema de control tiene al cambiar la
+especificación, el controlador de actualización simplemente carga la batería inmediatamente después de que se efectúe la
+actualización (i.e. cuando $startNewSpec$ ocurre). Esto sucede debido a que el controlador de actualización obtenido
+asume una actualización en el peor caso, que es cuando no hay batería disponible en el robot.
+
+Por otra parte, Pudimos validar el comportamiento del drone tras observar mediante la herramienta MTSA como los estados
+del controlador de actualización eran recorridos, y a su vez, observar las acciones reales que el robot efectuaba. La
+única acción controlada por el operador del sistema vía MTSA fue $beginUpdate$. Un video con uno de estos experimientos
+puede ser visto en \cite{}.
+
 
