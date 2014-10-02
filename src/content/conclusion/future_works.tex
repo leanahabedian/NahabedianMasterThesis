@@ -1,1 +1,27 @@
 \section{Trabajo futuro}
+
+El problema de actualización dinámica ha sido estudiado extensivamente y hay una gran cantidad de problemas distintos
+que deben ser abordados en función del dominio de aplicación, tecnología y la forma en que se efectúa la actualización
+(vea \cite{SMR:SMR1556} para mas información). El grueso del esfuerzo en actualización dinámica asume que no hay cambios
+de especificación y por lo tanto el mismo comportamiento es esperado (por ejemplo en \cite{mx:icse13}), o que la
+especificación es genérica (como en \cite{Shen:2005:TUF:1095430.1081720}, \cite{5551162}, \cite{1167829},
+\cite{4221625}, \cite{485222}, \cite{60317}) y no proporcionada por el usuario. Ejemplos de este último, aparte de
+asegurar que la actualización no desemboca un fallo, asegura type safety (ej. \cite{Subramanian08dynamicsoftware}) y
+data isolation entre versiones \cite{Stoyle07mutatismutandis:}. Quiescence \cite{60317} y nociones relacionadas (ej.
+\cite{4359466},  \cite{Anderson:2009:MPM:1656437.1656448}, \cite{485222}) no requieren una representación explicita de
+las propiedades a ser preservadas, pero fue utilizado en conjunto con técnicas que garantizan consistencia genérica de
+semántica (ej. \cite{5546542}). 
+
+La necesidad de una actualización por medio de la definición de propiedades por parte del usuario han sido reconocidas
+en \cite{Baresi:2010:DBD:1882362.1882367}. En \cite{Hayden:2012:SVC:2189314.2189336}, se considera la especificación de
+propiedades de actualización, pero posee un enfoque en verificar si el programa satisface estas propiedades, en vez de
+automáticamente sintetizar la actualización para satisfacer estas propiedades. 
+
+Síntesis, estrategia operacional para construir un autómata que satisface una especificación dada, ha sido usado
+extensivamente para garantizar código que es correcto por construcción (por ejemplo en
+\cite{Greenyer:2013:ISC:2491411.2491445}). La naturalidad automática de la síntesis logra poder aplicar esta técnica no
+solo en el momento en el que el diseño se lleva a cabo sino que también en tiempo de ejecución, generando una sistema
+adaptable. Dicha evolución no esta limitada exclusivamente para sistemas adaptables como describimos en la etapa de
+introducción y motivación (ver sección \ref{motivation}). Por ejemplo, en \cite{} el problema de 
+
+
