@@ -1,4 +1,4 @@
-\section{Trabajo futuro}
+\section{Discusión y trabajo futuro}
 
 El problema de actualización dinámica ha sido estudiado extensivamente y hay una gran cantidad de problemas distintos
 que deben ser abordados en función del dominio de aplicación, tecnología y la forma en que se efectúa la actualización
@@ -22,6 +22,52 @@ extensivamente para garantizar código que es correcto por construcción (por ej
 \cite{Greenyer:2013:ISC:2491411.2491445}). La naturalidad automática de la síntesis logra poder aplicar esta técnica no
 solo en el momento en el que el diseño se lleva a cabo sino que también en tiempo de ejecución, generando una sistema
 adaptable. Dicha evolución no esta limitada exclusivamente para sistemas adaptables como describimos en la etapa de
-introducción y motivación (ver sección \ref{motivation}). Por ejemplo, en \cite{} el problema de 
+introducción y motivación (ver sección \ref{motivation}). Por ejemplo, en \cite{Pelliccione20082237} el problema de
+evolucionar componentes conjuntos es resuelto sintetizando ``glue code'' (por ejemplo, controladores). Si bien la
+síntesis se ejecuta sin frenar el sistema, el nuevo controlador solo puede reemplazar al viejo cuando el sistema entra
+en ``quiescence''.
 
+Síntesis requiere algún tipo de especificación desde la que, a través de diferentes técnicas de razonamiento, producir
+una solución. El resultado de sintetizar es correcto solo en la medida en que la especificación es válida. Por lo tanto,
+técnicas de síntesis no son, en principio, resistentes a errores en la especificación o a ambientes que evolucionan y
+divergen de la especificación. El trabajo descrito en esta tesis es también susceptible a especificaciones invalidas. En
+el dominio de sistemas adaptables se han estudiado distintos enfoques que pueden detectar y resolver ciertas situaciones
+(por ejemplo en \cite{DBKMSU14} y \cite{Vromant:2011:ICL:1988008.1988037}) e incluso, aprender nuevas especificaciones
+en tiempo de ejecución. El enfoque descrito en este documento puede ser combinada con dichas técnicas.
+
+Una suposición de este trabajo es que es posible controlar cambios del ambiente. En otras palabras, si la nueva
+especificación introduce diferentes características en el ambiente, como serían nuevos componentes, cambios en el protocolo
+de llamada de un componente, o deshabilitar un componente, es el controlador quien puede decidir cuando estos cambios
+ocurren. El controlador controla una infraestructura intermedia que puede cargar, descargar o cambiar componentes en
+tiempo de ejecución. Esto permite al controlador a planificar un cambio y darle mas libertad para encontrar una
+estrategia que puede satisfacer el cambio requerido. Por otro lado, en muchas situaciones, puede suceder un cambio no
+anunciado en el ambiente y actualizar el controlador para acomodar este cambio es decidible.
+
+Por ejemplo, si la conexión entre el UAV y la base puede perderse, y por lo tanto, la interfaz que el controlador de UAV
+maneja queda deshabilitado. En este caso, la actualización de este controlador debe producirse inmediatamente y puede
+ser imposible continuar garantizando los objetivos actuales o los nuevos. En \cite{DBKMSU14} presentan un enfoque donde las
+garantías funcionales del controlador se degradan elegantemente para estos casos. Por otro lado, la técnica requiere que
+el controlador y la especificación del nivel de degradación preserve una relación de refinación entre el controlador
+actual y la especificación. Dicho requerimiento puede ser restrictivo.
+
+El trabajo realizado en esta tesis, puede ser visto como una generalización de una degradación progresiva presentada en
+\cite{DBKMSU14}. Decimos esto, ya que la no controlabilidad del cambio de ambiente, puede en nuestro enfoque manejarse teniendo
+que la especificación de transición $T$ requiera que el evento $startNewSpec$ ocurra inmediatamente después de
+$beginUpdate$, sin embargo, el ambiente viejo $E$ no es requerido para obtener refinamientos de $E$ como en
+\cite{DBKMSU14}
+
+En este trabajo, limitamos la expresividad de nuestro enfoque a objetivos de \emph{safety} (ver Definicion
+\ref{update_goals_def}). Esto hace a esta presentación simple e incluso permite una resolución de complejidad lineal al
+problema de control de actualización de controladores dinámicamente siempre y cuando el ambiente es determinístico. Sin
+embargo, podríamos permitir mayor expresividad en $G$, $G'$ y $T$ sin incurrir del todo en la penalidad de resolver un
+problema de control (2EXPTIME-COMPLETE). Es posible, reformular la definición \ref{update_goals_def} para permitir que
+las especificaciones $G$, $G'$ y $T$ puedan ser de la forma $\Box \Diamond G$, $\Box \Diamond G'$ y $\Box \Diamond T$.
+Este criterio de aceptación de Büchi extiende la expresividad manteniendo la complejidad en orden polinomial (esto lo
+conseguimos redefiniendo $G_u$ a $\Box \Diamond [(G \lor OldSpecDropped) \wedge (G' \lor \neg NewSpecEnsured) \wedge
+(\neg BeginUpdate \lor NewSpecEnsured) \wedge (\neg BeginUpdate \lor  OldSpecDropped) \wedge  T]$. Donde
+$OldSpecDropped$ es el flujo definido como $\langle \{stopOldSpec\},\emptyset,\bot\rangle$, $NewSpecEnsured$ es el flujo
+definido como $\langle \{startNewSpec\},\emptyset,\bot\rangle$ y $BeginUpdate$ es el flujo definido como $\langle
+\{beginUpdate\},\emptyset,\bot\rangle$). Se necesitan futuras investigaciones para analizar si, por ejemplo, las
+especificaciones SGR(1) \cite{D'ippolito:2013:SNE:2430536.2430543} en el problema de control de actualización de
+controladores dinámicos, solo puede ser resuelto en tiempo polinómico.
 
