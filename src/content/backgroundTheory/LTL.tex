@@ -5,11 +5,12 @@ La Lógica Lineal Temporal (LTL) esta siendo ampliamente usada en la ingeniería
 las LTL de flujos es que estas proveen un framework uniforme para especificar propiedades basados en estados sobre
 modelos basados en eventos \cite{Giannakopoulou:2003:FMC:940071.940106}. Fluent Linear Temporal Logic (FLTL) \cite{Giannakopoulou:2003:FMC:940071.940106}
 es una lógica de tiempo lineal, temporal, para razonar acerca de flujos. Un \emph{flujo} $Fl$ es definido por un par de
-conjuntos y un valor booleano: $Fl = <I_{Fl},T_{Fl},Init_{Fl}>$, donde $I_{Fl} \subseteq Act$ es el conjunto de acciones
-iniciadoras, $T_{Fl} \subseteq Act$ es el conjunto de acciones finalizadoras y $I_{Fl} \cap T_{Fl} = \emptyset$. Un
-flujo puede ser inicializado con valor true o false indicado por $Init_{Fl}$. Toda acción $\ell \in Act$ induce un flujo,
-que notaremos $\ell = <\ell, Act \ \{\ell\}, false>$. Por último, el alfabeto de un flujo es el que se obtiene mediante la
-unión del conjunto de acciones iniciadoras y el conjunto de acciones finalizadoras.
+conjuntos y un valor booleano: $Fl = \langle I_{Fl},T_{Fl},Init_{Fl}\rangle$, donde $I_{Fl} \subseteq Act$ es el
+conjunto de acciones iniciadoras, $T_{Fl} \subseteq Act$ es el conjunto de acciones finalizadoras y $I_{Fl} \cap T_{Fl}
+= \emptyset$. Un flujo puede ser inicializado con valor true o false indicado por $Init_{Fl}$. Toda acción $\ell \in
+Act$ induce un flujo, que notaremos $\ell = \langle\ell, Act \backslash \{\ell\}, false\rangle$. Por último, el alfabeto
+de un flujo es el que se obtiene mediante la unión del conjunto de acciones iniciadoras y el conjunto de acciones
+finalizadoras.
 
 Sea $\mathcal{F}$ el conjunto de todas las posibles flujos sobre $Act$. Una formula FLTL esta se define inductivamente
 utilizando los conectores booleanos estandar y operadores temporales como el $\mathbf{X}$ (próximo), $\mathbf{U}$ (antes

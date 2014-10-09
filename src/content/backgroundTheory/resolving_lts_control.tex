@@ -13,13 +13,13 @@ $(\sigma,u)$ es una solución a $\mathcal{E}$.
 \subsection{Control LTS SGR(1) a juegos GR(1)}
 
 Convertiremos el problema de control LTS SGR(1) a un juego GR(1). Dado un problema de control LTS SGR(1) $\mathcal{E} =
-<E,H,A_C>$ construimos un juego GR(1) $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ tal que cada estado en $S_g$
+\langle E,H,A_C\rangle$ construimos un juego GR(1) $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ tal que cada estado en $S_g$
 representa un estado en $E$ y una valuación de todos los flujos que aparecen en $A_s$ y en $G$.
 
 Mas precisamente, y por la definición de control LTS SGR(1) (definición \ref{ControlLTSSGR1}) tendremos que $H =
 \{(\emptyset,I),(A_s,G)\}$, $E = (S_e,A,\Delta_e,s_{e_0})$, $A_s = \bigwedge_{i=1}^n\Box\ \Diamond\ \phi_i$, $I = \Box\
 \rho$ y $G = \bigwedge_{j=1}^m\Box\ \Diamond\ \omega_j$. Sea $fl = \{\dot1,...,\dot k\}$ un conjunto de flujos usados en
-$A_s$ y en $G$ donde $\dot i = <I_i,T_i,Init_i>$. Construimos al juego $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ de
+$A_s$ y en $G$ donde $\dot i = \langle I_i,T_i,Init_i\rangle$. Construimos al juego $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ de
 la siguiente manera.
 
 Construimos $S_g$ a partir de $E$ de tal forma, que los estados en $S_g$ corresponden a un estado en $E$ y los valores
@@ -60,7 +60,7 @@ la hora de construir $\Gamma^-$ y $\Gamma^+$. De esta manera, la \emph{condicion
 
 Ahora pasaremos a explicar como conseguir un controlador LTS a partir de una estrategia ganadora para el juego en GR(1).
 Intuitivamente, la transformación es de la siguiente manera: dado un problema de control LTS SGR(1) $\mathcal{E} =
-<E,H,A_C>$, el juego $G = (S_g, \Gamma^-, \Gamma^+, s_{g_0},\varphi_g)$ obtenido a partir de $\mathcal{E}$ y de la
+\langle E,H,A_C\rangle$, el juego $G = (S_g, \Gamma^-, \Gamma^+, s_{g_0},\varphi_g)$ obtenido a partir de $\mathcal{E}$ y de la
 estrategia ganadora para $G$, construimos $M = (S_M,A,\Delta_M,s_{M_0})$ una solución para $\mathcal{E}$ traduciendo
 a estados de $S_M$ un estado de $S_g$ y un estado de la memoria dada por la estrategia ganadora.
 
@@ -184,6 +184,7 @@ de que los estados de \emph{deadlock} tienen ranking $\infty$. Además, notemos 
 objetivos. Dado un estado $s_g$ y un objetivo $\gamma_j$, $sr(s_g,j)$ está definida de la siguiente manera:
 
 \begin{itemize}
+\itemsep-4mm
 \item Si $\Gamma^+(s_g) \cup \Gamma^-(s_g) = \emptyset$, entonces $sr(s_g,j) = \infty$, caso contrario,
 \item si $s_g$ es controlable y $s_g \in \gamma_j$, entonces $sr(s_g,j) = min_{s'_g \in \Gamma^+(s_g)} R_{j \oplus
 1}(S'_g)$.
