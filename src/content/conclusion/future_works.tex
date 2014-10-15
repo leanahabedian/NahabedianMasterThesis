@@ -2,7 +2,7 @@
 
 El problema de actualización dinámica ha sido estudiado extensivamente y hay una gran cantidad de problemas distintos
 que deben ser abordados en función del dominio de aplicación, tecnología y la forma en que se efectúa la actualización
-(vea \cite{SMR:SMR1556} para mas información). El grueso del esfuerzo en actualización dinámica asume que no hay cambios
+(vea \cite{SMR:SMR1556} para más información). El grueso del esfuerzo en actualización dinámica asume que no hay cambios
 de especificación y por lo tanto el mismo comportamiento es esperado (por ejemplo en \cite{mx:icse13}), o que la
 especificación es genérica (como en \cite{Shen:2005:TUF:1095430.1081720}, \cite{5551162}, \cite{1167829},
 \cite{4221625}, \cite{485222}, \cite{60317}) y no proporcionada por el usuario. Ejemplos de este último, aparte de
@@ -20,31 +20,31 @@ automáticamente sintetizar la actualización para satisfacer estas propiedades.
 Síntesis, estrategia operacional para construir un autómata que satisface una especificación dada, ha sido usado
 extensivamente para garantizar código que es correcto por construcción (por ejemplo en
 \cite{Greenyer:2013:ISC:2491411.2491445}). La naturalidad automática de la síntesis logra poder aplicar esta técnica no
-solo en el momento en el que el diseño se lleva a cabo sino que también en tiempo de ejecución, generando una sistema
+sólo en el momento en el que el diseño se lleva a cabo sino que también en tiempo de ejecución, generando un sistema
 adaptable. Dicha evolución no esta limitada exclusivamente para sistemas adaptables como describimos en la etapa de
 introducción y motivación (ver sección \ref{motivation}). Por ejemplo, en \cite{Pelliccione20082237} el problema de
 evolucionar componentes conjuntos es resuelto sintetizando ``glue code'' (por ejemplo, controladores). Si bien la
-síntesis se ejecuta sin frenar el sistema, el nuevo controlador solo puede reemplazar al viejo cuando el sistema entra
+síntesis se ejecuta sin frenar el sistema, el nuevo controlador sólo puede reemplazar al viejo cuando el sistema entra
 en ``quiescence''.
 
-Síntesis requiere algún tipo de especificación desde la que, a través de diferentes técnicas de razonamiento, producir
-una solución. El resultado de sintetizar es correcto solo en la medida en que la especificación es válida. Por lo tanto,
+La síntesis requiere algún tipo de especificación desde la que, a través de diferentes técnicas de razonamiento, producir
+una solución. El resultado de sintetizar es correcto sólo en la medida en que la especificación es válida. Por lo tanto,
 técnicas de síntesis no son, en principio, resistentes a errores en la especificación o a ambientes que evolucionan y
 divergen de la especificación. El trabajo descrito en esta tesis es también susceptible a especificaciones invalidas. En
 el dominio de sistemas adaptables se han estudiado distintos enfoques que pueden detectar y resolver ciertas situaciones
 (por ejemplo en \cite{DBKMSU14} y \cite{Vromant:2011:ICL:1988008.1988037}) e incluso, aprender nuevas especificaciones
-en tiempo de ejecución. El enfoque descrito en este documento puede ser combinada con dichas técnicas.
+en tiempo de ejecución. El enfoque descrito en este documento puede ser combinado con dichas técnicas.
 
 Una suposición de este trabajo es que es posible controlar cambios del ambiente. En otras palabras, si la nueva
 especificación introduce diferentes características en el ambiente, como serían nuevos componentes, cambios en el protocolo
 de llamada de un componente, o deshabilitar un componente, es el controlador quien puede decidir cuando estos cambios
 ocurren. El controlador controla una infraestructura intermedia que puede cargar, descargar o cambiar componentes en
-tiempo de ejecución. Esto permite al controlador a planificar un cambio y darle mas libertad para encontrar una
+tiempo de ejecución. Esto permite al controlador a planificar un cambio y darle más libertad para encontrar una
 estrategia que puede satisfacer el cambio requerido. Por otro lado, en muchas situaciones, puede suceder un cambio no
-anunciado en el ambiente y actualizar el controlador para acomodar este cambio es decidible.
+anunciado en el ambiente y actualizar el controlador para acomodar este cambio es deseado.
 
-Por ejemplo, si la conexión entre el UAV y la base puede perderse, y por lo tanto, la interfaz que el controlador de UAV
-maneja queda deshabilitado. En este caso, la actualización de este controlador debe producirse inmediatamente y puede
+Por ejemplo, si la conexión entre el UAV y la base puede perderse, y al suceder esto, la interfaz que el controlador de UAV
+maneja queda deshabilitada. En este caso, la actualización de este controlador debe producirse inmediatamente y puede
 ser imposible continuar garantizando los objetivos actuales o los nuevos. En \cite{DBKMSU14} presentan un enfoque donde las
 garantías funcionales del controlador se degradan elegantemente para estos casos. Por otro lado, la técnica requiere que
 el controlador y la especificación del nivel de degradación preserve una relación de refinación entre el controlador
@@ -69,7 +69,7 @@ $OldSpecDropped$ es el flujo definido como $\langle \{stopOldSpec\},\emptyset,\b
 definido como $\langle \{startNewSpec\},\emptyset,\bot\rangle$ y $BeginUpdate$ es el flujo definido como $\langle
 \{beginUpdate\},\emptyset,\bot\rangle$). Se necesitan futuras investigaciones para analizar si, por ejemplo, las
 especificaciones SGR(1) \cite{D'ippolito:2013:SNE:2430536.2430543} en el problema de control de actualización de
-controladores dinámicos, solo puede ser resuelto en tiempo polinómico.
+controladores dinámicos, sólo puede ser resuelto en tiempo polinómico.
 
 La complejidad lineal del problema de control de actualización de controladores dinámicamente cuando se restringe a
 propiedades de \emph{safety} provee un argumento analítico para la escalabilidad. Sin embargo, queda por hacer una
@@ -78,8 +78,8 @@ producir que la complejidad se vaya a exponencial en peor caso. Los problemas de
 descritos en la sección \ref{cases_of_study} fueron resueltos usando MTSA que provee algoritmos más complejos que los
 necesitados (polinomial para SGR(1) en vez de linear para formulas de obligación). Además, la estrategia para resolver
 el problema de actualización definida en esta tesis, que construye un controlador que controla las tres fases de
-actualización (ver figura \ref{update_environment}), prioriza el entendimiento de dicha técnica. Para reducir la
-complejidad (particularmente para el caso no lineal de fórmulas de büchi), es posible producir el un controlador de
+actualización (ver Figura \ref{update_environment}), prioriza el entendimiento de dicha técnica. Para reducir la
+complejidad (particularmente para el caso no lineal de fórmulas de Büchi), es posible producir un controlador de
 actualización composicionalmente, computando primero estados en el nuevo ambiente desde los cuales los nuevos objetivos
 pueden ser garantizados, y luego, computando un controlador que puede satisfacer alcanzar uno de esos estados luego de
 que $beginUpdate$ ocurra, mientras se satisfacen los requerimientos de transición $T$.
@@ -87,16 +87,16 @@ que $beginUpdate$ ocurra, mientras se satisfacen los requerimientos de transici�
 Tenga en cuanta, que no discutimos hasta ahora que pasa si otra actualización dinámica es deseada luego de que se
 efectúe la primera. Una visión \emph{naive} para concretar ésto sería considerar a $C_u$, computado en la primera
 actualización, como controlador para la segunda. Esta idea sería ineficiente ya que  $C_u$ contiene, como lo muestra la
-figura \ref{update_controller}, el comportamiento entero del controlador original $C$ más el control de la fase de transición y el
+Figura \ref{update_controller}, el comportamiento entero del controlador original $C$ más el control de la fase de transición y el
 control para la nueva especificación. Usar a $C_u$ como $C$ para la segunda actualización dinámica y aplicar la misma
-técnicas tantas veces sea necesario llevaría a obtener un controlador que posee el historial de todos los controladores
+técnica tantas veces sea necesario, llevaría a obtener un controlador que posee el historial de todos los controladores
 y las actualizaciones realizadas en el sistema. Ésto contrae problemas de escalabilidad. Esta situación puede ser
 evitada ya que una vez que la actualización se ha ``estabilizado'' con la nueva especificación (esto es, el controlador
 de actualización efectuó la acción $startNewSpec$ y $stopOldSpec$), el controlador $C_u$ garantiza no visitar estados
-que correspondan a la fase inicial (ésto puede verse en el super-estado $C_{G'}$ de la figura \ref{update_controller}).
+que correspondan a la fase inicial (ésto puede verse en el super-estado $C_{G'}$ de la Figura \ref{update_controller}).
 Por lo tanto, para la nueva actualización, en vez de considerar por completo todos los estados de $C_u$, es posible
 considerar la componente conexa de $C_u$ que incluye al estado actual de $C_u$ (lo que es a lo sumo, todos los estados
-que pertenecen al super-estado de $C_{G'}$ de la figura \ref{update_controller}).
+que pertenecen al super-estado de $C_{G'}$ de la Figura \ref{update_controller}).
 
 En la sección \ref{cases_of_study} comparamos nuestro enfoque con \cite{6224401} y
 \cite{PanzicaLaManna:2013:FCC:2487336.2487349} mediante casos de estudio. Como discutimos, una ventaja del trabajo de

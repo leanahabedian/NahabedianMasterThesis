@@ -1091,7 +1091,7 @@
 \def\partname{Parte}
 \def\abstractname{Abstract}
 \def\draftname{preliminary draft}
-\def\figureshortname{Fig.}                      % <-- thesis
+\def\figureshortname{Figura}                      % <-- thesis
 \def\tableshortname{Tab.}                       % <-- thesis
 \def\prefacename{Prefacio}                       % <-- thesis
 \newcommand{\today}{\ifcase\month\or

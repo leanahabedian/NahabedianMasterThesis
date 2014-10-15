@@ -1,6 +1,6 @@
 \section{El Mundo y la Máquina}
 
-Los primeros conceptos que detallaré estarán involucrados con la ingeniería de los requerimientos. Los puntos de vista
+Los primeros conceptos que detallaremos estarán involucrados con la ingeniería de los requerimientos. Los puntos de vista
 mas relevantes son los de Zave y Jackson (\cite{Zave97fourdark, Jackson:1995:SRA:210207, 5071113}) por un lado, y los de
 Letier y Van Lamsweerde (\cite{879820, VanLamsweerde:2001:GRE:882477.883624}) por el otro. Ambos puntos de vista
 distinguen a los problemas del \emph{Mundo} y las soluciones de la \emph{Máquina} como fundamentales para reconocer si 
@@ -20,8 +20,8 @@ un brazo robótico o las reglas de procesamiento para cada elemento que entra en
 \end{figure}
 
 Así mismo, es esperado que la máquina proponga una solución al problema. Por ejemplo, en la Figura \ref{world_and_machine}
-podemos ver que la célula de producción debe procesar cada producto, solo si están disponible en la bandeja de entrada en ese
-momento. Con la sentencia $EnBandeja[p] \rightarrow get.Bandeja[p]$ muestro que se espera que el brazo del robot solo
+podemos ver que la célula de producción debe procesar cada producto, sólo si están disponible en la bandeja de entrada en ese
+momento. Con la sentencia $EnBandeja[p] \rightarrow get.Bandeja[p]$ mostramos que se espera que el brazo del robot sólo
 podrá tomar los productos de la bandeja cuando estén listos. Finalizando, los fenómenos compartidos entre el mundo y
 máquina, es decir, los que se encuentran en la intersección, representa a la \emph{interfaz}, donde la máquina
 interactúa con el mundo. También, podemos definir a los fenómenos del mundo como el \emph{modelo del entorno} ya que el
@@ -50,6 +50,6 @@ ambiente. Un requisito de software, o \emph{requisito} de forma abreviada, es un
 deberá satisfacer independientemente de cómo se comporta el problema detallado en el mundo y deben ser elaboradas en
 términos de fenómenos compartidos entre el mundo y la máquina.
 
-Para finalizar y siguiendo lo publicado en \cite{VanLamsweerde:2001:GRE:882477.883624, 879820} podremos determinar a una acción como supervisada / controlable si
-dicha acción es supervisada / controlable por la máquina. En este trabajo, llamaremos a las acciones supervisadas como
-acciones no controlables, ya que están controladas por el ambiente.
+Para finalizar y siguiendo lo publicado en \cite{VanLamsweerde:2001:GRE:882477.883624, 879820} podremos determinar a una
+acción como supervisada/controlable si dicha acción es supervisada/controlable por la máquina. En este trabajo,
+llamaremos a las acciones supervisadas como acciones no controlables, ya que están controladas por el ambiente.

@@ -2,8 +2,8 @@
 
 En esta sección vamos a dar una notación para los sistemas de transiciones etiquetados o Labelled Transition System
 (LTS), la cual usaremos durante este trabajo. Dichos sistemas, son muy usados actualmente para modelar y analizar
-comportamiento en sistemas concurrentes y distribuidos. Un LTS es un sistema de transiciones de estados donde cada una
-de ellas esta etiquetada con una acción. El conjunto de todas las acciones que posee un LTS es llamado alfabeto.
+comportamiento en sistemas concurrentes y distribuidos. Un LTS es un sistema de transiciones de estados donde cada uno
+de ellos esta etiquetado con una acción. El conjunto de todas las acciones que posee un LTS es llamado alfabeto.
 
 \begin{nahaDef}
     \emph{(Sistema de Transición Etiquetado)\cite{Keller:1976:FVP:360248.360251} Sea $States$ un conjunto universal de estados, $Act$ un conjunto
@@ -45,12 +45,12 @@ $\Delta_E(s) = $\{$\ell$ $|$ $(s,\ell,s')$ $\in$ $\Delta_E\}$. Dado un LTS $E$, 
 \end{nahaDef} 
 
 Intuitivamente, un LTS $M$ es un LTS $Legal$ para el LTS $E$ con respecto a $A_{E_u}$, si para todos los estados en la
-composición $(s_E,s_M) \in S_{S||M}$ se cumple que, una acción $\ell \in A_{E_u}$ es deshabilitada en $(s_E,s_M)$ si y solo
+composición $(s_E,s_M) \in S_{S||M}$ se cumple que, una acción $\ell \in A_{E_u}$ es deshabilitada en $(s_E,s_M)$ si y sólo
 si también esta deshabilitada en $s_E \in E$. En otras palabras, $M$ no restringe a $E$ con respecto a $A_{E_u}$.
 
 
 \begin{nahaDef}
-    \emph{(Tranzas) Sea un LTS $E = (S,A,\Delta,s_0)$. Una secuencia $\pi = \ell_0,\ell_1,...$ es una traza en $E$ si existe una
+    \emph{(Tranza) Sea un LTS $E = (S,A,\Delta,s_0)$. Una secuencia $\pi = \ell_0,\ell_1,...$ es una traza en $E$ si existe una
     secuencia $s_0,\ell_0,s_1,\ell_1,...$ donde para todo $i$ tenemos $(s_i,\ell_i,s_{i+1}) \in \Delta$.}
 \end{nahaDef} 
 
@@ -62,5 +62,5 @@ si también esta deshabilitada en $s_E \in E$. En otras palabras, $M$ no restrin
     como $Reach(E)$.}
 \end{nahaDef} 
 
-En el transcurso de esta tesis, vamos a estudiar solo aquellos LTSs $E$ donde todos sus estados $s \in S_E$ son
+En el transcurso de esta tesis, vamos a estudiar sólo aquellos LTSs $E$ donde todos sus estados $s \in S_E$ son
 alcanzables.

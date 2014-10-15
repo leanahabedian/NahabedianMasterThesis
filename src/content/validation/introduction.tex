@@ -24,14 +24,14 @@ hay un cambio de especificación explícito es en Ghezzi et al. \cite{6224401}. 
 natural y correcto. Una actualización dinámica es correcta si el comportamiento exhibido por el sistema es equivalente
 al obtenido luego de una actualización apagando la máquina. Esto relaja el esfuerzo del ingeniero al no tener que
 especificar requerimientos de transición (como en nuestro trabajo) pero con el costo de limitar posibles actualizaciones
-que pueden ser soportadas. Como en \cite{6224401}, permitimos especificaciones solapadas (ver figura \ref{overlaping}); pero
-también permitimos periodos en los que ninguna especificación vale a diferencia de \cite{6224401} (ver figura
+que pueden ser soportadas. Como en \cite{6224401}, permitimos especificaciones solapadas (ver Figura \ref{overlaping}); pero
+también permitimos periodos en los que ninguna especificación vale a diferencia de \cite{6224401} (ver Figura
 \ref{transition}).
 
 Es posible obtener el comportamiento de actualización obtenido en \cite{6224401} especificando como parte del
 requerimiento de transición $T$ que $startNewSpec$ pueda ocurrir si la nueva especificación vale desde el último estado
-inicial antes de $beginUpdate$ (ver la imagen de abajo de la figura \ref{ghezzi}) o tan pronto como el estado inicial es
-alcanzado nuevamente (ver la imagen de arriba de la figura \ref{ghezzi}). Esto, podemos formalizarlo de la siguiente manera:
+inicial antes de $beginUpdate$ (ver la imagen de abajo de la Figura \ref{ghezzi}) o tan pronto como el estado inicial es
+alcanzado nuevamente (ver la imagen de arriba de la Figura \ref{ghezzi}). Esto, podemos formalizarlo de la siguiente manera:
 
 \vspace{-1cm}
 \begin{equation}

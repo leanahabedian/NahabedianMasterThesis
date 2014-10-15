@@ -1,6 +1,6 @@
 \section{Resolviendo el problema de actualización dinámica de controladores}
 
-Resolver un problema de control LTS (como el definido en la definición \ref{LTS_control} en el capitulo
+Resolver un problema de control LTS (como el definido en la definición \ref{LTS_control} en el capítulo
 \ref{background}) por cada propiedad FLTL es 2EXPTIME complete \cite{Pnueli:1989:SRM:75277.75293}. El problema de
 actualización dinámica de controladores es una instancia especifica del problema de control LTS general. En efecto, dada
 la estructura de $G_u$, su resolución puede ser computada bajo limites de menor complejidad.
@@ -13,7 +13,7 @@ pueden usarse para producir versiones determinísticas, sin embargo, podría cre
 de no determinismo que exista.
 
 Es simple de ver que el objetivo del problema de control de actualización dinámica de controladores, $G_u$, puede ser
-reformulado como afirmaciones de obligación. Las formulas 1) a 3) en definición \ref{update_goals_def} son propiedades
+reformulado como afirmaciones de obligación. Las formulas 1) a 3) en la definición \ref{update_goals_def} son propiedades
 de seguridad (tenga en cuenta que $W$ es un ``weak until'' y por lo tanto es una propiedad de seguridad). Una propiedad
 de seguridad $I_j$ puede simplemente ser codificada como $\Box I_j \lor \Diamond \bot$. Las otras dos formulas de la
 definición \ref{update_goals_def} son de la forma $\Box(p \Longrightarrow \Diamond q)$ y pueden ser codificadas como
@@ -23,7 +23,7 @@ respectivos eventos han sucedido alguna vez en el pasado. Formalmente estarían 
 \emptyset, \bot \rangle$, $\langle{stopOldSpec}, \emptyset, \bot \rangle$ y $\langle{beginUpdate}, \emptyset, \bot
 \rangle$.
 
-El problema de control de la actualización dinámica de controladores puede tener o no una solución. La existencia de la
+El problema de control de la actualización dinámica de controladores puede tener o no una solución. La existencia de 
 esta solución significa que el controlador resultante $C_u$ garantiza que: se comporte inicialmente como el controlador
 actual $C$ bajo la especificación del ambiente actual $E$ y acepta en cualquier punto el comando $beginUpdate$; asegura
 una transición correcta, satisfaciendo $T$, preservando el objetivo viejo $G$ y conduciendo al sistema a un punto en el
@@ -33,12 +33,12 @@ La no existencia de una solución a este problema de control puede significar do
 el nuevo objetivo bajo las asunciones del nuevo ambiente no puede ser alcanzados por el controlador (esto es, el
 problema de control definido por $E'$ y $\Box G'$ no tiene solución para ningún estado inicial de $E'$). Esta es una
 situación extrema donde el controlador tiene poco por hacer con la actualización que se le pide. El segundo, asumiendo
-que el problema de control definido por $E'$ y $\Box G'$ tiene solución para algunos estados de $E'$, no es solo que la
+que el problema de control definido por $E'$ y $\Box G'$ tiene solución para algunos estados de $E'$, no es sólo que la
 transición de una especificación a la otra no pueda satisfacer la propiedad $T$, sino que también puede suceder que sea
 imposible alcanzar un estado de $E'$ desde el cual $G'$ valga. Este segundo escenario puede producirse, por ejemplo,
 porque el requerimiento de transición $T$ es excesivamente restrictiva o porque el controlador tiene capacidades
-insuficientes para asegurar alcanzar un estado desde el cual el nuevo ambiente puede garantizar la validez del nuevo
-objetivo. Mas generalmente, tendremos el problema cuando tenemos una combinación de especificaciones muy estrictas ($E$,
+insuficientes, para alcanzar un estado desde el cual el nuevo ambiente puede garantizar la validez del nuevo
+objetivo. Más generalmente, tendremos el problema cuando tenemos una combinación de especificaciones muy estrictas ($E$,
 $G$, $E'$, $G'$ y $T$) y falta de control del controlador sobre los eventos del ambiente. En el capítulo \ref{validation}
 discutiremos las causas de no poder resolver el problema de actualización dinámica de controladores para algunos
 ejemplos específicos.

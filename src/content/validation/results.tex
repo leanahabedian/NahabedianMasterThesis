@@ -4,7 +4,7 @@ En esta sección detallaremos los resultados obtenidos para cada caso de estudio
 \ref{cases_of_study}. Para comparar diferentes resultados obtenidos por el problema de control notaremos $Tr(C)$ como el
 conjunto de trazas del LTS $C$. Informalmente, una traza es una secuencia de acciones que un controlador puede
 realizar. Por lo tanto, dado dos controladores $C_1$, $C_2$, si toda traza de $C_1$ está en $Tr(C_2)$ (i.e. $Tr(C_1) \subset
-Tr(C_2)$) podremos decir que el controlador $C_2$ tiene mas comportamiento que $C_1$ debido a que en el controlador
+Tr(C_2)$) podremos decir que el controlador $C_2$ tiene más comportamiento que $C_1$ debido a que en el controlador
 $C_2$ puedo ejecutar todas las secuencias de acciones de $C_1$ y algunas más.
 
 \subsection{Planta de energía nuclear}
@@ -22,8 +22,8 @@ tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De h
 exhibe estrictamente menos comportamiento que el controlador previo ($Tr(C^2_u) \subset Tr(C^1_u)$).
 
 Finalmente, el tercer problema de control modela explícitamente el requerimiento de que la bomba no debería estar
-apagada continuamente (esto es, en realidad, un requerimiento de transición de aceptación büchi que puede ser manejado
-por nuestro enfoque sin problemas. Ver capítulo \ref{discusion}). El controlador resultante ($C^3_u$) no solo evita el
+apagada continuamente (esto es, en realidad, un requerimiento de transición de aceptación Büchi que puede ser manejado
+por nuestro enfoque sin problemas. Ver capítulo \ref{discusion}). El controlador resultante ($C^3_u$) no sólo evita el
 escenario descrito en \cite{PanzicaLaManna:2013:FCC:2487336.2487349} y exhibe menos comportamiento que el primer
 controlador ($Tr(C^2_u) \subset Tr(C^1_u)$) sino que también provee más oportunidades de actualización que el segundo
 controlador exhibiendo estrictamente más comportamiento ($Tr(C^2_u) \subset Tr(C^3_u)$). 
@@ -47,13 +47,13 @@ Para analizar este caso, exploramos varios escenarios de adaptación definiendo 
 cada escenario identificamos posibles especificaciones alternativas. Por ejemplo, una decisión común para todo escenario
 de actualización es como son los productos procesados. ?`Debería la cadena de montaje estar vacía antes de que se
 produzca la actualización? En este caso, los productos que están siendo procesados ?`deberían ser descartados? ?`o
-terminarlos?. Si decidimos terminarlos, ?`los deberíamos terminar con la vieja especificación o con la nueva? O tal vez,
+terminarlos? Si decidimos terminarlos, ?`los deberíamos terminar con la vieja especificación o con la nueva? O tal vez,
 durante el proceso de transición, la cadena de montaje no necesita ser vaciada y no importa que receta se lleva a cabo
 para  construir un producto, siempre y cuando, estén construidos de una manera consistente. 
 
 Estas alternativas fueron modeladas cambiando el valor del requerimiento de transición $T$...
 
-\subsection{ARDrone}
+\subsection{Cuadcóptero}
 
 Un aspecto interesante del controlador resultante, en este caso de estudio, es que en la vieja especificación el nivel
 de batería nunca es tenido en cuenta, generando en el ambiente de actualización $E_u$ mucho no determinismo a la hora de

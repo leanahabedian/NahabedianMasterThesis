@@ -3,16 +3,16 @@
 En esta tesis, como en \cite{6224401,PanzicaLaManna:2013:FCC:2487336.2487349} consideramos el problema de controladores
 actualizables en un sistema reactivo. Por otro lado, proponemos una técnica para actualización dinámica que
 \emph{fuerza} al sistema a alcanzar un estado actualizable en vez de asumir que el sistema va a llegar a dicho estado.
-Por lo tanto, nuestro enfoque no solo garantiza que la nueva especificación va a valer \emph{si} la actualización se
+Por lo tanto, nuestro enfoque no sólo garantiza que la nueva especificación va a valer \emph{si} la actualización se
 produce, sino que también garantiza que la actualización \emph{va a suceder}. Además, generalizamos la noción de estados
-actualizables en \cite{6224401,PanzicaLaManna:2013:FCC:2487336.2487349} mientras mantenemos correctitud que es mejor que
+actualizables en \cite{6224401,PanzicaLaManna:2013:FCC:2487336.2487349} mientras mantenemos correctitud, que es mejor que
 requerir que la nueva especificación empiece a valer desde el estado inicial (o co-inicial 
 \cite{PanzicaLaManna:2013:FCC:2487336.2487349}) del controlador actual. Proveemos también una especificación declarativa
 y general para señala desde que punto los nuevos objetivos valen y designar propiedades que deben valer en el momento
 que el sistema esta transicionando. 
 
-Una clase de sistemas que se amoldan al trabajo presentado son los sistemas adaptables. Dichos sistemas están diseñados
-para que, mientras el proceso esta corriendo, pueda soportar cambios en cuanto a la disponibilidad de recursos o
+Una clase de sistemas que se amoldan perfectamente al trabajo presentado son los sistemas adaptables. Dichos sistemas están diseñados
+para que, mientras el proceso esta corriendo, pueda soportar cambios en cuanto a la disponibilidad de recursos o 
 necesidades del usuario y también soportar condiciones inesperadas del ambiente y fallas \cite{SEAMS}. 
 
 Nuestro enfoque de actualización de controladores dinámicos forma parte junto con otros trabajos de la misma área para
@@ -23,16 +23,16 @@ es capaz de garantizar un objetivo bajo asunciones del ambiente.
 El problema de controladores dinámicos actualizables puede ser expresado como un problema de síntesis de controladores
 en el cual el nuevo controlador cumple que:
 
-\begin{enumerate}[I)]
+\begin{itemize}
 \itemsep-4mm
-\item es una estructura equivalente al controlador actual hasta que recibe un mensaje (no controlable) llamado
+\item Es una estructura equivalente al controlador actual hasta que recibe un mensaje (no controlable) llamado
 \emph{beginUpdate},
-\item  satisface la especificación actual hasta que el evento (controlable) \emph{stopOldSpec} sucede,
-\item garantiza a la nueva especificación desde que ocurre la acción (controlada) \emph{startNewSpec},
-\item proporciona que el comportamiento entre \emph{beginUpdate}, \emph{stopOldSpec} y \emph{startNewSpec} satisface
+\item Satisface la especificación actual hasta que el evento (controlable) \emph{stopOldSpec} sucede,
+\item Garantiza a la nueva especificación desde que ocurre la acción (controlada) \emph{startNewSpec},
+\item Proporciona que el comportamiento entre \emph{beginUpdate}, \emph{stopOldSpec} y \emph{startNewSpec} satisface
 cualquier requerimiento de transición y
-\item garantiza que los eventos \emph{startNewSpec} y \emph{stopOldSpec} van a suceder eventualmente.
-\end{enumerate}
+\item Garantiza que los eventos \emph{startNewSpec} y \emph{stopOldSpec} van a suceder eventualmente.
+\end{itemize}
 
 
 %Trabajos previos en el área de ingeniería de los requerimientos han estudiado la utilidad de diversas técnicas de sistemas

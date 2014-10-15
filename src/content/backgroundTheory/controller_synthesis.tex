@@ -2,7 +2,7 @@
 
 Los problemas de síntesis de controladores son aquellos que producen una máquina, la cual, restringe las ocurrencias de
 los eventos controlables, basado en las observaciones, de los eventos no controlables que han ocurrido. Dicha máquina, al
-ser desplegada con un ambiente adecuando logramos satisfacer el conjunto de objetivos del sistema. Cabe destacar, que
+ser desplegada con un ambiente adecuado logramos satisfacer el conjunto de objetivos del sistema. Cabe destacar, que
 estos objetivos se cumplirán si se satisfacen las asunciones que se hacen sobre el ambiente. Resumiendo, tendremos una
 especificación del ambiente, asunciones, objetivos, y un conjunto de acciones controlables. Resolver el \emph{problema
 de síntesis de control} es hallar una máquina, que al trabajar concurrentemente con el ambiente, que satisface las
@@ -10,9 +10,9 @@ asunciones del dominio, satisfacemos el conjunto de objetivos del sistema.
 
 Hecha esta introducción definiremos el problema de síntesis de control para modelos basados en eventos de la siguiente
 manera. Dada una LTS que detalla el comportamiento del ambiente, un conjunto de eventos controlables, un conjunto de
-formulas FLTL que describen los objetivos del sistema, el problema de control LTS consiste en encontrar una LTS que
-restringe solamente la ocurrencia de acciones controlables y garantiza que la composición paralela del ambiente con la
-LTS recién descripta estará libre de deadlocks y que, si las presunciones del ambiente valen, satisfacerá también los
+formulas FLTL que describen los objetivos del sistema, el problema de control LTS consiste en encontrar un LTS que
+restringe solamente la ocurrencia de acciones controlables y garantiza que la composición paralela del ambiente con el
+LTS recién descripto estará libre de deadlocks y que, si las presunciones del ambiente valen, satisfacerá también los
 objetivos del sistema.
 
 \begin{nahaDef}

@@ -7,21 +7,21 @@ transición'' $C^*$ que controla el traspaso del controlador actual $C$ al nuevo
 requerimientos de transición $T$.
 
 Si bien es conceptualmente elegante, el enfoque de los tres controladores es ingenuo ya que estos controladores están
-intrínsecamente relacionados. La nueva especificación solo puede ser alcanzada por un controlador $C'$ desde estados
+intrínsecamente relacionados. La nueva especificación sólo puede ser alcanzada por un controlador $C'$ desde estados
 específicos ($I_{C'}$). Estos estados iniciales de $C'$ necesitan ser calculados y considerados como estados finales del
 ``controlador de transición'' $C^*$. Luego, los estados desde donde el ``controlador de transición'' puede alcanzar
 $I_{C'}$ necesitan ser computados ($I_{C^*}$). Finalmente, nos queda analizar si $C$ puede ser extendido para
 garantizar que alcance algún estado en $I_{C^*}$ sin violar sus objetivos ($G$).
 
 La interacción entre estos tres controladores y la necesidad de generar una técnica para computar $C'$ y $C^*$ puede ser
-obtenida mediante la resolución de un problema de control que produce un solo controlador (el cual vamos a llamar $C_u$)
+obtenida mediante la resolución de un problema de control que produce un sólo controlador (el cual vamos a llamar $C_u$)
 que ejecuta acciones simulando las tres faces, primero simulando a $C$, luego a $C^*$ y finalmente a $C'$. Ahora
 pasaremos a explicar como la actualización de controladores dinámica puede ser expresada como un problema de control que
 abarca estas tres fases.
 
 El problema de control para la actualización de controladores dinámicos, como cualquier otro problema de control,
 necesita de un modelo del ambiente, el cual llamaremos $E_u$, un objetivo, el cual llamaremos $G_u$, y un conjunto de
-acciones, $A_u$. El objetivo $G_u$, lo definiremos en términos de $G$, $G'$ y $T$ mas los eventos $stopOldSpec$,
+acciones, $A_u$. El objetivo $G_u$, lo definiremos en términos de $G$, $G'$ y $T$ más los eventos $stopOldSpec$,
 $startNewSpec$ y $beginUpdate$. El ambiente $E_u$ estará definido en base a $E$, $E'$ y $C$. El conjunto de acciones
 $A_u$ estará definido en base a $A$ y $A'$.
 
@@ -48,19 +48,19 @@ FLTL:}
 \end{enumerate}
 \end{nahaDef}
 
-La primer fórmula requiere que el objetivos viejo $G$ valga hasta que el controlador active la señal $stopOldSpec$.
-Tenga en cuenta que esta propiedad de manera aislada significa que la especificación vieja, cualquiera sean su estado,
+La primer fórmula requiere que los objetivos viejo $G$ valgan hasta que el controlador active la señal $stopOldSpec$.
+Tenga en cuenta que, esta propiedad de manera aislada significa que la especificación vieja, cualesquiera sean sus estados,
 puede dejar de valer en cualquier momento. Esto no es lo deseado para una actualización dinámica, por lo tanto debemos
 restringirlo en la especificación de transición ($T$).
 
 La segunda fórmula simplemente requiere que la nueva especificación empiece a valer desde el momento en que el
-controlador active la señal $startNewSpec$. Esto forzará al controlador a que solo produzca esta señal cuando puede
+controlador active la señal $startNewSpec$. Esto forzará al controlador a que sólo produzca esta señal cuando puede
 asegurar $G'$.
 
 La tercera fórmula indica que los requerimientos de transición deben valer siempre. Restringimos $T$ a que sea una
 propiedad de seguridad (\emph{safety}). $T$ es esperado que predique sobre eventos $stopOldSpec$ y $startNewSpec$ para
-poder restringir el comportamiento del sistema cuando ni $G$ ni $G'$ valen. Un enfoque mas preciso sería requerir que
-$T$ solo valga entre ambos eventos, esto seria $\Box inTransition \Longrightarrow T$ donde $inTransition =
+poder restringir el comportamiento del sistema cuando ni $G$ ni $G'$ valen. Un enfoque más preciso sería requerir que
+$T$ sólo valga entre ambos eventos, esto seria $\Box inTransition \Longrightarrow T$ donde $inTransition =
 \langle\{stopOldSpec\},\{startNewSpec\}, \bot\rangle$. Esta idea es muy restrictiva ya que los requerimientos de transición
 pueden necesitar referirse a situaciones que suceden antes que la especificación vieja deje de valer. Por ejemplo
 COMPLETAR ACA CON UN EJEMPLO: a photograph taken before $stopOldSpec$ that was not processed before $stopOldSpec$ or
@@ -91,7 +91,7 @@ Para lograr esta propiedad en el controlador de actualización definiremos su am
 composición paralela del controlador viejo y su ambiente (es decir $E\|C$). Esto apunta a construir un controlador
 actualizable que inicialmente ejecutará en un ambiente que ya esta siendo controlado por $C$. Tenga en cuenta que como
 no queremos que la actualización se interponga con $C$ antes que $beginUpdate$ suceda, vamos a asegurar que en esta fase
-el controlador actualizable no controle nada, solo monitorea lo que sucede.
+el controlador actualizable no controle nada, sólo monitorea lo que sucede.
 
 Es cuando $beginUpdate$ sucede, que el controlador actualizable debe empezar a tomar medidas e intentar garantizar
 la transición correcta para satisfacer la nueva especificación. Es decir que luego de que la actualización es
@@ -106,11 +106,11 @@ del ambiente cuando cambia desde $E$ a $E'$.
 
 Consider, the moment in which... EJEMPLO
 
-El mapeo desde estados de $E$ a $E'$ puede ser definido de varias maneras, solo necesitamos que todos los estados de $E$
-tengan al menos un estado correspondiente en $E'$. Tenga en cuenta que permitimos sub-especificar la correspondencia de
+El mapeo desde estados de $E$ a $E'$ puede ser definido de varias maneras, sólo necesitamos que todos los estados de $E$
+tengan al menos un estado correspondiente en $E'$. Tenga en cuenta que, permitimos subespecificar la correspondencia de
 estados de $E'$ permitiendo, por ejemplo, una evolución no determinística desde un estado cuyo valor de batería es
 $\lnot LowBattery$ a un estado donde el valor es $MidBattery$ o $\neg HighBattery$. Durante este capítulo vamos a asumir
-una relación de mapping $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que desarrollamos (ver
+una relación de mapping de estados $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que desarrollamos (ver
 \ref{}), por conveniencia, definimos el mapeo naturalmente sobre definiciones de flujos: un estado $E$ esta mapeado a
 todos los estados de $E'$ que preservan el valor de flujos.
 
@@ -124,7 +124,7 @@ control de actualiazación, donde $E = (S_E, A_E, \Delta_E, s_{E_0})$ y $E' = (S
 Además, sea $M \subset S_E \times S_{E'}$ un mapeo de estados tal que para todo $s \in S_E$ existe un estado $s' \in
 {S_E'}$. El ambiente para el problema de control de la actualización de controladores dinámicamente ($E_u$) es un LTS
 $(S_u,A_u,\Delta_u,s_u)$ tal que $E_u$ es una unión disjunta de estados en $E\|C$, $E$ y $E'$ (i.e. $E_u = S_{E\|C}
-\uplus S_E \uplus S_{E'}$), $s_u = s_{E\|C}$, $A_u = A_E \cup A_{E'} \uplus \bar{\ell}|\ell \in A$ y $\Delta_u$ es la relación mas
+\uplus S_E \uplus S_{E'}$), $s_u = s_{E\|C}$, $A_u = A_E \cup A_{E'} \uplus \bar{\ell}|\ell \in A$ y $\Delta_u$ es la relación más
 pequeña que satisface las reglas que siguen a continuación donde $\ell \in A_u$:}
 
 \begin{enumerate}
@@ -188,9 +188,9 @@ $\Box G'$ y un conjunto de acciones controlables $A'$ la nueva especificación q
 actualización dinámica del controlador del sistema.}
 
 \emph{$C_u$ es una solución al problema de control de actualización de controladores dinámicamente si $C_u$ es el resultado de
-renombrar toda acción $\bar{\ell}$ por $\ell$ en el controlador $\overline{C}$ que es una solución la problema de
+renombrar toda acción $\bar{\ell}$ por $\ell$ en el controlador $\overline{C}$ que es una solución al problema de
 control LTS $\langle E_u, G_u, A_u \rangle$ donde $E_u$ esta definido en la definición \ref{update_environment_def},
-$G_u$ esta definido en la definición \ref{update_goals_def} y $A_u = A \cup A'$}
+$G_u$ esta definido en la definición \ref{update_goals_def} y $A_u = A \cup A'$.}
 \end{nahaDef}
 
 \begin{figure}
@@ -210,7 +210,7 @@ infraestructura de ejecución del controlador va a dinámicamente cargar cualqui
 la señal $startNewSpec$ suceda.
 
 Un controlador que es solución del problema definido recientemente tomará, informalmente, la estructura descrita en la
-figura \ref{update_controller}. Primero va a comportarse como $C$ excepto que aceptará en cualquier momento que la acción no controlable
+Figura \ref{update_controller}. Primero va a comportarse como $C$ excepto que aceptará en cualquier momento que la acción no controlable
 $beginUpdate$ suceda. Luego, se comportará como un controlador que esta intentando realizar las acciones $stopOldSpec$ y
 $startNewSpec$ mientras satisface la propiedad $T$. Finalmente, una vez que la acción $startNewSpec$ ha ocurrido se
 comportará como un controlador que satisface $G'$.

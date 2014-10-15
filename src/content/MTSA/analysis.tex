@@ -1,13 +1,13 @@
 \section{Análisis}
 
 Habiendo construido una aproximación inicial del comportamiento esperado del sistema, el análisis pasa a ser una tarea
-crucial que puede brindar información del dominio tanto del problema como de la solución, aumentando la confianza que se
+crucial que puede brindar información del dominio, tanto del problema como de la solución, aumentando la confianza que se
 tiene de la adecuación y correctitud del software y llama a proseguir la elaboración del modelo parcial. 
 
-MTSA soporta varios tipos de análisis, el más básico involucra la inspección de modelos LTS y está soportado a través de
-la construcción automática de representaciones visuales de los modelos LTS escritos usando FSP. Esta inspección queda
-sujeta al tamaño del modelo, limitación tal que puede mitigarse haciendo uso de los operadores de minimización y
-ocultamiento.
+La herramienta MTSA soporta varios tipos de análisis, el más básico involucra la inspección de modelos LTS y está
+soportado a través de la construcción automática de representaciones visuales de los modelos LTS escritos usando FSP.
+Esta inspección queda sujeta al tamaño del modelo, limitación tal que puede mitigarse haciendo uso de los operadores de
+minimización y ocultamiento.
 
 Aunque la inspección y animación no permiten una exploración exhaustiva de los modelos LTS, MTSA implementa un número de
 técnicas de análisis automáticas para éste propósito. En particular, MTSA permite verificar si un modelo LTS satisface
@@ -15,7 +15,7 @@ una propiedad expresada en FLTL. Un modelo LTS caracteriza un conjunto de implem
 satisfacer la propiedad siendo verificada y algunas pueden violarla. Por este motivo MTSA automáticamente verifica una
 relación de satisfactibilidad trivaluada entre el modelo LTS y una fórmula FLTL. Mientras que un Modelo LTS $M$ puede
 caracterizar a un conjunto extremadamente grande, potencialmente infinito, de implementaciones, verificar una propiedad
-en $M$ con emph{model checking} se reduce a dos verificaciones tradicionales de FLTL. Finalmente, MTSA permite verificar si un
+en $M$ con \emph{model checking} se reduce a dos verificaciones tradicionales de FLTL. Finalmente, MTSA permite verificar si un
 modelo es libre de \emph{deadlocks}. Al igual que en el caso de \emph{model checking} para propiedades FLTL, el
 resultado de esta verificación tiene uno de tres valores: o bien todas las implementaciones exhiben \emph{deadlocks}, o
 bien todas son libres de \emph{deadlocks} o bien hay una combinación de implementaciones que exhiben \emph{deadlocks} y

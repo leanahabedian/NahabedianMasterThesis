@@ -5,7 +5,7 @@
 
 Todos los casos de estudios se ejecutan usando una extensión de la herramienta MTSA \cite{4639371} que nos da soporte
 para especificar LTSs y propiedades, usando una notación textual, álgebra de procesos y FLTL. La herramienta también nos 
-da soporte para síntesis de controladores para problemas de control SGR(1), los cuales son estrictamente mas caros de lo
+da soporte para síntesis de controladores para problemas de control SGR(1), los cuales son estrictamente más caros de lo
 que es requerido para problemas de control en la actualización de controladores dinámicamente. La herramienta fue 
 extendida para automáticamente computar $A_u$, $G_u$ y $E_u$, y resuelve el problema de control de la actualización
 dinámica de controladores. La versión extendida de la herramienta y la especificación completa de todos los casos de
@@ -39,7 +39,7 @@ vía, y otros eventos que indican si esta habilitado para usar el freno o si tie
 que los llamaremos $lastBrake$ y $lastEmergencyBrake$. El RailCab controla el freno ($brake$) y el freno de emergencia
 ($emergencyBrake$) e incluso puede recibir respuestas a pedidos que controla como $requestPermissionToEnter$.
 
-La especificación del controlador actual requiere que el RailCab entre al cruce de vías solo si se le ha garantizado el
+La especificación del controlador actual requiere que el RailCab entre al cruce de vías sólo si se le ha garantizado el
 permiso para hacerlo. La especificación también describe varias asunciones de que la respuesta al pedido de permiso es
 contestada antes de que el RailCab llegue a la sección de $lastEmergencyBrake$, siempre y cuando, el pedido haya sido
 realizado antes de llegar a la zona de $lastBrake$. Como ejemplo de una nueva especificación, en \cite{6224401} discuten
@@ -55,18 +55,18 @@ $checkBarrier$ puede ser recibida.
 
 Consideramos varios escenarios de actualización para el caso de estudio de Production Cell presentado en
 \cite{Lewerentz:1995:646391}. El caso de estudio es sobre una fábrica que manofactura diferentes tipos de productos,
-donde cada uno de ellos, requiere un proceso de producción que involucra distintas aplicar distintas herramientas en
+donde cada uno de ellos, requiere un proceso de producción que involucra aplicar distintas herramientas en
 diferentes ordenes. El sistema de producción de la fábrica debería adaptar su proceso de producción al número de
 factores como la cantidad de herramientas disponibles, la especificación de como procesar cada tipo de producto, y otras
 restricciones como por ejemplo, un requerimiento de consumo de energía que restringe el uso concurrente de ciertas
 herramientas.
 
-Ademas de las herramientas, la fábrica tiene una bandeja de entrada, una bandeja de salida y un brazo robótico. El brazo
+Además de las herramientas, la fábrica tiene una bandeja de entrada, una bandeja de salida y un brazo robótico. El brazo
 robótico es el encargado de mover los productos entre las herramientas y las bandejas. Los productos en crudo llegan a
 la bandeja de entrada, para que el brazo robótico controle cada producto respetando la especificación y colocando el
 producto final en la bandeja de salida.
 
-\subsection{ARDrone}
+\subsection{Cuadcóptero}
 
 El propósito de este caso de estudio fue experimentar la técnica de actualización dinámica más allá de la especificación
 y tareas de síntesis discutidos en los casos de estudio previos. El enfoque, entonces, de este caso es poder analizar un

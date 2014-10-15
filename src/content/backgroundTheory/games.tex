@@ -7,7 +7,7 @@ que esto transformaría dicho estado a un estado de deadlock.
 
 Durante el transcurso de esta tesis llevaremos los juegos de dos jugadores al marco de síntesis de controladores, donde
 el jugador 1 (el controlador) elije, del conjunto de acciones controlables, cual habilitar y el jugador 2 (el ambiente)
-elije que acciones tomar libremente. Formalmente podemos definir lo siguiente.
+elije que acciones tomar libremente. Formalmente podemos definir un juego de dos jugadores de la siguiente manera:
 
 \begin{nahaDef}
     \emph{(Juego de dos jugadores) Un juego de dos jugadores es $G = (S_g, \Gamma^-, \Gamma^+, s_{g_0}, \varphi)$, donde
@@ -21,14 +21,14 @@ elije que acciones tomar libremente. Formalmente podemos definir lo siguiente.
 \end{nahaDef}
 
 Un detalle importante es que si para un estado controlable $\gamma$ el conjunto de opciones del controlador es vacía, esto
-puede llevar a un deadlock. Esto será considerado como prohibido mas adelante ya que el controlador definirá este estado
+puede llevar a un deadlock. Esto será considerado como prohibido más adelante, ya que el controlador definirá este estado
 como un estado perdedor. Para un estado no controlable el controlador puede decidir deshabilitar todas las acciones
 controlables. Las elecciones del controlador son formalizadas como estrategias y estas reglas son las que el controlador
 aplicará. Por lo general, las estrategias son elegidas dependiendo de la historia. Esto puede verse en la estrategia
 utilizando un valor de memoria $\Omega$ y actualizando este valor de acuerdo a la evolución del juego.
 
 Es importante destacar, que este tipo de juegos, con memoria, es diferente al definido en \cite{Piterman}. Piterman et al.
-define un juego en el cual el ambiente elige su movimiento y recién luego de este, el controlador podrá elegir cual será
+definen un juego en el cual el ambiente elige su movimiento y recién luego de este, el controlador podrá elegir cual será
 el siguiente paso.
 
 \begin{nahaDef}
@@ -48,7 +48,7 @@ como actualizar la memoria en cada paso. Si $\Omega$ es finita, diremos que la e
     que el controlador gana el juego $G$ si tiene una estrategia ganadora desde el estado inicial.}
 \end{nahaDef}
 
-Diremos que chequear si un controlador gana un juego $G$ es resolver el juego $G$. Una vez definido un juego de dos
+Diremos que verificar si un controlador gana un juego $G$ es resolver el juego $G$. Una vez definido un juego de dos
 jugadores, pasaremos a traducir un problema de síntesis de controladores a este tipo de juegos. La transformación se
 basa en generar una estrategia ganadora para el controlador. Si dicha estrategia existe, diremos que el problema de
 control es realizable \cite{MalerPS95,21072}. Resultados estudiados anteriormente \cite{Pnueli:1989:SRM:75277.75293},
