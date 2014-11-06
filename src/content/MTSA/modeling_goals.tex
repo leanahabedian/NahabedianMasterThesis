@@ -18,13 +18,9 @@ flujos.
 
 Los objetivos nuevos están definidos mediante el operador \texttt{\textbf{controllerSpec}}. La palabra reservada
 \texttt{\textbf{safety}} permite definir requerimientos de seguridad (\emph{safety}). Aquí incluiremos las formulas
-LTL descritas en la sección \ref{LTL}
-
-La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
+LTL descritas en la sección \ref{LTL}. La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
 \texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
 Ambas deberán definirse mediante FLTLs. En el ejemplo EL EJEMPLO. Luego, el controlador sintetizado nos garantizará que
 si infinitamente la actualización es requerida (i.e sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y
-$startNewSpec$ sucederán infinitamente.
-
-Por último la sección de acciones controlables se detallan con el operador \texttt{\textbf{controllableActions}}. Las
-acciones discriminadas en este conjunto serán consideradas controlables a la hora de resolver el problema de control.
+$startNewSpec$ sucederán infinitamente. Por último la sección de \texttt{\textbf{controllableActions}} detalla el
+conjunto de acciones consideradas controlables a la hora de resolver el problema de control.
