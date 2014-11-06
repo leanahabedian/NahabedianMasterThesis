@@ -134,7 +134,7 @@ estados que deben ser evitados para la construcción de la estrategia para el co
         \State $rank_g$(state)$\gets$ (0,1)
     \EndFor
 \EndFor
-\State {// Queue pending}
+\State {// Encolar pendientes}
 \For {state : states}
     \If {$\exists$ g : guarantees / state $\notin$ g $\land$ state $\in assume_1$}
         \State pending.push(pair(state,g))
