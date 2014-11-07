@@ -45,10 +45,27 @@ contestada antes de que el RailCab llegue a la sección de $lastEmergencyBrake$,
 realizado antes de llegar a la zona de $lastBrake$. Como ejemplo de una nueva especificación, en \cite{6224401} discuten
 hacer un objetivo más fuerte requiriendo que el RailCab envíe otro pedido preguntando si las barreras están funcionando
 antes de entrar al cruce de vía. También refuerzan la hipótesis del ambiente en relación a cuando la respuesta a
-$checkBarrier$ puede ser recibida.
+$checkCrossingStatus$ puede ser recibida.
 
 \subsection{Buscador UAV de vida salvaje}
 \label{buscador_UAV}
+
+Este caso de estudio consta de un robot UAV (unmanned aerial vehicle), un típico caso de sistema adaptable, que posee un
+controlador para buscar vida salvaje en una área de preservación. El UAV cuenta con un algoritmo de reconocimiento de
+vida salvaje que requiere que el UAV vuele en el rango de 40 a 50 metros y trasmita una foto por cada posible objetivo y
+debe volver a la base cuando la señal de batería baja se dispara. Durante la misión, se decide que el UAV debe ahora
+inmediatamente seguir al primer posible objetivo que encuentre en vez de continuar su búsqueda. Además, deberá trasmitir
+una foto de este animal cada 5 minutos. La nueva misión, requiere que el UAV vuele en un rango entre 20 y 30 metros de
+altura y use un algoritmo de reconocimiento mejorado. Los módulos del software nuevo van a estar cargados en el UAV y el
+controlador debe ser actualizado para lograr sus nuevos objetivos usando los nuevos módulos.
+
+Es importante destacar que los rangos de alturas no solapados implican que un período de transición serán requeridos
+entre las dos misiones donde el UAV deberá volar entre 30 a 40 metros de altura y ninguna especificación se satisface.
+A su vez, existen otros requerimientos que pueden ser relevantes para el período de transición. Por ejemplo, la nueva
+especificación no tiene en cuenta lo que sucederá con las imágenes que están siendo transmitidas por cada animal
+encontrado. Consecuentemente, una actualización que sucede entre que un animal es encontrado y la transmisión de la foto
+puede llevar a perder la foto. Por lo tanto, un requerimiento para el período de transición puede incluir que a la hora
+de dejar de satisfacer la especificación vieja, no haya imágenes pendientes para transmitir.
 
 
 \subsection{Production Cell}

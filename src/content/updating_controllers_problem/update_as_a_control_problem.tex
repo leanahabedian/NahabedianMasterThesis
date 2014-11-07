@@ -41,7 +41,7 @@ FLTL:}
 \begin{enumerate}
 \itemsep-4mm
 \item $\Box(G\ W stopOldSpec)$
-\item $\Box(startNewSpec \Longrightarrow G')$
+\item $\Box(startNewSpec \Longrightarrow \Box G')$
 \item $\Box\ T$
 \item $\Box(beginUpdate \Longrightarrow \Diamond startNewSpec)$
 \item $\Box(beginUpdate \Longrightarrow \Diamond stopOldSpec)$
@@ -62,9 +62,10 @@ propiedad de seguridad (\emph{safety}). $T$ es esperado que predique sobre event
 poder restringir el comportamiento del sistema cuando ni $G$ ni $G'$ valen. Un enfoque más preciso sería requerir que
 $T$ sólo valga entre ambos eventos, esto seria $\Box inTransition \Longrightarrow T$ donde $inTransition =
 \langle\{stopOldSpec\},\{startNewSpec\}, \bot\rangle$. Esta idea es muy restrictiva ya que los requerimientos de transición
-pueden necesitar referirse a situaciones que suceden antes que la especificación vieja deje de valer. Por ejemplo
-COMPLETAR ACA CON UN EJEMPLO: a photograph taken before $stopOldSpec$ that was not processed before $stopOldSpec$ or
-after $startNewSpec$ ...
+pueden necesitar referirse a situaciones que suceden antes que la especificación vieja deje de valer. Por ejemplo, en el
+caso del buscador UAV de vida salvaje \ref{buscador_UAV}, una foto tomada antes de $stopOldSpec$ que no fue
+procesada antes $stopOldSpec$. O puede ser necesario referirse a situaciones que suceden luego de $startNewSpec$. En
+nuestro ejemplo no empezar a satisfacer la nueva especificación hasta que todas las fotos sin procesar sean procesadas.
 
 Finalmente, las ultimas dos fórmulas requiere que el controlador luego de ejecutar la acción $beginUpdate$, continúe con
 el procedimiento y garantice que los eventos $stopOldSpec$ y $startNewSpec$ sucedan.
@@ -102,17 +103,19 @@ comportarse como $E$ hasta que la nueva especificación se pueda cumplir, moment
 $E'$.
 
 El segundo problema que debemos manejar en la construcción de $E_u$ está relacionado con preservar el estado el estado
-del ambiente cuando cambia desde $E$ a $E'$.
-
-Consider, the moment in which... EJEMPLO
+del ambiente cuando cambia desde $E$ a $E'$. Esto es, que el estado inicial del modelo del nuevo ambiente al
+momento de hacer la actualización debería estar configurado de acuerdo al estado actual del modelo del ambiente viejo.
+Por ejemplo en nuestro caso de estudio del buscador UAV de vida salvaje de la sección \ref{buscador_UAV}, si el sistema
+está en un estado de batería baja, entonces el estado del modelo del nuevo ambiente debería reflejar esto. Por lo tanto,
+lo que es necesario es un mapeo de estados que relacione estados del modelo del ambiente viejo $E$ al nuevo $E'$.
 
 El mapeo desde estados de $E$ a $E'$ puede ser definido de varias maneras, sólo necesitamos que todos los estados de $E$
 tengan al menos un estado correspondiente en $E'$. Tenga en cuenta que, permitimos subespecificar la correspondencia de
 estados de $E'$ permitiendo, por ejemplo, una evolución no determinística desde un estado cuyo valor de batería es
 $\lnot LowBattery$ a un estado donde el valor es $MidBattery$ o $\neg HighBattery$. Durante este capítulo vamos a asumir
-una relación de mapping de estados $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que desarrollamos (ver
-\ref{}), por conveniencia, definimos el mapeo naturalmente sobre definiciones de flujos: un estado $E$ esta mapeado a
-todos los estados de $E'$ que preservan el valor de flujos.
+una relación de mapping de estados $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que
+desarrollamos, por conveniencia, definimos el mapeo naturalmente sobre definiciones de flujos: un estado $E$ esta
+mapeado a todos los estados de $E'$ que preservan el valor de flujos.
 
 Ahora definiremos formalmente el ambiente $E_u$ para el problema de control de la actualización de controladores
 dinámicamente:

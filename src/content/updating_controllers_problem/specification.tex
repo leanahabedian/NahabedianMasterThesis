@@ -18,13 +18,14 @@ objetivos $G$ para un ambiente $E$. El usuario desea cambiar dinámicamente el c
 empezar a satisfacer el nuevo objetivo $G'$ en el nuevo ambiente $E'$ controlando un conjunto de acciones $A'$ y a su
 vez satisfacer los requerimientos de transición $T$.
 
-METER ALGÚN EJEMPLO
+Por ejemplo, en el caso de estudio del buscador UAV de vida salvaje \ref{buscador_UAV}, el conjunto de acciones
+controlables para la especificación original ($A$) incluye $start$, $return2base$, $scan$, $picture$ y $goto$. Las
+acciones controlables para la nueva especificación ($A'$) posee más extensa ya que provee nuevas capacidades para el
+controlador como por ejemplo $follow$.
 
 Los modelos de los ambientes $E$ y $E'$ pueden ser construidos mediante la composición paralela de varios modelos LTSs
 que describen diferentes aspectos del comportamiento del ambiente. Por ejemplo podríamos definir una LTS que describa el
 comportamiento de un tren que va atravesando distintas secciones de una vía. Por otro lado, tenemos otra LTS que
 describe la comunicación que el tren realiza con la barrera electrónica para identificar si está habilitado para cruzar.
-Para definir por completo el ambiente, necesitamos componer en paralelo ambas LTS. El comportamiento del ambiente por
-completo puede verse en la sección de casos de estudio.
+Para definir por completo el ambiente, necesitamos componer en paralelo ambas LTS. 
 
-NECESITO EL EJEMPLO

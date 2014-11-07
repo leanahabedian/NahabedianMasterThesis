@@ -13,20 +13,21 @@ donde cada elemento indicará correspondencia de propiedades del ambiente actual
 definición \ref{update_environment_def}. Por ejemplo, en la figura \ref{MTSA_example} podemos observar que al usar la
 palabra reservada \texttt{\textbf{updatingController}} configuramos \textsc{EnvironmentAndController} como el
 controlador actual, \textsc{OldEnvironment} como modelo del ambiente actual, \textsc{NewEnvironment} como modelo del
-ambiente nuevo, \texttt{\textbf{UpdateSpec}} como la nueva especificación y \textsc{\{\{RequestPending,RequestPending\},
-\{IsStopped,IsStopped\}\}} es el conjunto de flujos. Para este ejemplo, \textsc{OldEnvironment} y
+ambiente nuevo, \textsc{UpdateSpec} como el conjunto de objetivos para controladores actualizables según la
+definición \ref{update_goals_def} y \textsc{\{\{RequestPending,RequestPending\},
+\{IsStopped,IsStopped\}\}} es el conjunto de pares de flujos donde se indica que por cada estado del ambiente actual,
+existe una correspondencia con estados del ambiente nuevo si la valuación de los flujos de los primeros en cada par,
+iguala a la valuación de los segundos en cada par. Además, en este ejemplo, \textsc{OldEnvironment} y
 \textsc{NewEnvironment} poseen distintos nombres, pero son el mismo ambiente puesto a que este ejemplo es una
 actualización que no requiere hacer un cambio en el ambiente.
 
 Los objetivos nuevos están definidos mediante el operador \texttt{\textbf{controllerSpec}}. La palabra reservada
 \texttt{\textbf{safety}} permite definir requerimientos de seguridad (\emph{safety}). Aquí incluiremos fórmulas
-LTL definidas en la sección \ref{LTL} . La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
-\texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
-Ambas deberán definirse mediante FLTLs. En el ejemplo EL EJEMPLO. Luego, el controlador sintetizado nos garantizará que
-si infinitamente la actualización es requerida (i.e sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y
-$startNewSpec$ sucederán infinitamente. Por último la sección de \texttt{\textbf{controllableActions}} detalla el
-conjunto de acciones consideradas controlables a la hora de resolver el problema de control.
-
+FLTL definidas en la sección \ref{LTL} y, en particular para controladores actualizables dinámicamente, escribiremos las
+fórmulas FLTL 1, 2 y 3 de acuerdo a la definición \ref{update_goals_def}. Como se puede ver en la figura \ref{MTSA_example},
+\textsc{UPD\_OLD} representa la fórmula 1, \textsc{UPD\_NEW} corresponden a la fórmula 2 y la fórmula 3 no está
+especificada debido a que en este ejemplo configuramos a la fórmula 3 como $true$. \textsc{S\_OLD} y \textsc{S\_NEW} son
+aserciones FLTL que representan a los objetivos viejos ($G$) y a los objetivos nuevos ($G'$) respectivamente.
 
 \begin{figure}
     \centering
@@ -34,4 +35,20 @@ conjunto de acciones consideradas controlables a la hora de resolver el problema
     \caption{MTSA -- Definición de problema de controladores dinámicamente actualizables}
     \label{MTSA_example}
 \end{figure}
+
+La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
+\texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
+Ambas deberán definirse mediante FLTLs. En la figura \ref{MTSA_example}, \textsc{BeginUpdate}, \textsc{StopOldSpec} y
+\textsc{StartNewSpec} son los flujos que se inicializan apagados y se prenden cuando la acción del nombre del flujo
+sucede. Luego, el controlador sintetizado nos garantizará que si infinitamente la actualización es requerida (i.e sucede
+la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán infinitamente. Por lo tanto, con estos
+dos operadores definimos las fórmula 4 y 5 de la definición \ref{update_goals_def}.
+
+Por último, la sección de \texttt{\textbf{controllableActions}} detalla el conjunto de acciones consideradas
+controlables a la hora de resolver el problema de control. En nuestro ejemplo, utilizamos a
+\textsc{UpdatingControllableActions} que posee las acciones \textsc{ok}, \textsc{startNewSpec}, \textsc{stopOldSpec},
+\textsc{adfasdfas}.
+
+
+
 

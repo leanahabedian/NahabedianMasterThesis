@@ -33,12 +33,10 @@ La no existencia de una solución a este problema de control puede significar do
 el nuevo objetivo bajo las asunciones del nuevo ambiente no puede ser alcanzados por el controlador (esto es, el
 problema de control definido por $E'$ y $\Box G'$ no tiene solución para ningún estado inicial de $E'$). Esta es una
 situación extrema donde el controlador tiene poco por hacer con la actualización que se le pide. El segundo, asumiendo
-que el problema de control definido por $E'$ y $\Box G'$ tiene solución para algunos estados de $E'$, no es sólo que la
-transición de una especificación a la otra no pueda satisfacer la propiedad $T$, sino que también puede suceder que sea
+que el problema de control definido por $E'$ y $\Box G'$ tiene solución para algunos estados de $E'$, puede suceder que la
+transición de una especificación a la otra no pueda satisfacer la propiedad $T$, o sino puede suceder que sea
 imposible alcanzar un estado de $E'$ desde el cual $G'$ valga. Este segundo escenario puede producirse, por ejemplo,
 porque el requerimiento de transición $T$ es excesivamente restrictiva o porque el controlador tiene capacidades
 insuficientes, para alcanzar un estado desde el cual el nuevo ambiente puede garantizar la validez del nuevo
 objetivo. Más generalmente, tendremos el problema cuando tenemos una combinación de especificaciones muy estrictas ($E$,
-$G$, $E'$, $G'$ y $T$) y falta de control del controlador sobre los eventos del ambiente. En el capítulo \ref{validation}
-discutiremos las causas de no poder resolver el problema de actualización dinámica de controladores para algunos
-ejemplos específicos.
+$G$, $E'$, $G'$ y $T$) y falta de control del controlador sobre los eventos del ambiente.
