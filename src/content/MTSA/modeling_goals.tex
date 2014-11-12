@@ -25,13 +25,13 @@ Los objetivos nuevos están definidos mediante el operador \texttt{\textbf{contr
 \texttt{\textbf{safety}} permite definir requerimientos de seguridad (\emph{safety}). Aquí incluiremos fórmulas
 FLTL definidas en la sección \ref{LTL} y, en particular para controladores actualizables dinámicamente, escribiremos las
 fórmulas FLTL 1, 2 y 3 de acuerdo a la definición \ref{update_goals_def}. Como se puede ver en la figura \ref{MTSA_example},
-\textsc{UPD\_OLD} representa la fórmula 1, \textsc{UPD\_NEW} corresponden a la fórmula 2 y la fórmula 3 no está
+\textsc{UPD\_OLD} representa la fórmula 1, \textsc{UPD\_NEW} corresponde a la fórmula 2 y la fórmula 3 no está
 especificada debido a que en este ejemplo configuramos a la fórmula 3 como $true$. \textsc{S\_OLD} y \textsc{S\_NEW} son
 aserciones FLTL que representan a los objetivos viejos ($G$) y a los objetivos nuevos ($G'$) respectivamente.
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.5]{img/MTSA_example.png}
+    \includegraphics[scale=0.35]{img/MTSA_example.png}
     \caption{MTSA -- Definición de problema de controladores dinámicamente actualizables}
     \label{MTSA_example}
 \end{figure}
@@ -40,14 +40,15 @@ La sección de \emph{liveness} esta definida usando los operadores \texttt{\text
 \texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
 Ambas deberán definirse mediante FLTLs. En la figura \ref{MTSA_example}, \textsc{BeginUpdate}, \textsc{StopOldSpec} y
 \textsc{StartNewSpec} son los flujos que se inicializan apagados y se prenden cuando la acción del nombre del flujo
-sucede. Luego, el controlador sintetizado nos garantizará que si infinitamente la actualización es requerida (i.e sucede
-la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán infinitamente. Por lo tanto, con estos
-dos operadores definimos las fórmula 4 y 5 de la definición \ref{update_goals_def}.
+sucede y nunca más se apagarán. Luego, el controlador sintetizado nos garantizará que si la actualización es requerida
+(i.e sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán. Por lo tanto,
+con estos dos operadores definimos las fórmula 4 y 5 de la definición \ref{update_goals_def}.
 
 Por último, la sección de \texttt{\textbf{controllableActions}} detalla el conjunto de acciones consideradas
 controlables a la hora de resolver el problema de control. En nuestro ejemplo, utilizamos a
-\textsc{UpdatingControllableActions} que posee las acciones \textsc{ok}, \textsc{startNewSpec}, \textsc{stopOldSpec},
-\textsc{adfasdfas}.
+\textsc{UpdatingControllableActions} que posee las acciones $stopPump$, $startPump$, $procedure$ y $ok$ que son las
+acciones controlables del controlador original; y $startNewSpec$ y $stopOldSpec$ que son los eventos especiales
+agregados para resolver el problema de controladores actualizables dinámicamente.
 
 
 

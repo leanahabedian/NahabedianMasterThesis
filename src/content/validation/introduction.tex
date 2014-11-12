@@ -41,15 +41,6 @@ alcanzado nuevamente (ver la imagen de arriba de la Figura \ref{ghezzi}). Esto, 
 \noindent donde $LastInitBeforeUpdate = Init \wedge \bigcirc(\neg Init\ W\ beginUpdate)$ y $Init$ representa estar en un estado inicial de
 $C$.
 
-
-\begin{figure}
-\centering
-\includegraphics[scale=0.35]{img/Ghezzi.png}
-\caption{Relación de eventos relevantes en la actualización de controladores dinámicamente para estados actualizables
-según \cite{6224401}}
-\label{ghezzi}
-\end{figure}
-
 En \cite{PanzicaLaManna:2013:FCC:2487336.2487349}, tres criterios de actualización mas débiles son introducidos para
 permitir actualizaciones en sistemas donde el estado inicial no es visitado nuevamente. Por ejemplo, la noción de
 estados co-inicial (estados que son similares al estado inicial), expande las situaciones en las cuales la actualización
@@ -57,4 +48,12 @@ es permitida. De todos modos, no hay garantías, para ninguno de los nuevos crit
 si tiene. La falta de garantías requiere de un ingeniero que valide el controlador resultante. En nuestro trabajo,
 involucramos a un ingeniero capacitado y habilitado para proveer una especificación de un criterio correcto para la
 actualización ($T$).
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.35]{img/Ghezzi.png}
+\caption{Relación de eventos relevantes en la actualización de controladores dinámicamente para estados actualizables
+según \cite{6224401}}
+\label{ghezzi}
+\end{figure}
 
