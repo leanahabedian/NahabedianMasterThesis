@@ -17,8 +17,7 @@ la bomba durante la transición y permitiendo al nuevo controlador a nunca reini
 
 El segundo problema de control usa a $T$ con el requerimiento genérico de \cite{6224401} (ver fórmula
 \ref{ghezzi_formula}). El controlador resultante ($C^2_u$) evita la actualización mientras la bomba esta apagada, y por
-lo
-tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De hecho, como se espera, este controlador
+lo tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De hecho, como se espera, este controlador
 exhibe estrictamente menos comportamiento que el controlador previo ($Tr(C^2_u) \subset Tr(C^1_u)$).
 
 Finalmente, el tercer problema de control modela explícitamente el requerimiento de que la bomba no debería estar
@@ -40,24 +39,48 @@ resultante $C^1_u$ ....
 
 \subsection{Buscador UAV de vida salvaje}
 
-Utilizamos este caso de estudio, como ejemplo concreto de que los requerimientos de transición $T$ son fuertemente
-necesarios. Como dijimos previamente, no hay salto trivial entre la especificación vieja y la especificación nueva. Esto
-se debe a que el UAV en nuestra especificación del problema solo puede volar en tres posiciones, $high$, $mid$ y $low$,
-que representan las tres franjas descritas en el caso de estudio. (i.e. entre 40 a 50 metros, entre 30 a 40 metros y
-entre 20 a 30 metros). Por lo tanto, es necesario en este caso de estudio, definir $T$ como $\Box\ (startNewSpec
-\rightarrow FlyingLow)$ donde $FlyingLow$ es el flujo definido de la siguiente manera: $FlyingLow = \langle
-\{low\},\{high,mid\},\bot\rangle$. 
+Utilizamos este caso de estudio, como ejemplo concreto donde no hay salto trivial entre la especificación vieja y la
+especificación nueva. Esto se debe a que el UAV en nuestra especificación del problema solo puede volar en tres
+posiciones, $high$, $mid$ y $low$, que representan las tres franjas descritas en el caso de estudio. (i.e. entre 40 a 50
+metros, entre 30 a 40 metros y entre 20 a 30 metros). Al especificar este problema con nuestra técnica, tendremos que en
+conjunto de objetivos $G$, uno de ellos requiere que el UAV vuele en posición $high$. Mientras que en el conjunto de
+objetivos $G'$, uno de ellos requiere que el UAV vuele en posición $low$. Esto nos muestra que es necesario hacer
+al menos una acción entre $stopOldSpec$ y $startNewSpec$, ya que en caso contrario los objetivos $G'$ nunca podrán ser
+asegurados cuando la acción $startNewSpec$ se dispare.
+
+La técnica que definimos en la definición \ref{updating_controller_problem} con $T = true$ nos devuelve un controlador
+($C_u^{1}$) que efectúa la acción $low$ entre entre las acciones $stopOldSpec$ y $startOldSpec$ siempre y cuando la
+actualización se produzca cuando la misión esta siendo llevada a cabo. De esta manera, la síntesis controla el ambiente
+$E$ y lo fuerza a llegar a un estado, donde la actualización es posible. Podemos concluir entonces que el controlador
+$C_u^1$ satisface cierta propiedad de manera implícita y sólo realizará la actualización si dicha propiedad vale.
+
+El paso siguiente, en nuestro análisis, fue escribir en FLTL la fórmula implícita que el controlador $C_u^1$ está
+satisfaciendo. Por lo tanto, definimos $T$ de la siguiente manera: $T = \Box\ (startNewSpec
+\rightarrow (FlyingLow || !HeightSet))$ donde $FlyingLow$ y $HeightSet$ son flujos definidos de la siguiente manera: 
+
+\begin{itemize}
+\itemsep-4mm
+\item $FlyingLow = \langle \{low\},\{high,mid\},\bot\rangle$.
+\item $HeightSet = \langle \{high,mid,low\},\{return2base\},\bot\rangle$
+\end{itemize}
 
 Mediante esta fórmula FLTL estamos pidiendo que el controlador resultante, luego de la síntesis, cumpla con la propiedad
-de que la acción $startNewSpec$ sea disparada, solo si en ese momento el flujo $FlyingLow$ esta prendido, es decir,
-si el UAV esta volando en la franja de 20 a 30 metros. De no configurar dicho requerimiento de transición, la
-actualización no podría efectuarse nunca, puesto que cuando el evento $startNewSpec$ suceda, si el UAV se encuentra en
-una altura distinta, la especificación nueva $G'$ no podrá ser garantizada.
+de que la acción $startNewSpec$ sea disparada, sólo si en ese momento el flujo $FlyingLow$ esta prendido o $HeighSet$
+está apagado, es decir, si el UAV esta volando en la franja de 20 a 30 metros o si está en la base. Al controlador
+obtenido con esta propiedad lo llamaremos $C_u^2$ y lo comparamos con el controlador obtenido anteriormente.
 
-Así mismo, podríamos querer una actualización más restrictiva y por lo tanto más controlada configurando requerimientos
-más fuertes en $T$. Por ejemplo, agregando el requerimiento de transición de que si la actualización se realiza al
-momento en que vida salvaje ha sido detectada, forzar a que el UAV deba hacer $follow$ de dicho animal. De no agregar
-dicha configuración, el UAV
+Los resultados obtenidos cumple que $Tr(C_u^1) = Tr(C_u^2)$ mostrando que la técnica propuesta en esta tesis logra
+adaptarse a situaciones adversas donde, antes de realizar la actualización, el controlador debe primero forzar al
+sistema a que ciertas propiedades valgan.
+
+El último controlador que generamos, para este caso de estudio, es un controlador que cumple con el requerimiento genérico
+del trabajo de \cite{6224401} (ver fórmula \ref{ghezzi_formula}). El controlador obtenido ($C_u^3$) muestra nuevamente
+un controlador con menos comportamiento que los controladores obtenidos anteriormente ($Tr(C_u^3) \subset Tr(C_u^1)$).
+Esto se debe a que $C_u^3$ sólo acepta actualizaciones cuando el sistema alcanza un estado inicial (o similares al
+inicial). Para este caso de estudio, esos estados son alcanzados cuando el UAV se encuentra en la base. Si bien es
+correcto que el sistema se actualice en ese momento, porque el UAV elegirá la altura cuando inicie la misión, con esta
+técnica, perdemos la posibilidad de realizar una actualización durante la misión. Estas actualizaciones son
+soportadas por la técnica propuesta en este trabajo.
 
 \subsection{Production Cell}
 
