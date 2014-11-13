@@ -32,7 +32,6 @@ En otras palabras, nuestra técnica provee un criterio más relajado para contro
 \cite{6224401} y que a su vez, es correcto por construcción ya que satisface los requerimientos de transición y además
 no necesita de una validación manual posterior como en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}.
 
-
 \subsection{RailCab}
 
 Como en el caso de estudio previo, resolvimos tres problemas de control de actualización dinámica distintos. El primero
@@ -42,16 +41,23 @@ resultante $C^1_u$ ....
 \subsection{Buscador UAV de vida salvaje}
 
 Utilizamos este caso de estudio, como ejemplo concreto de que los requerimientos de transición $T$ son fuertemente
-necesarios. Como dijimos previamente, no hay salto trivial entre la especificación vieja y la especificación nueva. Es
-necesario en este caso de estudio, definir $T$ como $\Box\ (startNewSpec \rightarrow FlyingHigh)$ donde $FlyingHigh$ es el
-flujo definido de la siguiente manera: $FlyingHigh = \langle \{high\},\{low,mid\},\bot\rangle$. De no configurar dicho
-requerimiento de transición, la actualización no podría efectuarse nunca.
+necesarios. Como dijimos previamente, no hay salto trivial entre la especificación vieja y la especificación nueva. Esto
+se debe a que el UAV en nuestra especificación del problema solo puede volar en tres posiciones, $high$, $mid$ y $low$,
+que representan las tres franjas descritas en el caso de estudio. (i.e. entre 40 a 50 metros, entre 30 a 40 metros y
+entre 20 a 30 metros). Por lo tanto, es necesario en este caso de estudio, definir $T$ como $\Box\ (startNewSpec
+\rightarrow FlyingLow)$ donde $FlyingLow$ es el flujo definido de la siguiente manera: $FlyingLow = \langle
+\{low\},\{high,mid\},\bot\rangle$. 
+
+Mediante esta fórmula FLTL estamos pidiendo que el controlador resultante, luego de la síntesis, cumpla con la propiedad
+de que la acción $startNewSpec$ sea disparada, solo si en ese momento el flujo $FlyingLow$ esta prendido, es decir,
+si el UAV esta volando en la franja de 20 a 30 metros. De no configurar dicho requerimiento de transición, la
+actualización no podría efectuarse nunca, puesto que cuando el evento $startNewSpec$ suceda, si el UAV se encuentra en
+una altura distinta, la especificación nueva $G'$ no podrá ser garantizada.
 
 Así mismo, podríamos querer una actualización más restrictiva y por lo tanto más controlada configurando requerimientos
 más fuertes en $T$. Por ejemplo, agregando el requerimiento de transición de que si la actualización se realiza al
 momento en que vida salvaje ha sido detectada, forzar a que el UAV deba hacer $follow$ de dicho animal. De no agregar
 dicha configuración, el UAV
-
 
 \subsection{Production Cell}
 
