@@ -3,8 +3,8 @@
 En esta sección detallaremos los resultados obtenidos para cada caso de estudio planteado en la sección
 \ref{cases_of_study}. Para comparar diferentes resultados obtenidos por el problema de control notaremos $Tr(C)$ como el
 conjunto de trazas del LTS $C$. Informalmente, una traza es una secuencia de acciones que un controlador puede
-realizar. Por lo tanto, dado dos controladores $C_1$, $C_2$, si toda traza de $C_1$ está en $Tr(C_2)$ (i.e. $Tr(C_1) \subset
-Tr(C_2)$) podremos decir que el controlador $C_2$ tiene más comportamiento que $C_1$ debido a que en el controlador
+realizar. Por lo tanto, dado dos controladores $C_1$, $C_2$, si toda traza de $C_1$ está en $Tr(C_2)$ (i.e. $Tr(C_1)$
+$\subset$ $Tr(C_2)$) podremos decir que el controlador $C_2$ tiene más comportamiento que $C_1$ debido a que en el controlador
 $C_2$ puedo ejecutar todas las secuencias de acciones de $C_1$ y algunas más.
 
 \subsection{Planta de energía nuclear}
@@ -16,9 +16,9 @@ es, $T$ configurado como $true$). El controlador obtenido ($C^1_u$) exhibe el co
 la bomba durante la transición y permitiendo al nuevo controlador a nunca reiniciarla.
 
 El segundo problema de control usa a $T$ con el requerimiento genérico de \cite{6224401} (ver fórmula
-\ref{ghezzi_formula}). El controlador resultante ($C^2_u$) evita la actualización mientras la bomba esta apagada, y por
-lo tanto, evita que el nuevo controlador deje la bomba apagada sin intención. De hecho, como se espera, este controlador
-exhibe estrictamente menos comportamiento que el controlador previo ($Tr(C^2_u) \subset Tr(C^1_u)$).
+\ref{ghezzi_formula}). El controlador resultante ($C_u^{2}$) evita la actualización fuera del estado inicial y en
+particular evita la actualización mientras la bomba está apagada. Por otra parte, como se espera, este controlador exhibe
+estrictamente menos comportamiento que el controlador previo ($Tr(C^2_u) \subset Tr(C^1_u)$).
 
 Finalmente, el tercer problema de control modela explícitamente el requerimiento de que la bomba no debería estar
 apagada continuamente (esto es, en realidad, un requerimiento de transición de aceptación Büchi que puede ser manejado
@@ -35,7 +35,7 @@ no necesita de una validación manual posterior como en \cite{PanzicaLaManna:201
 
 Como en el caso de estudio previo, resolvimos tres problemas de control de actualización dinámica distintos. El primero
 sin requerimientos para la transición entre la vieja especificación y la nueva (i.e. $T = true$). El controlador
-resultante $C^1_u$ ....
+resultante $C^1_u$
 
 \subsection{Buscador UAV de vida salvaje}
 
