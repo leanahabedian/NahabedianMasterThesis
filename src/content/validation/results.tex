@@ -84,16 +84,45 @@ soportadas por la técnica propuesta en este trabajo.
 
 \subsection{Production Cell}
 
-Para analizar este caso, exploramos varios escenarios de adaptación definiendo una especificación inicial y nueva. Para
-cada escenario identificamos posibles especificaciones alternativas. Por ejemplo, una decisión común para todo escenario
-de actualización es como son los productos procesados. ?`Debería la cadena de montaje estar vacía antes de que se
-produzca la actualización? En este caso, los productos que están siendo procesados al momento en que la actualización es
-requerida ?`deberían ser descartados? ?`o terminarlos? Si decidimos terminarlos, ?`los deberíamos terminar con la vieja
-especificación o con la nueva? O tal vez, durante el proceso de transición, la cadena de montaje no necesita ser vaciada
-y no importa que receta se lleva a cabo para construir un producto, siempre y cuando, estén construidos de una manera
-consistente. 
+Para analizar este caso de estudio, exploramos varios escenarios de adaptación definiendo una especificación inicial y
+nueva. Durante la actualización no se produce un cambio del ambiente pero si de los objetivos. Dicho cambio, consiste en
+que los productos deberán ahora ser procesados en otro orden. En un principio, primero debemos usar la agujeriadora y
+luego pintar, pero luego de la actualización el orden cambia. 
 
-Estas alternativas fueron modeladas cambiando el valor del requerimiento de transición $T$...
+Estudiaremos durante esta actualización distintos escenarios especificando posibles alternativas. Por ejemplo, una
+decisión común para todo escenario de actualización es como son los productos procesados. ?`Debería la cadena de montaje
+estar vacía antes de que se produzca la actualización? En este caso, los productos que están siendo procesados al
+momento en que la actualización es requerida ?`deberían ser descartados? ?`o terminarlos? Si decidimos terminarlos,
+?`los deberíamos terminar con la vieja especificación o con la nueva? O tal vez, durante el proceso de transición, la
+cadena de montaje no necesita ser vaciada y no importa que receta se lleva a cabo para construir un producto, siempre y
+cuando, estén construidos de una manera consistente. 
+
+Estas alternativas fueron modeladas cambiando el valor del requerimiento de transición $T$ definiéndolo de la siguiente
+manera:
+
+\begin{enumerate}
+\item $\Box$ $(($ $startNewSpec$ $\rightarrow$ $($ $!$ $Processing['red]$ $\&\&$ $!$ $Processing['yellow]$ $))$ $\&\&$
+$($ $stopOldSpec$ $\rightarrow$ $($ $!$ $Processing['red]$ $&&$ $!$ $Processing['yellow]$ $)) )$
+\item $\Box$ $($ $startNewSpec$ $\rightarrow$ $StopOldSpec$ $)$
+\item $true$
+\end{enumerate}
+
+Donde $Processing$ es el flujo que se inicializa cuando un producto entra a la cadena de montaje y se apaga cuando se va
+y donde $StopOldSpec$ es el flujo que se prende cuando el evento especial $stopOldSpect$ se ejecuta y no se apaga nunca.
+
+Con la primer fórmula FLTL estamos forzando al sistema a que solo genere la actualización si no hay ningún producto en
+la cadena de montaje, de esta forma no ahorramos el problema de tener que decidir qué hacer con los productos que están
+pendientes.
+
+Con la fórmula 2, forzamos al sistema a generar actualizaciones sólo cuando la especificación vieja no esta siendo
+garantizada. De esta manera, evitamos que ambas especificaciones estén siendo garantizada, lo que sería un problema, ya
+que en esta actualización los objetivos actuales y los objetivos nuevos son opuestos (i.e. o bien uso el taladro primero
+y luego pinto o bien pinto primero y luego taladro, ambos objetivos no son posibles de satisfacer).
+
+Con la tercer fórmula, estamos dejando a la técnica libre, permitiéndole forzar al sistema a que haga lo que crea
+conveniente para satisfacer los objetivos nuevos.
+
+Los resultados obtenidos...
 
 \subsection{Cuadcóptero}
 
