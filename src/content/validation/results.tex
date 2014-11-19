@@ -101,28 +101,43 @@ Estas alternativas fueron modeladas cambiando el valor del requerimiento de tran
 manera:
 
 \begin{enumerate}
-\item $\Box$ $(($ $startNewSpec$ $\rightarrow$ $($ $!$ $Processing['red]$ $\&\&$ $!$ $Processing['yellow]$ $))$ $\&\&$
-$($ $stopOldSpec$ $\rightarrow$ $($ $!$ $Processing['red]$ $&&$ $!$ $Processing['yellow]$ $)) )$
-\item $\Box$ $($ $startNewSpec$ $\rightarrow$ $StopOldSpec$ $)$
-\item $true$
+\item $T_1$ $=$ $\Box$ $($ $startNewSpec$ $\rightarrow$ $($ $!$ $Processing[red]$ $\&\&$ $!$ $Processing[yellow]$ $))$ 
+\item $T_2$ $=$ $(T_1$ $\&\&$ $($$G$ $W$ $startNewSpec))$
+\item $T_3$ $=$ $true$
 \end{enumerate}
 
-Donde $Processing$ es el flujo que se inicializa cuando un producto entra a la cadena de montaje y se apaga cuando se va
-y donde $StopOldSpec$ es el flujo que se prende cuando el evento especial $stopOldSpect$ se ejecuta y no se apaga nunca.
+Donde $Processing$ es el flujo que se inicializa cuando un producto entra a la cadena de montaje y se apaga cuando este
+se va.
 
 Con la primer fórmula FLTL estamos forzando al sistema a que solo genere la actualización si no hay ningún producto en
-la cadena de montaje, de esta forma no ahorramos el problema de tener que decidir qué hacer con los productos que están
-pendientes.
+la cadena de montaje, de esta forma nos ahorramos el problema de tener que decidir qué hacer con los productos que están
+pendientes. Llamaremos al controlador generado por esta especificación de transición como $C_u^1$. Este controlador
+cumple con la particularidad de que si el requerimiento de actualización ($beginUpdate$) es disparado cuando la cadena
+de montaje esta vacía, el controlador obtenido hace $stopOldSpec$ lo mas pronto posible sin dejar que la cadena de
+montaje se llene. Luego de esto, el controlador puede hacer la actualización ($startNewSpec$) inmediatamente o llenar la
+cadena de montaje y vaciarla libremente sin cumplir ningún requerimiento hasta que efectúe la actualización.
 
-Con la fórmula 2, forzamos al sistema a generar actualizaciones sólo cuando la especificación vieja no esta siendo
-garantizada. De esta manera, evitamos que ambas especificaciones estén siendo garantizada, lo que sería un problema, ya
-que en esta actualización los objetivos actuales y los objetivos nuevos son opuestos (i.e. o bien uso el taladro primero
-y luego pinto o bien pinto primero y luego taladro, ambos objetivos no son posibles de satisfacer).
+El caso interesante de este controlador ($C_u^1$) se produce cuando el requerimiento de actualización ($beginUpdate$) se
+ejecuta cuando la cadena de montaje esta llena. El controlador hace $stopOldSpec$ tan rápido como en el caso anterior y
+de esta manera permite hacer cualquier cosa con los trabajos pendientes. Esto es, sacarlos de la cadena de montaje con
+la producción hecha a medias o terminarlos, pero esto no esta siendo forzado. Cuando no haya ningún producto en la
+cadena la acción $startNewSpec$ es habilitada y por lo tanto, la actualización se lleva a cabo.
 
-Con la tercer fórmula, estamos dejando a la técnica libre, permitiéndole forzar al sistema a que haga lo que crea
-conveniente para satisfacer los objetivos nuevos.
+Considerando lo sucedido en el controlador $C_u^1$ consideramos un controlador $C_u^2$ donde requerimos que la
+actualización se lleve a cabo con la cadena de montaje vacía pero completando los trabajos sin terminar satisfaciendo la
+especificación $G$. Este controlador es un controlador más restrictivo pero que consigue evitar el gasto de descartar
+los productos que deben terminarse de producir. 
 
-Los resultados obtenidos...
+Con la tercer fórmula, generamos el controlador $C_u^3$ dejando a la técnica libre, permitiéndole forzar al sistema a
+que haga lo que crea conveniente para satisfacer los objetivos nuevos. El sistema obtenido solo prohíbe la actualización
+cuando le es imposible satisfacer los nuevos objetivos si la actualización se lleva a cabo. En este caso particular, el
+controlador no va a poder actualizar si tiene una pieza a la cual se le aplico el taladro. Los nuevos requerimientos
+necesita que lo productos sean pintados antes de ser taladrados. De tener un producto taladrado en la cinta y la
+actualización realizada, el controlador no podrá satisfacer los nuevos objetivos. Para cualquier otro estado de la cinta
+de montaje, el controlador $C_u^3$ permite la actualización.
+
+En cuanto a las trazas de estos controladores se cumple que $Tr(C_u^2)$ $\subset$ $Tr(C_u^1)$ $\subset$ $Tr(C_u^3)$.
+Demostrando nuevamente que el controlador con $T = true$ es el controlador más general, que exhibe más comportamiento.
 
 \subsection{Cuadcóptero}
 
