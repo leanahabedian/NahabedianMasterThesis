@@ -7,20 +7,20 @@ operaciones. Este trabajo ha sido estudiado de diversas maneras, empezando por l
 \cite{60317} y más recientemente con el diseño de software adaptable \cite{SEAMS}.
 
 La pregunta central que intenta solucionar este problema es ?`cuándo es seguro cambiar un componente de software en un sistema
-que esta corriendo? Una respuesta conservadora a esta pregunta es ``cuando los componentes no están involucrados en
+que está corriendo? Una respuesta conservadora a esta pregunta es ``cuando los componentes no están involucrados en
 alguna interacción''; esto fue formalizado introduciendo la noción de \textbf{quietud} (\emph{quiescense}) \cite{60317} y luego
 \textbf{tranquilidad} (\emph{tranquility}) \cite{4359466}. Muchas otras técnicas han sido desarrolladas (como en
-\cite{Anderson:2009:MPM:1656437.1656448} y \cite{485222}) aunque estas nunca explican los requerimientos de
-actualización \cite{Baresi:2010:DBD:1882362.1882367}, ni indican cuando es correcto realizar el cambio a la nueva especificación.
+\cite{Anderson:2009:MPM:1656437.1656448} y \cite{485222}) aunque éstas nunca explican los requerimientos de
+actualización \cite{Baresi:2010:DBD:1882362.1882367}, ni indican cuándo es correcto realizar el cambio a la nueva especificación.
 Para tal fin Ghezzi et al. \cite{6224401,PanzicaLaManna:2013:FCC:2487336.2487349} estudiaron el problema de actualizar un
-controlador que esta monitoreando un ambiente de sistema reactivo mientras controla actuadores. La pregunta que persiguen
-contestar los autores es ?`cuándo es seguro reemplazar el controlador actual con uno nuevo, donde se cumple la nueva
+controlador que está monitoreando un ambiente de sistema reactivo mientras controla actuadores. La pregunta que persiguen
+contestar los autores es ?`cuándo es seguro reemplazar el controlador actual con uno nuevo? ?`cuándo debería empezar a satisfacerse la nueva
 especificación?
 
 Un problema en común que los trabajos existentes en actualización dinámica poseen, es que dichas técnicas necesitan
-asumir que el sistema que esta siendo ejecutado va a eventualmente alcanzar un estado seguro donde hacer la
+suponer que el sistema que esta siendo ejecutado va a eventualmente alcanzar un estado seguro donde hacer la
 actualización. Estos estados son designados como \emph{actualizables} y su identificación depende de cada técnica.
-Dichas técnicas, suelen tener un operador o una pieza de software especial designado a identificar dichos estados. Esta asunción, es algo
+Dichas técnicas, suelen tener un operador o una pieza de software especial designado a identificar dichos estados. Esta suposición, es algo
 que no depende del software, sino que depende del ambiente, el cual sabemos que no puede ser manipulado. A su vez, los trabajos
 existentes, tampoco dan una técnica para guiar al sistema hacia un estado actualizable. 
 
@@ -29,41 +29,8 @@ den información del momento en que dicho componente entró en estado de \emph{q
 \emph{pasivate} que, al deshabilitar componentes para inicializar nuevas transacciones, intentan, pero no garantizan
 que alcance \emph{quiescence}. Similarmente, en \cite{6224401} requiere asumir que el controlador a ser actualizado va a
 volver, eventualmente, a su estado inicial (o asumir que la nueva especificación vale desde el último estado inicial). Estados
-actualizables son aquellos en los que el comportamiento del sistema desde el ultimo estado inicial puede controlarse
+actualizables son aquellos en los que el comportamiento del sistema desde el último estado inicial puede controlarse
 para satisfacer la nueva especificación.  Por otra parte, en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}, el mismo
 autor relaja las condiciones necesarias para realizar una actualización, permitiendo más estados actualizables, al
 costo de violar la nueva especificación, y sin contemplar el problema de garantizar que dicho estado sea alcanzado.
 
-%Cuando trabajamos en ingeniería de requerimientos, nuestra tarea es relevar y documentar los objetivos y el
-%funcionamiento del ambiente, para elaborar un conjunto de requerimientos cuya máquina a construir debe cumplir.
-%Teniendo estas tres componentes, podemos formular la siguiente ecuación: R, D $\vDash$ G. Donde R son los Requerimientos de la
-%máquina, D las asunciones del dominio y G los objetivos que la máquina deberá satisfacer.
-
-%Entonces, un problema clave de la ingeniería de requerimientos puede ser visto como un problema de síntesis, tal que
-%dado un modelo de la máquina, un modelo del mundo y un conjunto de objetivos del sistema, permite construir un modelo
-%operacional el cual satisface los objetivos. La técnica que resuelve esta ecuación mediante los modelos mencionados es
-%llamada síntesis de controladores y esta siendo estudiada exhaustivamente en varios aspectos de la ingeniería de los requerimientos.
-
-%La construcción de dichos modelos son una de las principales herramientas en el diseño de sistemas concurrentes, debido
-%a que nos facilita la detección de errores de diseño en las primeras etapas de desarrollo. Por otro lado, estos modelos
-%de comportamiento pueden resultar complejos de construir. Utilizar la técnica de síntesis anteriormente mencionada
-%facilita la construcción tomando modelos pequeños y propiedades lógicas, que suelen ser más sencillas de especificar y de validar.
-
-%Por lo tanto, un problema de control consiste en generar automáticamente una máquina que restrinja la ocurrencia de
-%eventos controlables basado en los eventos del mundo que se producen. Es decir, teniendo la especificación de un
-%ambiente, asunciones, objetivos y un conjunto de acciones controlables, podemos definir una máquina cuyo comportamiento
-%concurrente con el ambiente satisfaga las asunciones y los objetivos del sistema.
-
-%Este problema está siendo ampliamente estudiado en diferentes contextos, desde sistemas autoadaptativos hasta
-%composición automática de web-services. Para diseñar softwares autoadaptativos los más evolucionados fueron los basados
-%en arquitectura y los basados en requerimientos. El primero de estos utiliza reglas de adaptación que serán utilizadas
-%para monitorear condiciones del conjunto de operaciones del sistema y definir acciones en run-time si las condiciones
-%son desfavorables. Por otro lado, los basados en requerimientos extienden las técnicas de ingeniería de los
-%requerimientos con el fin de representar a los requisitos de adaptación y/o la incertidumbre inherente del medio
-%ambiente en el que opera el sistema. El modelo más utilizado en la comunidad, hoy en día, para definir sistemas
-%autoadaptables es el modelo arquitectural. 
-
-%Actualmente, trabajos recientes en el área de sistemas auto adaptativos definen una técnica para lograr encontrar
-%estados de la ejecución del controlador en los cuales es seguro realizar una actualización y seguir  ejecutando el nuevo
-%controlador sin tener que apagar y prender el primero. Sin embargo, dicho problema no ha sido estudiado en el marco de
-%síntesis de controladores.

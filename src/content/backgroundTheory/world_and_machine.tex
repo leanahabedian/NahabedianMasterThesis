@@ -1,20 +1,20 @@
 \section{El Mundo y la Máquina}
 
 Los primeros conceptos que detallaremos estarán involucrados con la ingeniería de los requerimientos. Los puntos de vista
-mas relevantes son los de Zave y Jackson (\cite{Zave97fourdark, Jackson:1995:SRA:210207, 5071113}) por un lado, y los de
+más relevantes son los de Zave y Jackson (\cite{Zave97fourdark, Jackson:1995:SRA:210207, 5071113}) por un lado, y los de
 Letier y Van Lamsweerde (\cite{879820, VanLamsweerde:2001:GRE:882477.883624}) por el otro. Ambos puntos de vista
 distinguen a los problemas del \emph{Mundo} y las soluciones de la \emph{Máquina} como fundamentales para reconocer si 
-las operaciones de la máquina soluciona los problemas planteados en el mundo. De hecho, el efecto de la máquina en el mundo y las
+las operaciones de la máquina solucionan los problemas planteados en el mundo. De hecho, el efecto de la máquina en el mundo y las
 suposiciones que hacemos acerca de este mundo son fundamentales para el proceso de toma de requerimientos. En el lado
-del mundo definimos una serie de problemas que existen en el mundo real que serán solucionados al construir una máquina.
+del mundo definimos una serie de problemas que existen en el mundo real; que serán solucionados al construir una máquina.
 Fácilmente podremos notar que existen componentes en la máquina que interactúan directamente con el mundo siguiendo
-normas y procesos conocidos. Estas, forman parte de la intersección entre el mundo y la máquina. Por ejemplo un taladro,
+normas y procesos conocidos. Éstas, forman parte de la intersección entre el mundo y la máquina. Por ejemplo un taladro,
 un brazo robótico o las reglas de procesamiento para cada elemento que entra en una linea de producción (ver la Figura
 \ref{world_and_machine}).
 
 \begin{figure}
     \centering
-    \includegraphics[scale=0.45]{img/MTSA_example.png}
+    \includegraphics[scale=0.45]{img/world_and_machine.png}
     \caption{El Mundo y la Máquina}
     \label{world_and_machine}
 \end{figure}
@@ -25,10 +25,10 @@ momento. Con la sentencia $EnBandeja[p] \rightarrow get.Bandeja[p]$ mostramos qu
 podrá tomar los productos de la bandeja cuando estén listos. Finalizando, los fenómenos compartidos entre el mundo y
 máquina, es decir, los que se encuentran en la intersección, representa a la \emph{interfaz}, donde la máquina
 interactúa con el mundo. También, podemos definir a los fenómenos del mundo como el \emph{modelo del entorno} ya que el
-conjunto de estos describen los eventos que suceden en el mundo real.
+conjunto de éstos describen los eventos que suceden en el mundo real.
 
 Las sentencias que detallan los distintos fenómenos, tanto en el mundo como en la máquina pueden variar en
-\emph{alcance} y en \emph{forma} \cite{Parnas95functionaldocuments,Jackson:1995:SRA:210207}. Además, estas pueden estar en modo \emph{indicativo} u \emph{optativo}. En
+\emph{alcance} y en \emph{forma} \cite{Parnas95functionaldocuments,Jackson:1995:SRA:210207}. Además, éstas pueden estar en modo \emph{indicativo} u \emph{optativo}. En
 otros trabajos, como en \cite{van2009requirements}, las sentencias utilizadas son \emph{descriptivas} y \emph{prescriptivas}.
 
 \begin{itemize}
