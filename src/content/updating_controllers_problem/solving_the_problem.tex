@@ -5,7 +5,7 @@ Resolver un problema de control LTS (como el definido en la definición \ref{LTS
 actualización dinámica de controladores es una instancia especifica del problema de control LTS general. En efecto, dada
 la estructura de $G_u$, su resolución puede ser computada bajo limites de menor complejidad.
 
-Bajo la asunción de que $G$, $G'$ y $T$ son propiedades de seguridad, $G_u$ puede ser codificado como propiedades de
+Bajo la suposición de que $G$, $G'$ y $T$ son propiedades de seguridad, $G_u$ puede ser codificado como propiedades de
 obligación (por ejemplo disyunciones de afirmaciones de seguridad y alcanzabilidad, $\bigwedge^n_{i=1}(\Box I_i \lor
 \Diamond R_i)$). Los problemas de control LTS con objetivos de obligación pueden ser resueltos en tiempo lineal para
 modelos de ambientes determinísticos. Para ambientes no determinísticos, un especializado subconjunto de construcciones
@@ -30,7 +30,7 @@ una transición correcta, satisfaciendo $T$, preservando el objetivo viejo $G$ y
 cual ($startNewSpec$) el nuevo ambiente $E'$ puede ser reemplazado y el nuevo objetivo $G'$ puede ser garantizado.
 
 La no existencia de una solución a este problema de control puede significar dos posibles escenarios. El primero es que
-el nuevo objetivo bajo las asunciones del nuevo ambiente no puede ser alcanzados por el controlador (esto es, el
+el nuevo objetivo bajo las suposiciones del nuevo ambiente no puede ser alcanzados por el controlador (esto es, el
 problema de control definido por $E'$ y $\Box G'$ no tiene solución para ningún estado inicial de $E'$). Esta es una
 situación extrema donde el controlador tiene poco por hacer con la actualización que se le pide. El segundo, asumiendo
 que el problema de control definido por $E'$ y $\Box G'$ tiene solución para algunos estados de $E'$, puede suceder que la

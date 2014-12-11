@@ -5,8 +5,8 @@ que deben ser abordados en función del dominio de aplicación, tecnología y la
 (vea \cite{SMR:SMR1556} para más información). El grueso del esfuerzo en actualización dinámica asume que no hay cambios
 de especificación y por lo tanto el mismo comportamiento es esperado (por ejemplo en \cite{mx:icse13}), o que la
 especificación es genérica (como en \cite{Shen:2005:TUF:1095430.1081720}, \cite{5551162}, \cite{1167829},
-\cite{4221625}, \cite{485222}, \cite{60317}) y no proporcionada por el usuario. Ejemplos de este último, aparte de
-asegurar que la actualización no desemboca un fallo, asegura type safety (ej. \cite{Subramanian08dynamicsoftware}) y
+\cite{4221625}, \cite{485222}, \cite{60317}) y no proporcionada por el usuario. Ejemplos de este último, además de
+asegurar que la actualización no desemboca en un fallo, asegura type safety (ej. \cite{Subramanian08dynamicsoftware}) y
 data isolation entre versiones \cite{Stoyle07mutatismutandis:}. Quiescence \cite{60317} y nociones relacionadas (ej.
 \cite{4359466},  \cite{Anderson:2009:MPM:1656437.1656448}, \cite{485222}) no requieren una representación explicita de
 las propiedades a ser preservadas, pero fue utilizado en conjunto con técnicas que garantizan consistencia genérica de
@@ -15,13 +15,13 @@ semántica (ej. \cite{5546542}).
 La necesidad de una actualización por medio de la definición de propiedades por parte del usuario han sido reconocidas
 en \cite{Baresi:2010:DBD:1882362.1882367}. En \cite{Hayden:2012:SVC:2189314.2189336}, se considera la especificación de
 propiedades de actualización, pero posee un enfoque en verificar si el programa satisface estas propiedades, en vez de
-automáticamente sintetizar la actualización para satisfacer estas propiedades. 
+sintetizar la actualización para satisfacer estas propiedades. 
 
 Síntesis, estrategia operacional para construir un autómata que satisface una especificación dada, ha sido usado
 extensivamente para garantizar código que es correcto por construcción (por ejemplo en
 \cite{Greenyer:2013:ISC:2491411.2491445}). La naturalidad automática de la síntesis logra poder aplicar esta técnica no
 sólo en el momento en el que el diseño se lleva a cabo sino que también en tiempo de ejecución, generando un sistema
-adaptable. Dicha evolución no esta limitada exclusivamente para sistemas adaptables como describimos en la etapa de
+adaptable. Dicha evolución no está limitada exclusivamente para sistemas adaptables como describimos en la etapa de
 introducción y motivación (ver sección \ref{motivation}). Por ejemplo, en \cite{Pelliccione20082237} el problema de
 evolucionar componentes conjuntos es resuelto sintetizando ``glue code'' (por ejemplo, controladores). Si bien la
 síntesis se ejecuta sin frenar el sistema, el nuevo controlador sólo puede reemplazar al viejo cuando el sistema entra
@@ -76,12 +76,12 @@ propiedades de \emph{safety} provee un argumento analítico para la escalabilida
 validación experimental, y en particular evaluar la necesidad práctica de introducir el no-determinismo, lo que puede
 producir que la complejidad se vaya a exponencial en peor caso. Los problemas de control en los casos de estudio
 descritos en la sección \ref{cases_of_study} fueron resueltos usando MTSA que provee algoritmos más complejos que los
-necesitados (polinomial para SGR(1) en vez de linear para formulas de obligación). Además, la estrategia para resolver
+necesitados (polinomial para SGR(1) en vez de lineal para fórmulas de obligación). Además, la estrategia para resolver
 el problema de actualización definida en esta tesis, que construye un controlador que controla las tres fases de
 actualización (ver Figura \ref{update_environment}), prioriza el entendimiento de dicha técnica. Para reducir la
 complejidad (particularmente para el caso no lineal de fórmulas de Büchi), es posible producir un controlador de
 actualización composicionalmente, computando primero estados en el nuevo ambiente desde los cuales los nuevos objetivos
-pueden ser garantizados, y luego, computando un controlador que puede satisfacer alcanzar uno de esos estados luego de
+pueden ser garantizados, y luego, computando un controlador que puede alcanzar uno de esos estados luego de
 que $beginUpdate$ ocurra, mientras se satisfacen los requerimientos de transición $T$.
 
 Tenga en cuanta, que no discutimos hasta ahora que pasa si otra actualización dinámica es deseada luego de que se
@@ -110,6 +110,6 @@ generalizamos la relación entre historias entre estados de la especificación v
 Finalizando, como discutimos en el capítulo \ref{validation} el criterio de actualización correcta definido en
 \cite{6224401} puede ser expresado como un requerimiento de transición, pero hay una pequeña diferencia en los
 resultados obtenidos. Nuestro controlador de actualización forzará al sistema a que llegue al estado inicial,
-\emph{garantizando} que la actualización va a ocurrir. Mientras que en \cite{6224401} hay una \emph{asunción} de que el
-controlador actual y su ambiente van a ser cooperar a que el estado inicial eventualmente sea visitado, es decir, no
+\emph{garantizando} que la actualización va a ocurrir. Mientras que en \cite{6224401} hay una \emph{suposición} de que el
+controlador actual y su ambiente van a cooperar para que el estado inicial eventualmente sea visitado, es decir, no
 garantiza que la actualización ocurra.

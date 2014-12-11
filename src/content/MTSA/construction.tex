@@ -5,7 +5,7 @@ lenguaje es un lenguaje textual centrado en la construcción composicional de mo
 usado para describir LTSs.
 
 Los FSP incluyen varios operadores tradicionales para describir modelos de comportamiento, de los cuales destacaremos el
-prefijo de acción ($\rightarrow$), elección ($|$), composición secuencial (;), composición paralela ($\|$) y mezcla.
+prefijo de acción ($\rightarrow$), elección ($|$), composición paralela ($\|$) y mezcla.
 La semántica de la mezcla es tal que dada dos descripciones parciales del mismo componente, el operador de mezcla
 devuelve una LTS que combina la información provista por las descripciones parciales originales.
 
@@ -14,13 +14,13 @@ intenso trabajo y un grado considerable de experiencia. Para mitigar este proble
 que permite sintetizar modelos de comportamiento de forma automática, a partir de especificaciones declarativas de los
 requerimientos, escenarios y casos de uso.
 
-La palabra clave \emph{constraint} de MTSA se usa de manera conjunta con las propiedades de seguridad (\emph{safety})
-formalizadas haciendo uso de Lógica Lineal Temporal de Fluents (FLTL). Para una declaración de tipo \emph{constraint},
+La palabra clave \emph{constraint} de MTSA se usa de manera conjunta con las propiedades de seguridad (\emph{safety}) y
+se formalizan haciendo uso de la Lógica Lineal Temporal de Fluents (FLTL). Para una declaración de tipo \emph{constraint},
 MTSA construye automáticamente el modelo de LTS que caracteriza a todos los modelos LTS libres de \emph{deadlock} que
 satisfacen la fórmula FLTL. Al sintetizar y mezclar modelos LTS obtenidos con definiciones FLTL, se puede construir de
-forma iterativa una LTS que caracteriza a la cota superior de los sistemas de comportamiento esperados.
+forma iterativa un LTS que caracteriza a la cota superior de los sistemas de comportamiento esperados.
 
 La palabra clave \emph{abstract} de MTSA puede aplicarse a procesos FSP. Su semántica es tal que el modelo resultante es
-la LTS de menor refinamiento que garantiza el comportamiento requerido por los procesos FSP. Esta palabra clave,
+el LTS de menor refinamiento que garantiza el comportamiento requerido por los procesos FSP. Esta palabra clave,
 utilizada en conjunción con los procesos FSP que modelan el comportamiento descripto en la especificación del escenario,
 provee una LTS que caracteriza a todas las implementaciones que satisfacen dicha especificación.

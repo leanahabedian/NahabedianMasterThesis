@@ -13,7 +13,7 @@ Act$ induce un fluent, que notaremos $\ell = \langle\ell, Act \backslash \{\ell\
 de un fluent es el que se obtiene mediante la unión del conjunto de acciones iniciadoras y el conjunto de acciones
 finalizadoras.
 
-Sea $\mathcal{F}$ el conjunto de todos los posibles fluents sobre $Act$. Una formula FLTL se define inductivamente
+Sea $\mathcal{F}$ el conjunto de todos los posibles fluents sobre $Act$. Una fórmula FLTL se define inductivamente
 utilizando los conectores booleanos estandar y operadores temporales como el $\mathbf{X}$ (próximo), $\mathbf{U}$ (antes
 fuerte) de la siguiente manera:
 
@@ -29,7 +29,7 @@ traza $\pi = \ell_0,\ell_1,...$ satisface un fluent $Fl$ en la posición $i$, no
 las siguientes condiciones es válida:
 
 \begin{itemize}
-    \item $Init_{Fl} \land (\forall j \in \mathbb{N}: 0 \leq j \leq i \rightarrow \ell_k \notin T_{Fl} )$
+    \item $Init_{Fl} \land (\forall j \in \mathbb{N}: 0 \leq j \leq i \rightarrow \ell_j \notin T_{Fl} )$
     \item $\exists j \in \mathbb{N}: (j \leq i \land \ell_j \in I_{Fl}) \land (\forall k \in \mathbb{N}: j < k \leq i
     \rightarrow \ell_k \notin T_{Fl})$
 \end{itemize}
@@ -39,15 +39,14 @@ las siguientes condiciones es válida:
 
 \begin{center}
 \begin{tabular}{p{2cm}p{0.5cm}l}
-    $\pi,i \vDash Fl$                        & $\triangleq$    & $\pi,i \vDash Fl$\\
     $\pi,i \vDash \neg\varphi$              & $\triangleq$    & $\neg(\pi,i \vDash \varphi)$\\
     $\pi,i \vDash \varphi \lor \psi$         & $\triangleq$    & $(\pi,i\vDash\varphi)\lor(\pi,i\vDash\psi)$\\
     $\pi,i \vDash \mathbf{X}\varphi$         & $\triangleq$    & $\pi,1 \vDash \varphi$\\
-    $\pi,i \vDash \varphi\mathbf{U}\varphi$  & $\triangleq$    & $\exists j \geq i: \pi,j \vDash \psi\land\forall i \leq k < j:
+    $\pi,i \vDash \varphi\mathbf{U}\psi$  & $\triangleq$    & $\exists j \geq i: \pi,j \vDash \psi\land\forall i \leq k < j:
     \pi,k \vDash \varphi$
 \end{tabular}
 \end{center}
 
 Diremos que $\varphi$ se cumple en $\pi$, denotado como $\pi \vDash \varphi$, si $\pi,0 \vDash \varphi$. Una fórmula
-$\varphi \in$ FLTL es cierta si un LTS $E$ (denotado como $E \vDash \varphi$) si éste es cierto en toda traza infinita
+$\varphi \in$ FLTL es cierta si un LTS $E$ (denotado como $E \vDash \varphi$) si ésta es cierta en toda traza infinita
 producida por $E$. 

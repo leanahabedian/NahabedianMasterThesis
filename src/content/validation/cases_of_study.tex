@@ -5,9 +5,9 @@
 
 Todos los casos de estudios se ejecutan usando una extensión de la herramienta MTSA \cite{4639371} que nos da soporte
 para especificar LTSs y propiedades, usando una notación textual, álgebra de procesos y FLTL. La herramienta también nos 
-da soporte para síntesis de controladores para problemas de control SGR(1), los cuales son estrictamente más caros de lo
+da soporte para la síntesis de controladores para problemas de control SGR(1), los cuales son estrictamente más caros computacionalmente de lo
 que es requerido para problemas de control en la actualización de controladores dinámicamente. La herramienta fue 
-extendida para automáticamente computar $A_u$, $G_u$ y $E_u$, y resuelve el problema de control de la actualización
+extendida para computar $A_u$, $G_u$ y $E_u$, y resuelve el problema de control de la actualización
 dinámica de controladores. La versión extendida de la herramienta y la especificación completa de todos los casos de
 estudio pueden verse en \url{http://sourceforge.net/projects/mtsa/}.
 
@@ -28,24 +28,6 @@ reiniciada). Esto es lo que los autores aseguran en \cite{6224401}. Segundo, que
 actualización de \cite{6224401} es suavizada como en \cite{PanzicaLaManna:2013:FCC:2487336.2487349}  puede generar
 fallas y consecutivamente ellos recomiendan que ``el diseño de controladores actualizables dinámicamente basados en el
 criterio débil de  actualización incluye una subsiguiente validación de los controladores''.
-
-%\subsection{RailCab}
-
-%El sistema de RailCab es un sistema mecatrónico que fue desarrollado en la Universidad de Paderborn \cite{railcab} donde
-%los vehículos autónomos deben coordinar de que manera transportar pasajeros o bienes cada vez que le es solicitado. El
-%sistema que se discute en \cite{6224401} como caso de estudio base es controlar RailCabs cuando está acercándose a un
-%cruce de vías. El RailCab puede monitorear eventos como $endOfSection$ que determinan que esta entrando a un cruce de
-%vía, y otros eventos que indican si esta habilitado para usar el freno o si tiene que utilizar el freno de emergencia,
-%que los llamaremos $lastBrake$ y $lastEmergencyBrake$. El RailCab controla el freno ($brake$) y el freno de emergencia
-%($emergencyBrake$) e incluso puede recibir respuestas a pedidos que controla como $requestPermissionToEnter$.
-
-%La especificación del controlador actual requiere que el RailCab entre al cruce de vías sólo si se le ha garantizado el
-%permiso para hacerlo. La especificación también describe varias asunciones de que la respuesta al pedido de permiso es
-%contestada antes de que el RailCab llegue a la sección de $lastEmergencyBrake$, siempre y cuando, el pedido haya sido
-%realizado antes de llegar a la zona de $lastBrake$. Como ejemplo de una nueva especificación, en \cite{6224401} discuten
-%hacer un objetivo más fuerte requiriendo que el RailCab envíe otro pedido preguntando si las barreras están funcionando
-%antes de entrar al cruce de vía. También refuerzan la hipótesis del ambiente en relación a cuando la respuesta a
-%$checkCrossingStatus$ puede ser recibida.
 
 \subsection{Buscador UAV de vida salvaje}
 \label{buscador_UAV}
@@ -88,13 +70,13 @@ producto final en la bandeja de salida.
 El propósito de este caso de estudio fue experimentar la técnica de actualización dinámica más allá de la especificación
 y tareas de síntesis discutidos en los casos de estudio previos. El enfoque, entonces, de este caso es poder analizar un
 controlador resultante ejecutando dicha solución en una infraestructura de adaptación (enactment), tomando un dominio de
-aplicación especifico. Usamos una infraestructura reportada en \cite{Braberman:2013:CSM:2486788.2487002}, para poder
-dinámicamente cargar un controlador en un ARDrone \cite{ARDrone}. La especificación, tanto vieja como nueva, son
+aplicación específico. Usamos una infraestructura reportada en \cite{Braberman:2013:CSM:2486788.2487002}, para poder
+cargar un controlador en un ARDrone \cite{ARDrone}. La especificación, tanto vieja como nueva, son
 simplificaciones del caso de estudio del Buscador UAV de vida salvaje (sección \ref{buscador_UAV}). 
 
 El caso de estudio incluye las acciones de despegar (\emph{takeOff}), aterrizar ($land$), detectar marcas mediante la cámara
 onboard ($read$) y objetivos relacionados con las acciones que el drone ejecuta, obteniendo feedback de los leds
-onboard, cuando las marcas son leidas ($blink$). La diferencia entre especificación vieja y nueva es que al principio el
+onboard, cuando las marcas son leidas ($blink$). La diferencia entre la especificación vieja y la nueva es que en la inicial el
 robot debe parpadear al leer una marca $x$ y luego de la actualización debe parpadear al leer una marca $x'$ distinta a
 la original. Además, luego de la actualización tendremos un contador de batería que irá decrementando su valor a medida
 que el ARDrone ejecute acciones. El nivel de batería no debe agotarse nunca para satisfacer los objetivos, y para esto

@@ -2,30 +2,30 @@
 
 En capítulos anteriores mostramos ejemplos en los cuales nos referíamos a la actual y nueva especificación como
 entidades monolíticas (las llamaremos $S$ y $S'$ respectivamente). Sin embargo, para presentar la actualización dinámica
-de controladores como un problema de control asumiremos que la especificación $S$ esta dividida en tres partes. La
-primera es la descripción de la interfaz del controlador dada como un conjunto de etiquetas $A$ que representa las
-acciones controlables del controlador. La segunda es una descripción operacional $E$, en forma de LTS, que describe el
-comportamiento del ambiente en cuanto a acciones controlables y monitoriables. La tercera son los objetivos del
-controlador $G$, expresado como una formula FLTL.
+de controladores como un problema de control supondremos que la especificación $S$ está dividida en tres partes. La
+primera, es la descripción de la interfaz del controlador dada como un conjunto de etiquetas $A$ que representa las
+acciones controlables del controlador. La segunda, es una descripción operacional $E$, en forma de LTS, que describe el
+comportamiento del ambiente en cuanto a acciones controlables y monitoriables. La tercera, son los objetivos del
+controlador $G$, expresados como una formula FLTL.
 
-Tenga en cuenta que como el estado inicial de $E'$ depende el estado actual de $E$, el ingeniero debe proveer un mapeo de estados
+Tenga en cuenta que como el estado inicial de $E'$ depende el estado actual de $E$, el ingeniero debe proveer una relación de estados
 $M$ de $E$ a $E'$. Omitiremos referirnos a $M$ hasta que lleguemos a la sección donde formalizaremos todos estos
 conceptos para mantener la presentación simple.
 
-En consecuencia, el problema general que apuntamos a resolver puede ser planteado de la siguiente manera: Ejecutar
-un sistema adaptable mediante un controlador $C$ que controla un conjunto de acciones $A$ y a su vez satisface los
-objetivos $G$ para un ambiente $E$. El usuario desea cambiar dinámicamente el controlador que se esta ejecutando para
+En consecuencia, el problema general que apuntamos resolver puede ser planteado de la siguiente manera:
+Un sistema adaptable mediante un controlador $C$ que controla un conjunto de acciones $A$ y a su vez satisface los
+objetivos $G$ para un ambiente $E$. El usuario desea cambiar dinámicamente el controlador que se está ejecutando para
 empezar a satisfacer el nuevo objetivo $G'$ en el nuevo ambiente $E'$ controlando un conjunto de acciones $A'$ y a su
 vez satisfacer los requerimientos de transición $T$.
 
-Por ejemplo, en el caso de estudio del buscador UAV de vida salvaje \ref{buscador_UAV}, el conjunto de acciones
+Por ejemplo, en el caso de estudio del buscador UAV de vida salvaje de la sección \ref{buscador_UAV}, el conjunto de acciones
 controlables para la especificación original ($A$) incluye $start$, $return2base$, $scan$, $picture$ y $goto$. Las
-acciones controlables para la nueva especificación ($A'$) posee más extensa ya que provee nuevas capacidades para el
+acciones controlables para la nueva especificación ($A'$) es un conjunto más extenso ya que provee nuevas capacidades para el
 controlador como por ejemplo $follow$.
 
 Los modelos de los ambientes $E$ y $E'$ pueden ser construidos mediante la composición paralela de varios modelos LTSs
-que describen diferentes aspectos del comportamiento del ambiente. Por ejemplo podríamos definir una LTS que describa el
+que describen diferentes aspectos del comportamiento del ambiente. Por ejemplo podríamos definir un LTS que describa el
 comportamiento de un tren que va atravesando distintas secciones de una vía. Por otro lado, tenemos otra LTS que
 describe la comunicación que el tren realiza con la barrera electrónica para identificar si está habilitado para cruzar.
-Para definir por completo el ambiente, necesitamos componer en paralelo ambas LTS. 
+Para definir por completo el ambiente, necesitamos componer en paralelo ambos LTS. 
 

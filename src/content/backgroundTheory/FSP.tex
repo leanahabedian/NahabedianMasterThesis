@@ -15,14 +15,14 @@ A modo de ejemplo, en la Figura \ref{FSP}, mostramos un código FSP que represen
 En FSP, los nombres de los procesos empiezan con letras mayúsculas y las acciones con minúsculas. El código de la planta
 nuclear consta de dos procesos FPS, el primero, llamado \texttt{\textbf{MAINTENANCE}} modela el proceso de enviar un
 mensaje para que se realice el mantenimiento de la bomba refrigeradora y recibe la respuesta de dicho mensaje. Estas
-acciones se representan con la acción \texttt{\textbf{request}} y \texttt{\textbf{ok}} respectivamente. Por otro lado,
+acciones se representan con las acciónes \texttt{\textbf{request}} y \texttt{\textbf{ok}} respectivamente. Por otro lado,
 tenemos el proceso \texttt{\textbf{COOLER}} que posee como procesos auxiliares a los subprocesos \texttt{\textbf{STARTED}}
 y \texttt{\textbf{STOPPED}} que son locales al proceso FSP en donde están definidas. \texttt{\textbf{COOLER}} está
 definida para que inicialmente se comporte como \texttt{\textbf{STARTED}} puesto que queremos modelar que la bomba en
-estado inicial esta prendida. Luego, podemos ejecutar diferentes acciones, \texttt{\textbf{stopPump}},
+estado inicial está prendida. Luego, podemos ejecutar diferentes acciones, \texttt{\textbf{stopPump}},
 \texttt{\textbf{procedure}} y \texttt{\textbf{ok}}. \texttt{\textbf{STARTED}} está definido usando el operador de acción 
 \texttt{\textbf{->}} y recursión. Por ejemplo, dicho proceso está definido para empezar ejecutando, o bien \texttt{\textbf{procedure}}
-o \texttt{\textbf{ok}}, acciones que nos llevan a seguir ejecutando como el proceso \texttt{\textbf{STARTED}} indica, o
+o \texttt{\textbf{ok}}, acciones que nos llevan a seguir ejecutando como el proceso \texttt{\textbf{STARTED}}, o
 \texttt{\textbf{stopPump}} que nos llevará a ejecutar el proceso \texttt{\textbf{STOPPED}}.
 
 \begin{figure}
@@ -33,24 +33,24 @@ o \texttt{\textbf{ok}}, acciones que nos llevan a seguir ejecutando como el proc
 \end{figure}
 
 A su vez, los FSP soportan distintos operadores de composición como la composición en paralelo. Dicha operación,
-denotada como $|\ |$, esta definida para preservar la semántica de la composición en paralelo de los LTS definidos en la
+denotada como $|\ |$, está definida para preservar la semántica de la composición en paralelo de los LTS definidos en la
 definición \ref{COMP_EN_PARALELO}. Por lo tanto, dados dos procesos FSP \texttt{P} y \texttt{Q}, tenemos:
 \texttt{lts(P||Q) = lts(P)||lts(Q)}.
 
-En procesos FSP que están definidos mediante una composición de dos procesos no auxiliares, son llamados procesos
+Los procesos FSP que están definidos mediante una composición de dos procesos no auxiliares, son llamados procesos
 compuestos y sus nombres poseen el prefijo $|\ |$. En nuestro ejemplo, la composición en paralelo entre los procesos FSP 
 \texttt{\textbf{MAINTENANCE}} y \texttt{\textbf{COOLER}} se escribe como \texttt{\textbf{||COOLING\_TOWER =
 (MAINTENANCE||COOLER).}}
 
 Además, FSP posee palabras reservadas que se colocan antes de la definición de un proceso que fuerzan a la herramienta
-MTSA a realizar una operación mas compleja al proceso. Un caso de estos, es la palabra reservada
+MTSA a realizar una operación más compleja al proceso. Un caso de estos, es la palabra reservada
 \texttt{\textbf{minimal}}, la cual, hace que MTSA construya un LTS minimal que respeta la semántica equivalente o la
 palabra reservada \texttt{\textbf{deterministic}}, que construye un LTS minimal con respecto a las trazas.
 
-FSP también permite definir propiedades FLTL. Un fluent que marca aquellos estados donde la bomba esta apagada puede ser
+FSP también permite definir propiedades FLTL. Un fluent que marca aquellos estados donde la bomba está apagada puede ser
 expresada en lenguaje FSP mediante el siguiente código: \texttt{\textbf{fluent IsStopped = <stopPump,startPump>\ initially 0}}.
 Como dijimos anteriormente, la bomba empieza encendida, por lo tanto IsStopped es inicialmente falso, pasa a ser
 verdadero cuando sucede la acción \texttt{\textbf{stopPump}} y falso nuevamente cuando la acción \texttt{\textbf{startPump}} sucede.
 
-Finalizando, FSP nos otorga facilidad para especificar LTSs y FLTL formulas. Este lenguaje es el que utilizaremos en los
+Finalizando, FSP nos otorga facilidad para especificar LTSs y FLTL fórmulas. Este lenguaje es el que utilizaremos en los
 siguiente capítulos para definir modelos que representan ambientes y objetivos. 

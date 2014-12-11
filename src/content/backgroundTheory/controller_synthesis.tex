@@ -2,11 +2,11 @@
 
 Los problemas de síntesis de controladores son aquellos que producen una máquina, la cual, restringe las ocurrencias de
 los eventos controlables, basado en las observaciones, de los eventos no controlables que han ocurrido. Dicha máquina, al
-ser desplegada con un ambiente adecuado logramos satisfacer el conjunto de objetivos del sistema. Cabe destacar, que
-estos objetivos se cumplirán si se satisfacen las asunciones que se hacen sobre el ambiente. Resumiendo, tendremos una
-especificación del ambiente, asunciones, objetivos, y un conjunto de acciones controlables. Resolver el \emph{problema
-de síntesis de control} es hallar una máquina, que al trabajar concurrentemente con el ambiente, que satisface las
-asunciones del dominio, satisfacemos el conjunto de objetivos del sistema.
+ser desplegada con un ambiente adecuado, logramos satisfacer el conjunto de objetivos del sistema. Cabe destacar, que
+estos objetivos se cumplirán si se satisfacen las suposiciones que se hacen sobre el ambiente. Resumiendo, tendremos una
+especificación del ambiente, suposiciones, objetivos, y un conjunto de acciones controlables. Resolver el \emph{problema
+de síntesis de control} es hallar una máquina, que al trabajar concurrentemente con el ambiente, satisface las
+suposiciones del dominio, y satisface el conjunto de objetivos del sistema.
 
 Hecha esta introducción definiremos el problema de síntesis de control para modelos basados en eventos de la siguiente
 manera. Dada una LTS que detalla el comportamiento del ambiente, un conjunto de eventos controlables, un conjunto de
@@ -19,18 +19,18 @@ objetivos del sistema.
     \label{LTS_control}
     \emph{(Control LTS) Dada una especificación de un entorno en forma de una LTS $E$, un conjunto de acciones
     controlables $A_c \in Act$ y un conjunto $H$ de pares $(A_{s_i}, G_i)$ donde $A_{s_i}$ y $G_i$ son fórmulas FLTL
-    especificando presunciones y objetivos del sistema respectivamente, la solución al problema de control LTS
+    que especifican suposiciones y objetivos del sistema respectivamente, la solución al problema de control LTS
     $\mathcal{E} = <E,H,A_c>$ consiste en encontrar una LTS $M$ de forma que $M$ es legal a $E$ sobre el conjunto de acciones
     no controlables $A_U = \overline{A_c}$, $E||M$ se encuentra libre de deadlocks, y para cada par $(A_{s_i}, G_i) \in
     H$ y para cada traza $\pi$ en $E||M$ se cumple que si $\pi \vDash A_{s_i}$ entonces $\pi \vDash G_i$.}
 \end{nahaDef}
 
-Ahora pasaremos a definir un subconjunto de problemas de control LTS que esta determinado por aquellos problemas de
+Ahora pasaremos a definir un subconjunto de problemas de control LTS que está determinado por aquellos problemas de
 control que son computables en tiempo polinómico. Identificaremos estos problemas como problemas de control LTS SGR(1)
 (Safe Generalised Reactivity(1)). Estos se construyen a partir de GR(1) y problemas de seguridad pero en modelos basados
 en eventos. Dichos problemas, constan de un modelo del ambiente $E$ que será un LTS determinístico para asegurar que el
 controlador tenga una visión completa de los estados del ambiente. Requerimos que $H$ sea $\{(\emptyset,I),(A_s,G)\}$,
-donde $I$ es un invariante de seguridad de la pinta $\Box\ \rho$, las asunciones $A_s$ son una conjunción de sub-fórmulas
+donde $I$ es un invariante de seguridad de la forma $\Box\ \rho$, las suposiciones $A_s$ son una conjunción de sub-fórmulas
 FLTL de la pinta $\Box\ \Diamond\ \phi$, y el objetivo $G$ una conjunción de sub-fórmulas FLTL de la pinta $\Box\ \Diamond\ \gamma$
 donde $\rho,\phi$ y $\gamma$ son combinación booleana de fluents.
 

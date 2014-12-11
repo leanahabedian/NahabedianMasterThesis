@@ -1,13 +1,13 @@
 \section{Resolviendo el problema de control LTS SGR(1)}
 
-En esta sección explicaremos como una solución para un problema de control SGR(1) puede ser obtenida por construcción
+En esta sección explicaremos cómo una solución para un problema de control SGR(1) puede ser obtenida por construcción
 utilizando técnicas existentes de síntesis de controladores (basados en estados), llamados GR(1). \cite{Piterman}
 
-La construcción de la máquina para un problema de control LTS SGR(1) está divido en dos pasos. Primero, se crea un juego GR(1)
-$G$ en representación del ambiente $E$, las asunciones $A_s$, los objetivos $O$ y el conjunto de acciones controlables
+La construcción de la máquina para un problema de control LTS SGR(1) está dividido en dos pasos. Primero, se crea un juego GR(1)
+$G$ en representación del ambiente $E$, las suposiciones $A_s$, los objetivos $O$ y el conjunto de acciones controlables
 $A_C$. Como segundo paso, se elabora una solución $(\sigma,u)$ al juego GR(1) para construir una máquina $M$ (i.e un
 controlador LTS) para $\mathcal{E}$. Esta solución al problema de control LTS SGR(1) $\mathcal{E}$ existe, si y sólo si,
-existe una solución al juego GR(1) $G$. Luego, podremos afirmar que el controlador LTS $M$ creada a partir de
+existe una solución al juego GR(1) $G$. Luego, podremos afirmar que el controlador LTS $M$ creado a partir de
 $(\sigma,u)$ es una solución a $\mathcal{E}$.
 
 \subsection{Control LTS SGR(1) a juegos GR(1)}
@@ -53,7 +53,7 @@ juego GR(1).
 
 Cabe destacar que las propiedades de seguridad (\emph{safety}) que son parte de la especificación no están contempladas en la
 \emph{condición de ganada} $\varphi_g$ del juego GR(1), pero si se traducen a un problema de \emph{deadlock avoidance} a
-la hora de construir $\Gamma^-$ y $\Gamma^+$. De esta manera, la \emph{condicion de ganada} es  $\Box\ \rho
+la hora de construir $\Gamma^-$ y $\Gamma^+$. De esta manera, la \emph{condición de ganada} es  $\Box\ \rho
 \wedge(\bigwedge_{i=1}^n\Box\Diamond\phi_i \Rightarrow \bigwedge_{j=1}^m \Box\Diamond\omega_j)$.
 
 \subsection{Traduciendo la estrategia a un Controlador LTS}
@@ -76,7 +76,7 @@ Para construir $S_M \subseteq \Omega \times S_g$, consideremos dos estados $s_g 
 \itemsep-4mm
 \item $(s_g,s_g') \in \Gamma^- \cup \Gamma^+$,
 \item existe una acción $\ell$ tal que $(s_e,\ell,s_e') \in \Delta_e$ y
-\item para cada \emph{fluent} $fl_i$ valga alguna de las siguiente condiciones:
+\item para cada \emph{fluent} $fl_i$ vale alguna de las siguiente condiciones:
 \vspace{-4mm}
 \begin{itemize}
     \itemsep-4mm
@@ -94,7 +94,7 @@ $(s_g,s_g') \in \Gamma^+$. Por definición de $\Gamma^+$ existe una acción $\el
 $s_g$ hacia $s_g'$. Si $s_g' \in \sigma(\omega,s_g)$ entonces para cada acción $\ell$ tal que $\ell$ es posible desde
 $s_g$ hacia $s_g'$ agregamos $((\omega,s_g),\ell,(u(\omega,s_g),s_g'))$ hacia $\Delta_M$.
 
-El estado inicial de $M$ esta definido como $s_{M_0} = (\omega_0,s_{g_0})$ donde $\omega_0$ es el valor inicial de la
+El estado inicial de $M$ está definido como $s_{M_0} = (\omega_0,s_{g_0})$ donde $\omega_0$ es el valor inicial de la
 memoria $\Omega$. De esta forma completamos la definición de $M$.
 
 \subsection{Algoritmo}
@@ -102,16 +102,16 @@ memoria $\Omega$. De esta forma completamos la definición de $M$.
 En esta sección, presentaremos el algoritmo implementado en la herramienta MTSA \cite{4639371} el cual está basado en las
 ideas de Juvekar y Piterman \cite{Juvekar:buchi}.
 
-Este algoritmo realiza una búsqueda de ciclos de estados que satisfacen todas las asunciones pero no todos los objetivos
+Este algoritmo realiza una búsqueda de ciclos de estados que satisfacen todas las suposiciones pero no todos los objetivos
 restringiendo acciones controlables. De haber ciclos como estos podrían permitir trazas en las que el controlador
 pierde el juego GR(1). Para lograr evitar estos ciclos, el algoritmo busca para cada estado, una estrategia que
 garantice la satisfacción de todos los objetivos. Para esto, se configura un orden en el cual satisfacer los objetivos.
 El algoritmo, mediante la técnica de punto fijo computa la mejor forma en que cada estado puede satisfacer el siguiente
 objetivo. A su vez, mide la ``calidad'' de cada uno de los diferentes sucesores para satisfacer un objetivo mediante un
 sistema de rankings \cite{Jurdzinski:ParityGames}. El ranking de un sucesor particular mide la distancia (cantidad de transiciones utilizadas)
-al siguiente objetivo en términos de número de veces que las asunciones son satisfechas antes de alcanzar el objetivo.
+al siguiente objetivo en términos de cantidad de veces que las suposiciones son satisfechas antes de alcanzar el objetivo.
 Si este número tiende a infinito, deduciremos que desde el estado actual existe una traza infinita en la cual las
-asunciones del ambiente valen infinitamente, pero los objetivos no se satisfacen. Es así, como el algoritmo reconoce
+suposiciones del ambiente valen infinitamente, pero los objetivos no se satisfacen. Es así, como el algoritmo reconoce
 estados que deben ser evitados para la construcción de la estrategia para el controlador.
 
 \begin{nahaDef}
@@ -119,9 +119,9 @@ estados que deben ser evitados para la construcción de la estrategia para el co
     gr(( \phi_1 ,..., \phi_n ),( \gamma_1 ,..., \gamma_m ) )$. Una función de ranking para un objetivo $\gamma_j$ es una función
     $R_j : S_g \rightarrow (\mathbb{N} \times \{1,...,n\}\cup\{\infty\})$. Intuitivamente, $R_j(s_g) = (k,\ell)$
     significa que para alcanzar desde $s_g$ a un estado en el cual $\gamma_j$ vale, todos los caminos satisfacen
-    la asunción $\phi_{\ell}$ a lo sumo $k$ veces. $R(s) = \infty$ significa que $s$ es un estado perdedor, es decir,
+    la suposición $\phi_{\ell}$ a lo sumo $k$ veces. $R(s) = \infty$ significa que $s$ es un estado perdedor, es decir,
     desde $s$ no hay una estrategia para el controlador que pueda evitar una traza en la cual se satisface infinitamente
-    las asunciones, pero no satisface infinitamente a todos los objetivos.}
+    las suposiciones, pero no satisface infinitamente a todos los objetivos.}
 \end{nahaDef}
 
 \begin{algorithm}
@@ -167,12 +167,12 @@ El algoritmo \ref{algoritmo} computa un ranking estable en cada estado $s_g \in 
 controlador (es decir, $R_1(t)<\infty$). Conceptualmente, podemos separar el algoritmo en dos grandes instancias,
 inicialización y estabilización. El valor inicial del ranking para cada estado en el juego, junto a la cola de
 estados \emph{pending} para ser procesados, se crean en la etapa de inicialización. Agregaremos un estado a
-\emph{pending} si no satisface ningún objetivo y satisface las asunciones. Todos los estados en cada función de ranking
+\emph{pending} si no satisface ningún objetivo y satisface las suposiciones. Todos los estados en cada función de ranking
 son inicializados con el valor $(0,1)$. Este valor indica el menor ranking posible. Los estados que cumplen que
 $\Gamma^- \cup \Gamma^+ = \emptyset$ serán inicializados con el valor $\infty$. De esta manera, los estados cuyos
 rankings son $\infty$ son aquellos donde no se satisface $\rho$ o son estados de \emph{deadlock} en $E$.
 
-La sección de estabilización es un iteración de punto fijo sobre la cola \emph{pending} hasta que se vacía. La función
+La sección de estabilización es una iteración de punto fijo sobre la cola \emph{pending} hasta que se vacía. La función
 \texttt{is\_stable(state,g)} devuelve true si la g-esima función de ranking es estable para \texttt{state}.
 
 La función \texttt{unstable\_pred(state,g)} devuelve un conjunto de pares de predecesores de \texttt{state} y un
@@ -180,7 +180,7 @@ ranking g para el cual el ranking es inestable.
 
 La función \texttt{best(state,g)} devuelve el mejor ranking basado en sus sucesores. Para eso utiliza la siguiente
 función $sr : S_g \rightarrow (\mathbb{N} \times \{1,...,n\} \cup \{\infty\})$. Esta función también codifica el hecho
-de que los estados de \emph{deadlock} tienen ranking $\infty$. Además, notemos que usa un orden lexicográfico para los
+que los estados de \emph{deadlock} tienen ranking $\infty$. Además, notemos que usa un orden lexicográfico para los
 objetivos. Dado un estado $s_g$ y un objetivo $\gamma_j$, $sr(s_g,j)$ está definida de la siguiente manera:
 
 \begin{itemize}

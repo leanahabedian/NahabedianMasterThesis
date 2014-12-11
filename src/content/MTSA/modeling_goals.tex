@@ -23,7 +23,7 @@ actualización que no requiere hacer un cambio en el ambiente.
 
 Los objetivos nuevos están definidos mediante el operador \texttt{\textbf{controllerSpec}}. La palabra reservada
 \texttt{\textbf{safety}} permite definir requerimientos de seguridad (\emph{safety}). Aquí incluiremos fórmulas
-FLTL definidas en la sección \ref{LTL} y, en particular para controladores actualizables dinámicamente, escribiremos las
+FLTL definidas en la sección \ref{LTL} y, en particular, para controladores actualizables dinámicamente, escribiremos las
 fórmulas FLTL 1, 2 y 3 de acuerdo a la definición \ref{update_goals_def}. Como se puede ver en la figura \ref{MTSA_example},
 \textsc{UPD\_OLD} representa la fórmula 1, \textsc{UPD\_NEW} corresponde a la fórmula 2 y la fórmula 3 no está
 especificada debido a que en este ejemplo configuramos a la fórmula 3 como $true$. \textsc{S\_OLD} y \textsc{S\_NEW} son
@@ -36,12 +36,12 @@ aserciones FLTL que representan a los objetivos viejos ($G$) y a los objetivos n
     \label{MTSA_example}
 \end{figure}
 
-La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
-\texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
+La sección de \emph{liveness} está definida usando los operadores \texttt{\textbf{assumption}} y
+\texttt{\textbf{liveness}} que especifican las suposiciones del ambiente y objetivos de \emph{liveness} respectivamente.
 Ambas deberán definirse mediante FLTLs. En la figura \ref{MTSA_example}, \textsc{BeginUpdate}, \textsc{StopOldSpec} y
 \textsc{StartNewSpec} son los fluents que se inicializan apagados y se prenden cuando la acción del nombre del fluent
 sucede y nunca más se apagarán. Luego, el controlador sintetizado nos garantizará que si la actualización es requerida
-(i.e sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán. Por lo tanto,
+(es decir, sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán. Por lo tanto,
 con estos dos operadores definimos las fórmula 4 y 5 de la definición \ref{update_goals_def}.
 
 Por último, la sección de \texttt{\textbf{controllableActions}} detalla el conjunto de acciones consideradas
