@@ -32,12 +32,12 @@ en eventos. Dichos problemas, constan de un modelo del ambiente $E$ que será un
 controlador tenga una visión completa de los estados del ambiente. Requerimos que $H$ sea $\{(\emptyset,I),(A_s,G)\}$,
 donde $I$ es un invariante de seguridad de la pinta $\Box\ \rho$, las asunciones $A_s$ son una conjunción de sub-fórmulas
 FLTL de la pinta $\Box\ \Diamond\ \phi$, y el objetivo $G$ una conjunción de sub-fórmulas FLTL de la pinta $\Box\ \Diamond\ \gamma$
-donde $\rho,\phi$ y $\gamma$ son combinación booleana de flujos.
+donde $\rho,\phi$ y $\gamma$ son combinación booleana de fluents.
 
 \begin{nahaDef}\label{ControlLTSSGR1}
     \emph{(Control LTS SGR(1)) un problema de control LTS $\mathcal{E} = <E,H,A_C>$ es SGR(1) si $E$ es
     determinístico, y $H = \{(\emptyset,I),(A_s,G)\}$, donde $I = \Box\ \rho$, $A_s = \bigwedge_{i=1}^{n}
     \Box\ \Diamond\ \phi_i, G = \bigwedge_{j=1}^{m}\Box\ \Diamond\ \gamma_j$, y $\phi_i, \rho$ y $\gamma_j$ son combinación
-    booleana de flujos.}
+    booleana de fluents.}
 \end{nahaDef}
 

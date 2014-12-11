@@ -65,8 +65,8 @@ las especificaciones $G$, $G'$ y $T$ puedan ser de la forma $\Box \Diamond G$, $
 Este criterio de aceptación de Büchi extiende la expresividad manteniendo la complejidad en orden polinomial (esto lo
 conseguimos redefiniendo $G_u$ a $\Box \Diamond [(G \lor OldSpecDropped) \wedge (G' \lor \neg NewSpecEnsured) \wedge
 (\neg BeginUpdate \lor NewSpecEnsured) \wedge (\neg BeginUpdate \lor  OldSpecDropped) \wedge  T]$. Donde
-$OldSpecDropped$ es el flujo definido como $\langle \{stopOldSpec\},\emptyset,\bot\rangle$, $NewSpecEnsured$ es el flujo
-definido como $\langle \{startNewSpec\},\emptyset,\bot\rangle$ y $BeginUpdate$ es el flujo definido como $\langle
+$OldSpecDropped$ es el fluent definido como $\langle \{stopOldSpec\},\emptyset,\bot\rangle$, $NewSpecEnsured$ es el fluent
+definido como $\langle \{startNewSpec\},\emptyset,\bot\rangle$ y $BeginUpdate$ es el fluent definido como $\langle
 \{beginUpdate\},\emptyset,\bot\rangle$). Se necesitan futuras investigaciones para analizar si, por ejemplo, las
 especificaciones SGR(1) \cite{D'ippolito:2013:SNE:2430536.2430543} en el problema de control de actualización de
 controladores dinámicos, sólo puede ser resuelto en tiempo polinómico.

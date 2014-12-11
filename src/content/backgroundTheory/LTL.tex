@@ -1,19 +1,19 @@
-\section{Lógica Lineal Temporal de Flujos (Fluent Linear Temporal Logic)}
+\section{Lógica Lineal Temporal de Fluents (Fluent Linear Temporal Logic)}
 \label{LTL}
 
-La Lógica Lineal Temporal (LTL) esta siendo ampliamente usada en la ingeniería de los requerimientos
+La Lógica Lineal Temporal (LTL) está siendo ampliamente usada en la ingeniería de los requerimientos
 \cite{1347546,Giannakopoulou:2003:FMC:940071.940106,879820,Letier:2002:ATG:581339.581353}. La motivación para escoger a
-las LTL de flujos es que estas proveen un framework uniforme para especificar propiedades basados en estados sobre
+las LTL de fluents es que éstas proveen un framework uniforme para especificar propiedades basados en estados sobre
 modelos basados en eventos \cite{Giannakopoulou:2003:FMC:940071.940106}. Fluent Linear Temporal Logic (FLTL) \cite{Giannakopoulou:2003:FMC:940071.940106}
-es una lógica de tiempo lineal, temporal, para razonar acerca de flujos. Un \emph{flujo} $Fl$ es definido por un par de
+es una lógica de tiempo lineal, temporal, para razonar acerca de fluents. Un \emph{fluent} $Fl$ es definido por un par de
 conjuntos y un valor booleano: $Fl = \langle I_{Fl},T_{Fl},Init_{Fl}\rangle$, donde $I_{Fl} \subseteq Act$ es el
 conjunto de acciones iniciadoras, $T_{Fl} \subseteq Act$ es el conjunto de acciones finalizadoras y $I_{Fl} \cap T_{Fl}
-= \emptyset$. Un flujo puede ser inicializado con valor \emph{true} o \emph{false} indicado por $Init_{Fl}$. Toda acción $\ell \in
-Act$ induce un flujo, que notaremos $\ell = \langle\ell, Act \backslash \{\ell\}, false\rangle$. Por último, el alfabeto
-de un flujo es el que se obtiene mediante la unión del conjunto de acciones iniciadoras y el conjunto de acciones
+= \emptyset$. Un fluent puede ser inicializado con valor \emph{true} o \emph{false} indicado por $Init_{Fl}$. Toda acción $\ell \in
+Act$ induce un fluent, que notaremos $\ell = \langle\ell, Act \backslash \{\ell\}, false\rangle$. Por último, el alfabeto
+de un fluent es el que se obtiene mediante la unión del conjunto de acciones iniciadoras y el conjunto de acciones
 finalizadoras.
 
-Sea $\mathcal{F}$ el conjunto de todos los posibles flujos sobre $Act$. Una formula FLTL se define inductivamente
+Sea $\mathcal{F}$ el conjunto de todos los posibles fluents sobre $Act$. Una formula FLTL se define inductivamente
 utilizando los conectores booleanos estandar y operadores temporales como el $\mathbf{X}$ (próximo), $\mathbf{U}$ (antes
 fuerte) de la siguiente manera:
 
@@ -25,7 +25,7 @@ fuerte) de la siguiente manera:
 
 \noindent donde $Fl \in \mathcal{F}$. Para comodidad sintáctica, vamos a introducir las operaciones de $\land$,
 $\Diamond$ (eventualmente) y $\Box$ (siempre). Sea $\Pi$ el conjunto de trazas infinitas sobre $Act$, diremos que la
-traza $\pi = \ell_0,\ell_1,...$ satisface un flujo $Fl$ en la posición $i$, notado $\pi,i\vDash Fl$, si y sólo si una de
+traza $\pi = \ell_0,\ell_1,...$ satisface un fluent $Fl$ en la posición $i$, notado $\pi,i\vDash Fl$, si y sólo si una de
 las siguientes condiciones es válida:
 
 \begin{itemize}

@@ -34,7 +34,7 @@ como una conjunción de las siguientes formulas FLTL.
 \label{update_goals_def}
 \emph{(Objetivo para el problema de control de la actualización de controladores dinámicamente) Sean $\Box\ G$ y $\Box\ G'$
 los objetivos actuales y los nuevos para un escenario de actualización de controladores dinámicamente, donde $G$ y $G'$
-son una combinación Booleana de flujos y $T$ es una propiedad de safety. Definimos a $G_u$, el objetivo para el
+son una combinación Booleana de fluents y $T$ es una propiedad de safety. Definimos a $G_u$, el objetivo para el
 problema de control de la actualización de controladores dinámicamente como la conjunción de las siguientes fórmulas
 FLTL:}
 
@@ -114,8 +114,8 @@ tengan al menos un estado correspondiente en $E'$. Tenga en cuenta que, permitim
 estados de $E'$ permitiendo, por ejemplo, una evolución no determinística desde un estado cuyo valor de batería es
 $\lnot LowBattery$ a un estado donde el valor es $MidBattery$ o $\neg HighBattery$. Durante este capítulo vamos a asumir
 una relación de mapping de estados $M \subset S_E \times S_{E'}$ que cubre a todos $S_E$. En la herramienta que
-desarrollamos, por conveniencia, definimos el mapeo naturalmente sobre definiciones de flujos: un estado $E$ esta
-mapeado a todos los estados de $E'$ que preservan el valor de flujos.
+desarrollamos, por conveniencia, definimos el mapeo naturalmente sobre definiciones de fluents: un estado $E$ esta
+mapeado a todos los estados de $E'$ que preservan el valor de fluents.
 
 Ahora definiremos formalmente el ambiente $E_u$ para el problema de control de la actualización de controladores
 dinámicamente:
@@ -184,7 +184,7 @@ controlables hasta que suceda $beginUpdate$. Una vez computado, mientras el cont
 las acciones deben ser revertidas a su nombre original.
 
 \begin{nahaDef}
-\emph{(El problema de control de la actualización de controladores dinámicamente) Sean $G$ y $G'$ expresiones de flujos
+\emph{(El problema de control de la actualización de controladores dinámicamente) Sean $G$ y $G'$ expresiones de fluents
 sin expresiones temporales. Sea $E$ un LTS y sea la formula FLTL $\Box G$ la especificación actual que el sistema esta
 satisfaciendo tras ejecutar el LTS $C$, controlador que controla las acciones en $A$. Sea $E'$ un LTS, la formula FLTL
 $\Box G'$ y un conjunto de acciones controlables $A'$ la nueva especificación que es esperada satisfacer con la

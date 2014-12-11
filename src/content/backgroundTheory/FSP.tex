@@ -47,7 +47,7 @@ MTSA a realizar una operación mas compleja al proceso. Un caso de estos, es la 
 \texttt{\textbf{minimal}}, la cual, hace que MTSA construya un LTS minimal que respeta la semántica equivalente o la
 palabra reservada \texttt{\textbf{deterministic}}, que construye un LTS minimal con respecto a las trazas.
 
-FSP también permite definir propiedades FLTL. Un flujo que marca aquellos estados donde la bomba esta apagada puede ser
+FSP también permite definir propiedades FLTL. Un fluent que marca aquellos estados donde la bomba esta apagada puede ser
 expresada en lenguaje FSP mediante el siguiente código: \texttt{\textbf{fluent IsStopped = <stopPump,startPump>\ initially 0}}.
 Como dijimos anteriormente, la bomba empieza encendida, por lo tanto IsStopped es inicialmente falso, pasa a ser
 verdadero cuando sucede la acción \texttt{\textbf{stopPump}} y falso nuevamente cuando la acción \texttt{\textbf{startPump}} sucede.

@@ -14,17 +14,17 @@ $(\sigma,u)$ es una solución a $\mathcal{E}$.
 
 Convertiremos el problema de control LTS SGR(1) a un juego GR(1). Dado un problema de control LTS SGR(1) $\mathcal{E} =
 \langle E,H,A_C\rangle$ construimos un juego GR(1) $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ tal que cada estado en $S_g$
-representa un estado en $E$ y una valuación de todos los flujos que aparecen en $A_s$ y en $G$.
+representa un estado en $E$ y una valuación de todos los fluents que aparecen en $A_s$ y en $G$.
 
 Más precisamente, y por la definición de control LTS SGR(1) (definición \ref{ControlLTSSGR1}) tendremos que $H =
 \{(\emptyset,I),(A_s,G)\}$, $E = (S_e,A,\Delta_e,s_{e_0})$, $A_s = \bigwedge_{i=1}^n\Box\ \Diamond\ \phi_i$, $I = \Box\
-\rho$ y $G = \bigwedge_{j=1}^m\Box\ \Diamond\ \omega_j$. Sea $fl = \{\dot1,...,\dot k\}$ un conjunto de flujos usados en
+\rho$ y $G = \bigwedge_{j=1}^m\Box\ \Diamond\ \omega_j$. Sea $fl = \{\dot1,...,\dot k\}$ un conjunto de fluents usados en
 $A_s$ y en $G$ donde $\dot i = \langle I_i,T_i,Init_i\rangle$. Construimos al juego $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ de
 la siguiente manera:
 
 Construimos $S_g$ a partir de $E$ de tal forma, que los estados en $S_g$ corresponden a un estado en $E$ y los valores
-de verdad de los \emph{flujos} en $\varphi$. Formalmente, tenemos que  $S_g = S_e \times \prod_{i=1}^k\{true,false\}$.
-Consideramos un estado $s_g = (s_e,\alpha_1,...,\alpha_k)$. Dado un flujo $fl_i$, diremos que $s_g$ satisface $fl_i$ si
+de verdad de los \emph{fluents} en $\varphi$. Formalmente, tenemos que  $S_g = S_e \times \prod_{i=1}^k\{true,false\}$.
+Consideramos un estado $s_g = (s_e,\alpha_1,...,\alpha_k)$. Dado un fluent $fl_i$, diremos que $s_g$ satisface $fl_i$ si
 $\alpha_i$ es $true$ y $s_g$ no satisface $fl_i$ si no. 
 
 Además, definiremos las relaciones $\Gamma^-$ y $\Gamma^+$ aplicando las siguientes reglas. Sea $s_g =
@@ -64,7 +64,7 @@ Intuitivamente, la transformación es de la siguiente manera: dado un problema d
 estrategia ganadora para $G$, construimos $M = (S_M,A,\Delta_M,s_{M_0})$ una solución para $\mathcal{E}$ traduciendo
 a estados de $S_M$ un estado de $S_g$ y un estado de la memoria dada por la estrategia ganadora.
 
-Más formalmente, sea $E = (S_e,A,\Delta_e,s_{e_0})$, $fl = \{fl_1,...,fl_k\}$ el conjunto de flujos que aparecen en
+Más formalmente, sea $E = (S_e,A,\Delta_e,s_{e_0})$, $fl = \{fl_1,...,fl_k\}$ el conjunto de fluents que aparecen en
 $\varphi$, $G = (S_g,\Gamma^-,\Gamma^+,s_{g_0},\varphi_g)$ el juego GR(1) construido a partir de $E$ como explicamos
 anteriormente, y sea $\sigma: \Omega \times S_g \rightarrow 2^{S_g}$ y $u: \Omega \times S_g \rightarrow \Omega$ la
 estrategia ganadora para $G$. Construiremos la máquina $M = (S_M, A, \Delta_M, s_{M_0})$ de la siguiente manera.
@@ -76,7 +76,7 @@ Para construir $S_M \subseteq \Omega \times S_g$, consideremos dos estados $s_g 
 \itemsep-4mm
 \item $(s_g,s_g') \in \Gamma^- \cup \Gamma^+$,
 \item existe una acción $\ell$ tal que $(s_e,\ell,s_e') \in \Delta_e$ y
-\item para cada \emph{flujo} $fl_i$ valga alguna de las siguiente condiciones:
+\item para cada \emph{fluent} $fl_i$ valga alguna de las siguiente condiciones:
 \vspace{-4mm}
 \begin{itemize}
     \itemsep-4mm

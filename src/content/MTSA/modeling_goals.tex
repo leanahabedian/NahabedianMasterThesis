@@ -8,15 +8,15 @@ El operador \texttt{\textbf{updatingController}} es utilizado para definir el pr
 actualizables. Al ejecutar la composición en paralelo de este elemento obtendremos, si existe, un controlador que satisface los
 objetivos del problema de control sin violar la especificación del ambiente de actualización. Ambos definidos en el
 capítulo \ref{updating_controller_chapter}. Necesitamos en esta declaración, además de los nuevos requerimientos, suministrar
-el controlador actual, el modelo del ambiente actual, el modelo del ambiente nuevo y un conjunto de pares de flujos
+el controlador actual, el modelo del ambiente actual, el modelo del ambiente nuevo y un conjunto de pares de fluents
 donde cada elemento indicará correspondencia de propiedades del ambiente actual al ambiente nuevo como dijimos en la
 definición \ref{update_environment_def}. Por ejemplo, en la figura \ref{MTSA_example} podemos observar que al usar la
 palabra reservada \texttt{\textbf{updatingController}} configuramos \textsc{EnvironmentAndController} como el
 controlador actual, \textsc{OldEnvironment} como modelo del ambiente actual, \textsc{NewEnvironment} como modelo del
 ambiente nuevo, \textsc{UpdateSpec} como el conjunto de objetivos para controladores actualizables según la
 definición \ref{update_goals_def} y \textsc{\{\{RequestPending,RequestPending\},
-\{IsStopped,IsStopped\}\}} es el conjunto de pares de flujos donde se indica que por cada estado del ambiente actual,
-existe una correspondencia con estados del ambiente nuevo si la valuación de los flujos de los primeros en cada par,
+\{IsStopped,IsStopped\}\}} es el conjunto de pares de fluents donde se indica que por cada estado del ambiente actual,
+existe una correspondencia con estados del ambiente nuevo si la valuación de los fluents de los primeros en cada par,
 iguala a la valuación de los segundos en cada par. Además, en este ejemplo, \textsc{OldEnvironment} y
 \textsc{NewEnvironment} poseen distintos nombres, pero son el mismo ambiente puesto a que este ejemplo es una
 actualización que no requiere hacer un cambio en el ambiente.
@@ -39,7 +39,7 @@ aserciones FLTL que representan a los objetivos viejos ($G$) y a los objetivos n
 La sección de \emph{liveness} esta definida usando los operadores \texttt{\textbf{assumption}} y
 \texttt{\textbf{liveness}} que especifican las asunciones del ambiente y objetivos de \emph{liveness} respectivamente.
 Ambas deberán definirse mediante FLTLs. En la figura \ref{MTSA_example}, \textsc{BeginUpdate}, \textsc{StopOldSpec} y
-\textsc{StartNewSpec} son los flujos que se inicializan apagados y se prenden cuando la acción del nombre del flujo
+\textsc{StartNewSpec} son los fluents que se inicializan apagados y se prenden cuando la acción del nombre del fluent
 sucede y nunca más se apagarán. Luego, el controlador sintetizado nos garantizará que si la actualización es requerida
 (i.e sucede la acción $beginUpdate$), las acciones $stopOldSpec$ y $startNewSpec$ sucederán. Por lo tanto,
 con estos dos operadores definimos las fórmula 4 y 5 de la definición \ref{update_goals_def}.

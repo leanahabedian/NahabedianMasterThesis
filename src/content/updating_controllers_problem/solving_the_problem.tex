@@ -18,7 +18,7 @@ de seguridad (tenga en cuenta que $W$ es un ``weak until'' y por lo tanto es una
 de seguridad $I_j$ puede simplemente ser codificada como $\Box I_j \lor \Diamond \bot$. Las otras dos formulas de la
 definición \ref{update_goals_def} son de la forma $\Box(p \Longrightarrow \Diamond q)$ y pueden ser codificadas como
 $\Box \neg UpdateBegan \lor \Diamond (UpdateBegan \wedge NewSpecStarted)$ y $\Box \neg UpdateBegan \lor \Diamond
-(UpdateBegan \wedge OldSpecStopped)$ donde los flujos $NewSpecStarted$, $OldSpecStopped$ y $UpdateBegan$ modelan que sus
+(UpdateBegan \wedge OldSpecStopped)$ donde los fluents $NewSpecStarted$, $OldSpecStopped$ y $UpdateBegan$ modelan que sus
 respectivos eventos han sucedido alguna vez en el pasado. Formalmente estarían definidos como $\langle{startNewSpec},
 \emptyset, \bot \rangle$, $\langle{stopOldSpec}, \emptyset, \bot \rangle$ y $\langle{beginUpdate}, \emptyset, \bot
 \rangle$.

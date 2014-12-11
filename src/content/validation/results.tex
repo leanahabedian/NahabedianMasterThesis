@@ -56,7 +56,7 @@ $C_u^1$ satisface cierta propiedad de manera implícita y sólo realizará la ac
 
 El paso siguiente, en nuestro análisis, fue escribir en FLTL la fórmula implícita que el controlador $C_u^1$ está
 satisfaciendo. Por lo tanto, definimos $T$ de la siguiente manera: $T = \Box\ (startNewSpec$
-$\rightarrow$ $(FlyingLow$ $||$ $!$ $HeightSet$ $))$ donde $FlyingLow$ y $HeightSet$ son flujos definidos de la siguiente manera: 
+$\rightarrow$ $(FlyingLow$ $||$ $!$ $HeightSet$ $))$ donde $FlyingLow$ y $HeightSet$ son fluents definidos de la siguiente manera: 
 
 \begin{itemize}
 \itemsep-4mm
@@ -65,7 +65,7 @@ $\rightarrow$ $(FlyingLow$ $||$ $!$ $HeightSet$ $))$ donde $FlyingLow$ y $Height
 \end{itemize}
 
 Mediante esta fórmula FLTL estamos pidiendo que el controlador resultante, luego de la síntesis, cumpla con la propiedad
-de que la acción $startNewSpec$ sea disparada, sólo si en ese momento el flujo $FlyingLow$ esta prendido o $HeighSet$
+de que la acción $startNewSpec$ sea disparada, sólo si en ese momento el fluent $FlyingLow$ esta prendido o $HeighSet$
 está apagado, es decir, si el UAV esta volando en la franja de 20 a 30 metros o si está en la base. Al controlador
 obtenido con esta propiedad lo llamaremos $C_u^2$ y lo comparamos con el controlador obtenido anteriormente.
 
@@ -106,7 +106,7 @@ manera:
 \item $T_3$ $=$ $true$
 \end{enumerate}
 
-Donde $Processing$ es el flujo que se inicializa cuando un producto entra a la cadena de montaje y se apaga cuando este
+Donde $Processing$ es el fluent que se inicializa cuando un producto entra a la cadena de montaje y se apaga cuando este
 se va.
 
 Con la primer fórmula FLTL estamos forzando al sistema a que solo genere la actualización si no hay ningún producto en
